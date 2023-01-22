@@ -11,7 +11,7 @@ _$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState(
       authenticated: json['authenticated'] as bool? ?? false,
       isAuthenticating: json['isAuthenticating'] as bool? ?? false,
       hasCredentials: json['hasCredentials'] as bool? ?? false,
-      selectedTabIndexNoMobile: json['selectedTabIndexNoMobile'] as int? ?? 0,
+      selectedSidebarItemIndex: json['selectedSidebarItemIndex'] as int? ?? 0,
       availableBiometricsOptions:
           (json['availableBiometricsOptions'] as List<dynamic>?)
                   ?.map((e) => e as String)
@@ -25,6 +25,6 @@ Map<String, dynamic> _$$_AppStateToJson(_$_AppState instance) =>
       'authenticated': instance.authenticated,
       'isAuthenticating': instance.isAuthenticating,
       'hasCredentials': instance.hasCredentials,
-      'selectedTabIndexNoMobile': instance.selectedTabIndexNoMobile,
+      'selectedSidebarItemIndex': instance.selectedSidebarItemIndex,
       'availableBiometricsOptions': instance.availableBiometricsOptions,
     };

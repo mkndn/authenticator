@@ -1154,6 +1154,21 @@ class _$_DisplayState implements _DisplayState {
     return 'DisplayState(tapToReveal: $tapToReveal, primaryColor: $primaryColor)';
   }
 
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DisplayState &&
+            (identical(other.tapToReveal, tapToReveal) ||
+                other.tapToReveal == tapToReveal) &&
+            (identical(other.primaryColor, primaryColor) ||
+                other.primaryColor == primaryColor));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, tapToReveal, primaryColor);
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -1312,6 +1327,23 @@ class _$_SecurityState implements _SecurityState {
   String toString() {
     return 'SecurityState(hasPassword: $hasPassword, hasPin: $hasPin, fingerPrint: $fingerPrint)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SecurityState &&
+            (identical(other.hasPassword, hasPassword) ||
+                other.hasPassword == hasPassword) &&
+            (identical(other.hasPin, hasPin) || other.hasPin == hasPin) &&
+            (identical(other.fingerPrint, fingerPrint) ||
+                other.fingerPrint == fingerPrint));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, hasPassword, hasPin, fingerPrint);
 
   @JsonKey(ignore: true)
   @override

@@ -39,16 +39,6 @@ class DisplayState with _$DisplayState {
       primaryColor: initialData.primaryColor,
     );
   }
-
-  @override
-  bool operator ==(other) {
-    return (other is DisplayState) &&
-        tapToReveal == other.tapToReveal &&
-        primaryColor == other.primaryColor;
-  }
-
-  @override
-  int get hashCode => tapToReveal.hashCode ^ primaryColor.hashCode;
 }
 
 @freezed
@@ -71,16 +61,4 @@ class SecurityState with _$SecurityState {
       fingerPrint: initialData.fingerPrint,
     );
   }
-
-  @override
-  bool operator ==(other) {
-    return (other is SecurityState) &&
-        hasPassword == other.hasPassword &&
-        hasPin == other.hasPin &&
-        fingerPrint == other.fingerPrint;
-  }
-
-  @override
-  int get hashCode =>
-      hasPassword.hashCode ^ hasPin.hashCode ^ fingerPrint.hashCode;
 }

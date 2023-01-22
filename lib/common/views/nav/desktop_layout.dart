@@ -1,13 +1,13 @@
 import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/views/brightness_toggle.dart';
+import 'package:authenticator/common/views/window_buttons.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/views/brightness_toggle.dart';
-import 'package:authenticator/common/views/hover_container.dart';
-import 'package:window_manager/window_manager.dart';
 
 class DesktopLayout extends StatefulWidget {
   const DesktopLayout({
@@ -35,20 +35,10 @@ class DesktopLayout extends StatefulWidget {
   State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
+class _DesktopLayoutState extends State<DesktopLayout> {
   String resizeText = 'Maximize';
   final Map<int, VoidCallback> navigationMapping = {};
   final Map<String, int> routeNameToIndex = {};
-
-  @override
-  Future<void> onWindowEvent(String eventName) async {
-    if (eventName == 'unmaximize') {
-      resizeText = 'Maximize';
-    }
-    if (eventName == 'maximize') {
-      resizeText = 'Restore';
-    }
-  }
 
   List<NavigationRailDestination> getNavigationRailItems(
     SettingsBloc bloc,
@@ -92,36 +82,6 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
     ];
   }
 
-  Widget getAppBarContent(
-          SettingsBloc bloc, SettingsModel settings, bool isTemplate) =>
-      FittedBox(
-        alignment: Alignment.centerRight,
-        clipBehavior: Clip.hardEdge,
-        child: getContentByAlignment(bloc, settings),
-      );
-
-  Widget getContentByAlignment(SettingsBloc bloc, SettingsModel settings) {
-    List<Widget> children = [];
-
-    children.add(const BrightnessToggle());
-
-    return Container(
-      alignment: Alignment.centerRight,
-      constraints: BoxConstraints(
-        maxHeight: widget.toolBarHeight,
-        maxWidth: double.infinity,
-      ),
-      height: widget.toolBarHeight,
-      padding: const EdgeInsets.all(10.0),
-      child: Wrap(
-        spacing: 5.0,
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: children,
-      ),
-    );
-  }
-
   void loadNavigationMapping(
     SettingsBloc bloc,
     SettingsModel settings,
@@ -138,84 +98,6 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
         () => () => context.goNamed(e.key),
       );
     }
-
-    navigationMapping.putIfAbsent(3, () => () => windowManager.close());
-  }
-
-  // Toolbar
-  Widget getControls() {
-    return Container(
-      alignment: AlignmentDirectional.centerStart,
-      padding: const EdgeInsets.all(15.0),
-      height: widget.toolBarHeight,
-      child: Wrap(
-        spacing: 5.0,
-        children: [
-          GestureDetector(
-            child: Tooltip(
-              message: resizeText,
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: resizeText == 'Maximize'
-                    ? Transform.rotate(
-                        angle: 45,
-                        child: const Icon(
-                          Icons.unfold_more,
-                          color: Colors.black,
-                          size: 12.0,
-                        ),
-                      )
-                    : Transform.rotate(
-                        angle: 45,
-                        child: const Icon(
-                          Icons.unfold_less,
-                          color: Colors.black,
-                          size: 12.0,
-                        ),
-                      ),
-                containerColor: Colors.green,
-              ),
-            ),
-            onTap: () async => await windowManager.isMaximized()
-                ? windowManager.restore()
-                : windowManager.maximize(),
-          ),
-          GestureDetector(
-            child: Tooltip(
-              message: 'Minimize',
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: const Icon(
-                  Icons.remove,
-                  size: 12,
-                  color: Colors.black,
-                ),
-                containerColor: Colors.amber,
-              ),
-            ),
-            onTap: () async => windowManager.minimize(),
-          ),
-          GestureDetector(
-            child: Tooltip(
-              message: 'close',
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: const Icon(
-                  Icons.close,
-                  size: 12,
-                  color: Colors.black,
-                ),
-                containerColor: Colors.red,
-              ),
-            ),
-            onTap: () async => windowManager.close(),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget? floatingAction(SettingsBloc settingsBloc) {
@@ -229,15 +111,8 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
         },
         child: const Icon(Icons.visibility_off),
       );
-    } else if (widget.backButton) {
-      return FloatingActionButton.small(
-        shape: const CircleBorder(),
-        onPressed: () => context.goNamed(widget.parent),
-        child: const Icon(Icons.chevron_left_outlined),
-      );
-    } else {
-      return null;
     }
+    return null;
   }
 
   void initListener() {
@@ -251,8 +126,8 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
               info.location!.substring(info.location!.lastIndexOf("/") + 1);
           int? index = routeNameToIndex[name];
           if (index != null &&
-              appBloc.state.selectedTabIndexNoMobile != index) {
-            appBloc.add(AppEvent.setSelectedTabIndexNoMobile(index));
+              appBloc.state.selectedSidebarItemIndex != index) {
+            appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
           }
         }
       }
@@ -262,7 +137,6 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
   @override
   void initState() {
     super.initState();
-    windowManager.addListener(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initListener();
     });
@@ -284,23 +158,18 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
             return Scaffold(
               appBar: AppBar(
                 bottom: widget.bottom,
-                leadingWidth: 100.0,
-                leading: getControls(),
+                leading: null,
+                flexibleSpace: WindowTitleBarBox(child: MoveWindow()),
                 centerTitle: true,
                 title: Text(
                   widget.title,
                 ),
-                flexibleSpace: DragToMoveArea(
-                  child: Container(),
-                ),
-                actions: [
-                  getAppBarContent(settingsBloc, settings, true),
-                ],
+                actions: const [BrightnessToggle(), WindowButtons()],
               ),
               floatingActionButtonLocation:
                   GoRouterState.of(context).location == AppRoute.home.path
                       ? FloatingActionButtonLocation.endFloat
-                      : FloatingActionButtonLocation.startFloat,
+                      : null,
               floatingActionButton: floatingAction(settingsBloc),
               body: SafeArea(
                 child: Row(
@@ -311,10 +180,10 @@ class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
                     NavigationRail(
                       extended: widget.constraints.maxWidth >= 800,
                       minExtendedWidth: 150,
-                      selectedIndex: appBloc.state.selectedTabIndexNoMobile,
+                      selectedIndex: appBloc.state.selectedSidebarItemIndex,
                       onDestinationSelected: (int index) {
                         appBloc
-                            .add(AppEvent.setSelectedTabIndexNoMobile(index));
+                            .add(AppEvent.setselectedSidebarItemIndex(index));
                         final navFunc = navigationMapping[index];
                         if (navFunc != null) navFunc();
                       },

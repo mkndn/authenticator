@@ -7,7 +7,7 @@ class AppState with _$AppState {
     @Default(false) bool authenticated,
     @Default(false) bool isAuthenticating,
     @Default(false) bool hasCredentials,
-    @Default(0) int selectedTabIndexNoMobile,
+    @Default(0) int selectedSidebarItemIndex,
     @Default([]) List<String> availableBiometricsOptions,
   }) = _AppState;
 

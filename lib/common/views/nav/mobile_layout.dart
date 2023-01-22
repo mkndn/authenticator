@@ -125,9 +125,9 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
               ),
               bottomNavigationBar: BottomNavigationBar(
                 items: getBottomNavigation(),
-                currentIndex: appBloc.state.selectedTabIndexNoMobile,
+                currentIndex: appBloc.state.selectedSidebarItemIndex,
                 onTap: (int index) {
-                  appBloc.add(AppEvent.setSelectedTabIndexNoMobile(index));
+                  appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
                   final navFunc = navigationMapping[index];
                   if (navFunc != null) navFunc();
                 },

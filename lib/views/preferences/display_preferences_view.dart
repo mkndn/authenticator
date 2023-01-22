@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/common/classes/observables.dart';
@@ -113,7 +115,7 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
                 SettingsTile(
                   leading: const [
                     Icon(
-                      Icons.hide_source,
+                      Icons.visibility_off_rounded,
                     ),
                   ],
                   trailing: [

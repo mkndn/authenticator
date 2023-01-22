@@ -6,8 +6,6 @@ import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
 import 'package:authenticator/common/views/brightness_toggle.dart';
-import 'package:authenticator/common/views/hover_container.dart';
-import 'package:window_manager/window_manager.dart';
 
 class TabletLayout extends StatefulWidget {
   const TabletLayout({
@@ -70,15 +68,6 @@ class _TabletLayoutState extends State<TabletLayout> {
         ),
         label: Text(NavRailOptions.settings.title),
       ),
-      NavigationRailDestination(
-        icon: const Icon(
-          Icons.cancel_outlined,
-        ),
-        selectedIcon: const Icon(
-          Icons.cancel,
-        ),
-        label: Text(NavRailOptions.exit.title),
-      ),
     ];
   }
 
@@ -128,84 +117,6 @@ class _TabletLayoutState extends State<TabletLayout> {
         () => () => context.goNamed(e.key),
       );
     }
-
-    navigationMapping.putIfAbsent(3, () => () => windowManager.close());
-  }
-
-  // Toolbar
-  Widget getControls() {
-    return Container(
-      alignment: AlignmentDirectional.centerStart,
-      padding: const EdgeInsets.all(15.0),
-      height: widget.toolBarHeight,
-      child: Wrap(
-        spacing: 5.0,
-        children: [
-          GestureDetector(
-            child: Tooltip(
-              message: resizeText,
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: resizeText == 'Maximize'
-                    ? Transform.rotate(
-                        angle: 45,
-                        child: const Icon(
-                          Icons.unfold_more,
-                          color: Colors.black,
-                          size: 12.0,
-                        ),
-                      )
-                    : Transform.rotate(
-                        angle: 45,
-                        child: const Icon(
-                          Icons.unfold_less,
-                          color: Colors.black,
-                          size: 12.0,
-                        ),
-                      ),
-                containerColor: Colors.green,
-              ),
-            ),
-            onTap: () async => await windowManager.isMaximized()
-                ? windowManager.restore()
-                : windowManager.maximize(),
-          ),
-          GestureDetector(
-            child: Tooltip(
-              message: 'Minimize',
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: const Icon(
-                  Icons.remove,
-                  size: 12,
-                  color: Colors.black,
-                ),
-                containerColor: Colors.amber,
-              ),
-            ),
-            onTap: () async => windowManager.minimize(),
-          ),
-          GestureDetector(
-            child: Tooltip(
-              message: 'close',
-              child: HoverContainer.contained(
-                size: 15.0,
-                align: Alignment.center,
-                hoverIcon: const Icon(
-                  Icons.close,
-                  size: 12,
-                  color: Colors.black,
-                ),
-                containerColor: Colors.red,
-              ),
-            ),
-            onTap: () async => windowManager.close(),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget? floatingAction(SettingsBloc settingsBloc) {
@@ -241,8 +152,8 @@ class _TabletLayoutState extends State<TabletLayout> {
               info.location!.substring(info.location!.lastIndexOf("/") + 1);
           int? index = routeNameToIndex[name];
           if (index != null &&
-              appBloc.state.selectedTabIndexNoMobile != index) {
-            appBloc.add(AppEvent.setSelectedTabIndexNoMobile(index));
+              appBloc.state.selectedSidebarItemIndex != index) {
+            appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
           }
         }
       }
@@ -273,14 +184,9 @@ class _TabletLayoutState extends State<TabletLayout> {
             return Scaffold(
               appBar: AppBar(
                 bottom: widget.bottom,
-                leadingWidth: 100.0,
-                leading: getControls(),
                 centerTitle: true,
                 title: Text(
                   widget.title,
-                ),
-                flexibleSpace: DragToMoveArea(
-                  child: Container(),
                 ),
                 actions: [
                   getAppBarContent(settingsBloc, settings, true),
@@ -298,12 +204,10 @@ class _TabletLayoutState extends State<TabletLayout> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     NavigationRail(
-                      extended: widget.constraints.maxWidth >= 800,
-                      minExtendedWidth: 150,
-                      selectedIndex: appBloc.state.selectedTabIndexNoMobile,
+                      selectedIndex: appBloc.state.selectedSidebarItemIndex,
                       onDestinationSelected: (int index) {
                         appBloc
-                            .add(AppEvent.setSelectedTabIndexNoMobile(index));
+                            .add(AppEvent.setselectedSidebarItemIndex(index));
                         final navFunc = navigationMapping[index];
                         if (navFunc != null) navFunc();
                       },

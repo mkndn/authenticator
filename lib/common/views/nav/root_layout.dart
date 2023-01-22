@@ -59,7 +59,15 @@ class _RootLayoutState extends State<RootLayout> {
           child: widget.child,
         );
       } else if (constraints.isTablet) {
-        return const TabletLayout();
+        return TabletLayout(
+          title: widget.title,
+          parent: parentRouteName,
+          constraints: constraints,
+          bottom: widget.bottom,
+          backButton: widget.backButton,
+          toolBarHeight: widget.toolBarHeight,
+          child: widget.child,
+        );
       } else if (constraints.isMobile) {
         return MobileLayout(
           title: widget.title,

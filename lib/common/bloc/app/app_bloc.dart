@@ -23,8 +23,8 @@ class AppBloc extends Bloc<AppEvent, AppState> with ChangeNotifier {
         setAuthenticated: (event) => _setAuthenticated(event, emit),
         isAuthenticating: (event) => _isAuthenticating(event, emit),
         setHasCredentials: (event) => _setHasCredentials(event, emit),
-        setSelectedTabIndexNoMobile: (event) =>
-            _setSelectedTabIndexNoMobile(event, emit),
+        setselectedSidebarItemIndex: (event) =>
+            _setselectedSidebarItemIndex(event, emit),
         setAvailableBiometricsOptions: (event) =>
             _setAvailableBiometricsOptions(event, emit),
       ),
@@ -58,10 +58,10 @@ class AppBloc extends Bloc<AppEvent, AppState> with ChangeNotifier {
     notifyListeners();
   }
 
-  void _setSelectedTabIndexNoMobile(
-      SetSelectedTabIndexNoMobile event, Emitter<AppState> emit) {
+  void _setselectedSidebarItemIndex(
+      SetselectedSidebarItemIndex event, Emitter<AppState> emit) {
     emit(
-      state.copyWith(selectedTabIndexNoMobile: event.index),
+      state.copyWith(selectedSidebarItemIndex: event.index),
     );
   }
 
@@ -70,5 +70,10 @@ class AppBloc extends Bloc<AppEvent, AppState> with ChangeNotifier {
     emit(
       state.copyWith(availableBiometricsOptions: event.options),
     );
+  }
+
+  @override
+  Future<void> close() async {
+    await super.close();
   }
 }

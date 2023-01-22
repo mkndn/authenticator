@@ -24,7 +24,7 @@ mixin _$AppEvent {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,7 +34,7 @@ mixin _$AppEvent {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,7 +44,7 @@ mixin _$AppEvent {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,8 +56,8 @@ mixin _$AppEvent {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,8 +68,8 @@ mixin _$AppEvent {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,8 +80,8 @@ mixin _$AppEvent {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,7 +148,7 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
     return setSettingsLoaded();
   }
@@ -161,7 +161,7 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
     return setSettingsLoaded?.call();
   }
@@ -174,7 +174,7 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setSettingsLoaded != null) {
@@ -192,8 +192,8 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
     return setSettingsLoaded(this);
   }
@@ -207,8 +207,8 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
     return setSettingsLoaded?.call(this);
   }
@@ -222,8 +222,8 @@ class _$SetSettingsLoaded implements SetSettingsLoaded {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setSettingsLoaded != null) {
@@ -307,7 +307,7 @@ class _$SetAuthenticated implements SetAuthenticated {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
     return setAuthenticated(status);
   }
@@ -320,7 +320,7 @@ class _$SetAuthenticated implements SetAuthenticated {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
     return setAuthenticated?.call(status);
   }
@@ -333,7 +333,7 @@ class _$SetAuthenticated implements SetAuthenticated {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setAuthenticated != null) {
@@ -351,8 +351,8 @@ class _$SetAuthenticated implements SetAuthenticated {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
     return setAuthenticated(this);
   }
@@ -366,8 +366,8 @@ class _$SetAuthenticated implements SetAuthenticated {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
     return setAuthenticated?.call(this);
   }
@@ -381,8 +381,8 @@ class _$SetAuthenticated implements SetAuthenticated {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setAuthenticated != null) {
@@ -471,7 +471,7 @@ class _$IsAuthenticating implements IsAuthenticating {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
     return isAuthenticating(status);
   }
@@ -484,7 +484,7 @@ class _$IsAuthenticating implements IsAuthenticating {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
     return isAuthenticating?.call(status);
   }
@@ -497,7 +497,7 @@ class _$IsAuthenticating implements IsAuthenticating {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (isAuthenticating != null) {
@@ -515,8 +515,8 @@ class _$IsAuthenticating implements IsAuthenticating {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
     return isAuthenticating(this);
   }
@@ -530,8 +530,8 @@ class _$IsAuthenticating implements IsAuthenticating {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
     return isAuthenticating?.call(this);
   }
@@ -545,8 +545,8 @@ class _$IsAuthenticating implements IsAuthenticating {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (isAuthenticating != null) {
@@ -635,7 +635,7 @@ class _$SetHasCredentials implements SetHasCredentials {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
     return setHasCredentials(status);
   }
@@ -648,7 +648,7 @@ class _$SetHasCredentials implements SetHasCredentials {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
     return setHasCredentials?.call(status);
   }
@@ -661,7 +661,7 @@ class _$SetHasCredentials implements SetHasCredentials {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setHasCredentials != null) {
@@ -679,8 +679,8 @@ class _$SetHasCredentials implements SetHasCredentials {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
     return setHasCredentials(this);
   }
@@ -694,8 +694,8 @@ class _$SetHasCredentials implements SetHasCredentials {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
     return setHasCredentials?.call(this);
   }
@@ -709,8 +709,8 @@ class _$SetHasCredentials implements SetHasCredentials {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setHasCredentials != null) {
@@ -809,7 +809,7 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
     return setAvailableBiometricsOptions(options);
   }
@@ -822,7 +822,7 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
     return setAvailableBiometricsOptions?.call(options);
   }
@@ -835,7 +835,7 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setAvailableBiometricsOptions != null) {
@@ -853,8 +853,8 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
     return setAvailableBiometricsOptions(this);
   }
@@ -868,8 +868,8 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
     return setAvailableBiometricsOptions?.call(this);
   }
@@ -883,8 +883,8 @@ class _$SetAvailableBiometricsOptions implements SetAvailableBiometricsOptions {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
     if (setAvailableBiometricsOptions != null) {
@@ -905,22 +905,22 @@ abstract class SetAvailableBiometricsOptions implements AppEvent {
 }
 
 /// @nodoc
-abstract class _$$SetSelectedTabIndexNoMobileCopyWith<$Res> {
-  factory _$$SetSelectedTabIndexNoMobileCopyWith(
-          _$SetSelectedTabIndexNoMobile value,
-          $Res Function(_$SetSelectedTabIndexNoMobile) then) =
-      __$$SetSelectedTabIndexNoMobileCopyWithImpl<$Res>;
+abstract class _$$SetselectedSidebarItemIndexCopyWith<$Res> {
+  factory _$$SetselectedSidebarItemIndexCopyWith(
+          _$SetselectedSidebarItemIndex value,
+          $Res Function(_$SetselectedSidebarItemIndex) then) =
+      __$$SetselectedSidebarItemIndexCopyWithImpl<$Res>;
   @useResult
   $Res call({int index});
 }
 
 /// @nodoc
-class __$$SetSelectedTabIndexNoMobileCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$SetSelectedTabIndexNoMobile>
-    implements _$$SetSelectedTabIndexNoMobileCopyWith<$Res> {
-  __$$SetSelectedTabIndexNoMobileCopyWithImpl(
-      _$SetSelectedTabIndexNoMobile _value,
-      $Res Function(_$SetSelectedTabIndexNoMobile) _then)
+class __$$SetselectedSidebarItemIndexCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$SetselectedSidebarItemIndex>
+    implements _$$SetselectedSidebarItemIndexCopyWith<$Res> {
+  __$$SetselectedSidebarItemIndexCopyWithImpl(
+      _$SetselectedSidebarItemIndex _value,
+      $Res Function(_$SetselectedSidebarItemIndex) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -928,7 +928,7 @@ class __$$SetSelectedTabIndexNoMobileCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
   }) {
-    return _then(_$SetSelectedTabIndexNoMobile(
+    return _then(_$SetselectedSidebarItemIndex(
       null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -939,22 +939,22 @@ class __$$SetSelectedTabIndexNoMobileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
-  const _$SetSelectedTabIndexNoMobile(this.index);
+class _$SetselectedSidebarItemIndex implements SetselectedSidebarItemIndex {
+  const _$SetselectedSidebarItemIndex(this.index);
 
   @override
   final int index;
 
   @override
   String toString() {
-    return 'AppEvent.setSelectedTabIndexNoMobile(index: $index)';
+    return 'AppEvent.setselectedSidebarItemIndex(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SetSelectedTabIndexNoMobile &&
+            other is _$SetselectedSidebarItemIndex &&
             (identical(other.index, index) || other.index == index));
   }
 
@@ -964,9 +964,9 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SetSelectedTabIndexNoMobileCopyWith<_$SetSelectedTabIndexNoMobile>
-      get copyWith => __$$SetSelectedTabIndexNoMobileCopyWithImpl<
-          _$SetSelectedTabIndexNoMobile>(this, _$identity);
+  _$$SetselectedSidebarItemIndexCopyWith<_$SetselectedSidebarItemIndex>
+      get copyWith => __$$SetselectedSidebarItemIndexCopyWithImpl<
+          _$SetselectedSidebarItemIndex>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -977,9 +977,9 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     required TResult Function(bool status) setHasCredentials,
     required TResult Function(List<String> options)
         setAvailableBiometricsOptions,
-    required TResult Function(int index) setSelectedTabIndexNoMobile,
+    required TResult Function(int index) setselectedSidebarItemIndex,
   }) {
-    return setSelectedTabIndexNoMobile(index);
+    return setselectedSidebarItemIndex(index);
   }
 
   @override
@@ -990,9 +990,9 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     TResult? Function(bool status)? isAuthenticating,
     TResult? Function(bool status)? setHasCredentials,
     TResult? Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult? Function(int index)? setSelectedTabIndexNoMobile,
+    TResult? Function(int index)? setselectedSidebarItemIndex,
   }) {
-    return setSelectedTabIndexNoMobile?.call(index);
+    return setselectedSidebarItemIndex?.call(index);
   }
 
   @override
@@ -1003,11 +1003,11 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     TResult Function(bool status)? isAuthenticating,
     TResult Function(bool status)? setHasCredentials,
     TResult Function(List<String> options)? setAvailableBiometricsOptions,
-    TResult Function(int index)? setSelectedTabIndexNoMobile,
+    TResult Function(int index)? setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
-    if (setSelectedTabIndexNoMobile != null) {
-      return setSelectedTabIndexNoMobile(index);
+    if (setselectedSidebarItemIndex != null) {
+      return setselectedSidebarItemIndex(index);
     }
     return orElse();
   }
@@ -1021,10 +1021,10 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     required TResult Function(SetHasCredentials value) setHasCredentials,
     required TResult Function(SetAvailableBiometricsOptions value)
         setAvailableBiometricsOptions,
-    required TResult Function(SetSelectedTabIndexNoMobile value)
-        setSelectedTabIndexNoMobile,
+    required TResult Function(SetselectedSidebarItemIndex value)
+        setselectedSidebarItemIndex,
   }) {
-    return setSelectedTabIndexNoMobile(this);
+    return setselectedSidebarItemIndex(this);
   }
 
   @override
@@ -1036,10 +1036,10 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     TResult? Function(SetHasCredentials value)? setHasCredentials,
     TResult? Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult? Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult? Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
   }) {
-    return setSelectedTabIndexNoMobile?.call(this);
+    return setselectedSidebarItemIndex?.call(this);
   }
 
   @override
@@ -1051,24 +1051,24 @@ class _$SetSelectedTabIndexNoMobile implements SetSelectedTabIndexNoMobile {
     TResult Function(SetHasCredentials value)? setHasCredentials,
     TResult Function(SetAvailableBiometricsOptions value)?
         setAvailableBiometricsOptions,
-    TResult Function(SetSelectedTabIndexNoMobile value)?
-        setSelectedTabIndexNoMobile,
+    TResult Function(SetselectedSidebarItemIndex value)?
+        setselectedSidebarItemIndex,
     required TResult orElse(),
   }) {
-    if (setSelectedTabIndexNoMobile != null) {
-      return setSelectedTabIndexNoMobile(this);
+    if (setselectedSidebarItemIndex != null) {
+      return setselectedSidebarItemIndex(this);
     }
     return orElse();
   }
 }
 
-abstract class SetSelectedTabIndexNoMobile implements AppEvent {
-  const factory SetSelectedTabIndexNoMobile(final int index) =
-      _$SetSelectedTabIndexNoMobile;
+abstract class SetselectedSidebarItemIndex implements AppEvent {
+  const factory SetselectedSidebarItemIndex(final int index) =
+      _$SetselectedSidebarItemIndex;
 
   int get index;
   @JsonKey(ignore: true)
-  _$$SetSelectedTabIndexNoMobileCopyWith<_$SetSelectedTabIndexNoMobile>
+  _$$SetselectedSidebarItemIndexCopyWith<_$SetselectedSidebarItemIndex>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1082,7 +1082,7 @@ mixin _$AppState {
   bool get authenticated => throw _privateConstructorUsedError;
   bool get isAuthenticating => throw _privateConstructorUsedError;
   bool get hasCredentials => throw _privateConstructorUsedError;
-  int get selectedTabIndexNoMobile => throw _privateConstructorUsedError;
+  int get selectedSidebarItemIndex => throw _privateConstructorUsedError;
   List<String> get availableBiometricsOptions =>
       throw _privateConstructorUsedError;
 
@@ -1102,7 +1102,7 @@ abstract class $AppStateCopyWith<$Res> {
       bool authenticated,
       bool isAuthenticating,
       bool hasCredentials,
-      int selectedTabIndexNoMobile,
+      int selectedSidebarItemIndex,
       List<String> availableBiometricsOptions});
 }
 
@@ -1123,7 +1123,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
     Object? authenticated = null,
     Object? isAuthenticating = null,
     Object? hasCredentials = null,
-    Object? selectedTabIndexNoMobile = null,
+    Object? selectedSidebarItemIndex = null,
     Object? availableBiometricsOptions = null,
   }) {
     return _then(_value.copyWith(
@@ -1143,9 +1143,9 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.hasCredentials
           : hasCredentials // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedTabIndexNoMobile: null == selectedTabIndexNoMobile
-          ? _value.selectedTabIndexNoMobile
-          : selectedTabIndexNoMobile // ignore: cast_nullable_to_non_nullable
+      selectedSidebarItemIndex: null == selectedSidebarItemIndex
+          ? _value.selectedSidebarItemIndex
+          : selectedSidebarItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       availableBiometricsOptions: null == availableBiometricsOptions
           ? _value.availableBiometricsOptions
@@ -1167,7 +1167,7 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       bool authenticated,
       bool isAuthenticating,
       bool hasCredentials,
-      int selectedTabIndexNoMobile,
+      int selectedSidebarItemIndex,
       List<String> availableBiometricsOptions});
 }
 
@@ -1186,7 +1186,7 @@ class __$$_AppStateCopyWithImpl<$Res>
     Object? authenticated = null,
     Object? isAuthenticating = null,
     Object? hasCredentials = null,
-    Object? selectedTabIndexNoMobile = null,
+    Object? selectedSidebarItemIndex = null,
     Object? availableBiometricsOptions = null,
   }) {
     return _then(_$_AppState(
@@ -1206,9 +1206,9 @@ class __$$_AppStateCopyWithImpl<$Res>
           ? _value.hasCredentials
           : hasCredentials // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedTabIndexNoMobile: null == selectedTabIndexNoMobile
-          ? _value.selectedTabIndexNoMobile
-          : selectedTabIndexNoMobile // ignore: cast_nullable_to_non_nullable
+      selectedSidebarItemIndex: null == selectedSidebarItemIndex
+          ? _value.selectedSidebarItemIndex
+          : selectedSidebarItemIndex // ignore: cast_nullable_to_non_nullable
               as int,
       availableBiometricsOptions: null == availableBiometricsOptions
           ? _value._availableBiometricsOptions
@@ -1226,7 +1226,7 @@ class _$_AppState implements _AppState {
       this.authenticated = false,
       this.isAuthenticating = false,
       this.hasCredentials = false,
-      this.selectedTabIndexNoMobile = 0,
+      this.selectedSidebarItemIndex = 0,
       final List<String> availableBiometricsOptions = const []})
       : _availableBiometricsOptions = availableBiometricsOptions;
 
@@ -1247,7 +1247,7 @@ class _$_AppState implements _AppState {
   final bool hasCredentials;
   @override
   @JsonKey()
-  final int selectedTabIndexNoMobile;
+  final int selectedSidebarItemIndex;
   final List<String> _availableBiometricsOptions;
   @override
   @JsonKey()
@@ -1260,7 +1260,7 @@ class _$_AppState implements _AppState {
 
   @override
   String toString() {
-    return 'AppState(settingsLoaded: $settingsLoaded, authenticated: $authenticated, isAuthenticating: $isAuthenticating, hasCredentials: $hasCredentials, selectedTabIndexNoMobile: $selectedTabIndexNoMobile, availableBiometricsOptions: $availableBiometricsOptions)';
+    return 'AppState(settingsLoaded: $settingsLoaded, authenticated: $authenticated, isAuthenticating: $isAuthenticating, hasCredentials: $hasCredentials, selectedSidebarItemIndex: $selectedSidebarItemIndex, availableBiometricsOptions: $availableBiometricsOptions)';
   }
 
   @override
@@ -1277,8 +1277,8 @@ class _$_AppState implements _AppState {
             (identical(other.hasCredentials, hasCredentials) ||
                 other.hasCredentials == hasCredentials) &&
             (identical(
-                    other.selectedTabIndexNoMobile, selectedTabIndexNoMobile) ||
-                other.selectedTabIndexNoMobile == selectedTabIndexNoMobile) &&
+                    other.selectedSidebarItemIndex, selectedSidebarItemIndex) ||
+                other.selectedSidebarItemIndex == selectedSidebarItemIndex) &&
             const DeepCollectionEquality().equals(
                 other._availableBiometricsOptions,
                 _availableBiometricsOptions));
@@ -1292,7 +1292,7 @@ class _$_AppState implements _AppState {
       authenticated,
       isAuthenticating,
       hasCredentials,
-      selectedTabIndexNoMobile,
+      selectedSidebarItemIndex,
       const DeepCollectionEquality().hash(_availableBiometricsOptions));
 
   @JsonKey(ignore: true)
@@ -1315,7 +1315,7 @@ abstract class _AppState implements AppState {
       final bool authenticated,
       final bool isAuthenticating,
       final bool hasCredentials,
-      final int selectedTabIndexNoMobile,
+      final int selectedSidebarItemIndex,
       final List<String> availableBiometricsOptions}) = _$_AppState;
 
   factory _AppState.fromJson(Map<String, dynamic> json) = _$_AppState.fromJson;
@@ -1329,7 +1329,7 @@ abstract class _AppState implements AppState {
   @override
   bool get hasCredentials;
   @override
-  int get selectedTabIndexNoMobile;
+  int get selectedSidebarItemIndex;
   @override
   List<String> get availableBiometricsOptions;
   @override

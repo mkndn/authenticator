@@ -8,6 +8,6 @@ class AppEvent with _$AppEvent {
   const factory AppEvent.setHasCredentials(bool status) = SetHasCredentials;
   const factory AppEvent.setAvailableBiometricsOptions(List<String> options) =
       SetAvailableBiometricsOptions;
-  const factory AppEvent.setSelectedTabIndexNoMobile(int index) =
-      SetSelectedTabIndexNoMobile;
+  const factory AppEvent.setselectedSidebarItemIndex(int index) =
+      SetselectedSidebarItemIndex;
 }
