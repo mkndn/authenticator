@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/common/bloc/progress/progress_bloc.dart';
-import 'package:authenticator/common/extensions.dart';
 
 class DynamicProgressIndicator extends StatefulWidget {
   const DynamicProgressIndicator({super.key});

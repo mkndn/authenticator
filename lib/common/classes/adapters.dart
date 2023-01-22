@@ -1,7 +1,7 @@
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
 import 'package:objectid/objectid.dart';
 
 class AlgorithmAdapter extends TypeAdapter<Algorithm> {

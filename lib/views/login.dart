@@ -1,13 +1,13 @@
+import 'package:authenticator/common/classes/alert.dart';
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/common/views/pin_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:authenticator/classes/settings.dart';
-import 'package:authenticator/common/alert.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
 import 'package:authenticator/services/secured_storage.dart';
 import 'package:authenticator/services/auth/auth_service.dart';
 

@@ -1,5 +1,5 @@
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:hive/hive.dart';
-import 'package:authenticator/common/enums.dart';
 import 'package:objectid/objectid.dart';
 
 part 'totp_data.g.dart';

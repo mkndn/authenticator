@@ -1,18 +1,20 @@
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/extensions.dart';
+import 'package:authenticator/common/classes/route_config.dart';
 import 'package:flutter/material.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/desktop_nav.dart';
-import 'package:authenticator/common/views/nav/mobile_nav.dart';
-import 'package:authenticator/common/views/nav/tablet_nav.dart';
+import 'package:authenticator/common/views/nav/desktop_layout.dart';
+import 'package:authenticator/common/views/nav/mobile_layout.dart';
+import 'package:authenticator/common/views/nav/tablet_layout.dart';
 import 'package:authenticator/services/preference_service.dart';
 
-class AppTitleBar extends StatefulWidget {
-  const AppTitleBar({
+class RootLayout extends StatefulWidget {
+  const RootLayout({
     required this.title,
     required this.child,
+    required this.routeInfo,
     this.bottom,
     this.displayMenu = true,
     this.backButton = false,
-    this.backActionPath,
     this.toolBarHeight = 50.0,
     super.key,
   });
@@ -21,19 +23,22 @@ class AppTitleBar extends StatefulWidget {
   final Widget child;
   final PreferredSizeWidget? bottom;
   final bool displayMenu;
-  final String? backActionPath;
   final double toolBarHeight;
   final bool backButton;
+  final RouteInfo routeInfo;
 
   @override
-  State<AppTitleBar> createState() => _AppTitleBarState();
+  State<RootLayout> createState() => _RootLayoutState();
 }
 
-class _AppTitleBarState extends State<AppTitleBar> {
+class _RootLayoutState extends State<RootLayout> {
   final PreferenceService preferenceService = PreferenceService.instance();
   Alignment toolbarAlignment = Alignment.center;
   double containerWidth = 0.0;
   double containerHeight = 0.0;
+
+  String get parentRouteName =>
+      widget.routeInfo.parent?.name ?? AppRoute.home.name;
 
   @override
   void initState() {
@@ -44,8 +49,9 @@ class _AppTitleBarState extends State<AppTitleBar> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.isDesktop) {
-        return DesktopNav(
+        return DesktopLayout(
           title: widget.title,
+          parent: parentRouteName,
           constraints: constraints,
           bottom: widget.bottom,
           backButton: widget.backButton,
@@ -53,10 +59,11 @@ class _AppTitleBarState extends State<AppTitleBar> {
           child: widget.child,
         );
       } else if (constraints.isTablet) {
-        return const TabletNav();
+        return const TabletLayout();
       } else if (constraints.isMobile) {
-        return MobileNav(
+        return MobileLayout(
           title: widget.title,
+          parent: parentRouteName,
           bottom: widget.bottom,
           backButton: widget.backButton,
           constraints: constraints,

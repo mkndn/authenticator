@@ -1,5 +1,5 @@
-import 'package:authenticator/common/enums.dart';
 import 'package:authenticator/classes/settings.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/services/secured_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

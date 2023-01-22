@@ -1,9 +1,7 @@
-import 'package:authenticator/mixins/route_mixin.dart';
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/common/views/settings_section.dart';
 import 'package:authenticator/common/views/settings_tile.dart';
 import 'package:authenticator/common/views/settings_view.dart';
@@ -15,46 +13,41 @@ class PreferencesView extends StatefulWidget {
   State<PreferencesView> createState() => _PreferencesViewState();
 }
 
-class _PreferencesViewState extends State<PreferencesView> with RouteMixin {
+class _PreferencesViewState extends State<PreferencesView> {
   @override
   Widget build(BuildContext context) {
-    return AppTitleBar(
-      backButton: true,
-      backActionPath: AppRoutes.home.path,
-      displayMenu: false,
-      title: AppSubRoutes.settings.title,
-      child: SettingsView(
-        children: [
-          SettingsSection(
-            children: SettingsSubRoutes.values
-                .map((e) => SettingsTile(
-                      leading: [
-                        Icon(
-                          e.icon,
-                        )
-                      ],
-                      trailing: const [
-                        Icon(
-                          Icons.chevron_right,
-                        )
-                      ],
-                      title: Text(
-                        e.title,
+    return SettingsView(
+      children: [
+        SettingsSection(
+          children: routes.values
+              .where(
+                (element) => element.parent?.name == AppRoute.settings.name,
+              )
+              .map((e) => SettingsTile(
+                    leading: [
+                      Icon(
+                        e.route.icon,
+                      )
+                    ],
+                    trailing: const [
+                      Icon(
+                        Icons.chevron_right,
+                      )
+                    ],
+                    title: Text(
+                      e.route.title,
+                    ),
+                    subTitle: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        e.leaves.join(" . "),
                       ),
-                      subTitle: Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Text(
-                          e.getLeaves().join(" . "),
-                        ),
-                      ),
-                      onClick: () => GoRouter.of(context).go(
-                        absolute(GoRouterState.of(context), e.path),
-                      ),
-                    ))
-                .toList(),
-          ),
-        ],
-      ),
+                    ),
+                    onClick: () => context.goNamed(e.route.name),
+                  ))
+              .toList(),
+        ),
+      ],
     );
   }
 }

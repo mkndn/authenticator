@@ -1,8 +1,8 @@
 import 'dart:math';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:crypto/crypto.dart';
 import 'package:base32/base32.dart';
 import 'package:flutter/foundation.dart';
-import 'package:authenticator/common/enums.dart';
 
 class TOTP {
   TOTP._();

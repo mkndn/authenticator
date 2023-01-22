@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:authenticator/common/classes/alert.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:authenticator/common/alert.dart';
-import 'package:authenticator/common/enums.dart';
 import 'package:authenticator/mixins/security_mixin.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:authenticator/services/import_export.dart';

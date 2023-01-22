@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/route_config.dart';
 import 'package:authenticator/views/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
+import 'package:authenticator/common/views/nav/root_layout.dart';
 import 'package:authenticator/views/add_entry.dart';
 import 'package:authenticator/views/edit_entry.dart';
 import 'package:authenticator/views/preferences/import_export_settings_view.dart';
@@ -34,93 +35,174 @@ class GoRouterRefreshStream extends ChangeNotifier {
   }
 }
 
+final Map<AppRoute, RouteInfo> routes = {
+  AppRoute.login: RouteInfo(
+    route: AppRoute.login,
+  ),
+  AppRoute.home: RouteInfo(
+    route: AppRoute.home,
+  ),
+  AppRoute.scan: RouteInfo(
+    route: AppRoute.scan,
+    parent: AppRoute.home,
+  ),
+  AppRoute.editEntry: RouteInfo(
+    route: AppRoute.editEntry,
+    parent: AppRoute.home,
+  ),
+  AppRoute.addEntry: RouteInfo(
+    route: AppRoute.addEntry,
+    parent: AppRoute.home,
+  ),
+  AppRoute.settings: RouteInfo(
+    route: AppRoute.settings,
+    parent: AppRoute.home,
+  ),
+  AppRoute.display: RouteInfo(
+      route: AppRoute.display,
+      parent: AppRoute.settings,
+      leaves: DisplaySettings.titles),
+  AppRoute.security: RouteInfo(
+      route: AppRoute.security,
+      parent: AppRoute.settings,
+      leaves: SecuritySettings.titles),
+  AppRoute.importExport: RouteInfo(
+      route: AppRoute.importExport,
+      parent: AppRoute.settings,
+      leaves: ImportExportSettings.titles),
+  AppRoute.data: RouteInfo(
+      route: AppRoute.data,
+      parent: AppRoute.settings,
+      leaves: DataSettings.titles),
+};
+
 GoRouter appRouter(AppBloc bloc) => GoRouter(
       refreshListenable: bloc,
-      initialLocation: AppRoutes.login.path,
+      initialLocation: AppRoute.login.path,
       routes: [
         // LoginScreen
         GoRoute(
-          path: AppRoutes.login.path,
-          name: AppRoutes.login.name,
+          path: AppRoute.login.path,
+          name: AppRoute.login.name,
           pageBuilder: (context, state) => MaterialPage<void>(
             key: _pageKey,
-            child: AppTitleBar(
+            child: RootLayout(
               displayMenu: false,
-              title: AppRoutes.login.title,
+              routeInfo: routes[AppRoute.login]!,
+              title: AppRoute.login.title,
               child: const LoginView(),
             ),
           ),
         ),
         // HomeScreen
         GoRoute(
-            path: AppRoutes.home.path,
-            name: AppRoutes.home.name,
+            path: AppRoute.home.path,
+            name: AppRoute.home.name,
             pageBuilder: (context, state) => MaterialPage<void>(
                   key: _pageKey,
-                  child: AppTitleBar(
-                    title: AppRoutes.home.title,
-                    child: const HomePage(),
+                  child: RootLayout(
+                    routeInfo: routes[AppRoute.home]!,
+                    title: AppRoute.home.title,
+                    child: HomeView(
+                      reload: state.queryParams['reload'] == 'true',
+                    ),
                   ),
                 ),
             routes: [
               GoRoute(
-                path: AppSubRoutes.scan.path,
-                name: AppSubRoutes.scan.name,
+                path: AppRoute.scan.path,
+                name: AppRoute.scan.name,
                 pageBuilder: (context, state) => const MaterialPage<void>(
                   child: QRScanner(),
                 ),
               ),
               GoRoute(
-                path: AppSubRoutes.addEntry.path,
-                name: AppSubRoutes.addEntry.name,
-                pageBuilder: (context, state) => const MaterialPage<void>(
-                  child: AddEntry(),
-                ),
-              ),
-              GoRoute(
-                path: AppSubRoutes.editEntry.path,
-                name: AppSubRoutes.editEntry.name,
+                path: AppRoute.addEntry.path,
+                name: AppRoute.addEntry.name,
                 pageBuilder: (context, state) => MaterialPage<void>(
-                  child: EditEntry(
-                    title: AppSubRoutes.editEntry.title,
-                    entryId: state.params['eid']!,
-                    embedded: false,
+                  child: RootLayout(
+                    routeInfo: routes[AppRoute.addEntry]!,
+                    displayMenu: false,
+                    title: "Add account",
+                    backButton: true,
+                    child: const AddEntry(),
                   ),
                 ),
               ),
               GoRoute(
-                path: AppSubRoutes.settings.path,
-                name: AppSubRoutes.settings.name,
-                pageBuilder: (context, state) => const MaterialPage<void>(
-                  child: PreferencesView(),
+                path: '${AppRoute.editEntry.path}/:eid',
+                name: AppRoute.editEntry.name,
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  child: RootLayout(
+                    routeInfo: routes[AppRoute.editEntry]!,
+                    displayMenu: false,
+                    backButton: true,
+                    title: AppRoute.editEntry.title,
+                    child: EditEntry.standalone(
+                      entryId: state.params['eid']!,
+                    ),
+                  ),
+                ),
+              ),
+              GoRoute(
+                path: AppRoute.settings.path,
+                name: AppRoute.settings.name,
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  child: RootLayout(
+                    routeInfo: routes[AppRoute.settings]!,
+                    backButton: true,
+                    displayMenu: false,
+                    title: AppRoute.settings.title,
+                    child: const PreferencesView(),
+                  ),
                 ),
                 routes: [
                   GoRoute(
-                    path: SettingsSubRoutes.display.path,
-                    name: SettingsSubRoutes.display.name,
-                    pageBuilder: (context, state) => const MaterialPage<void>(
-                      child: DisplayPreferencesView(),
+                    path: AppRoute.display.path,
+                    name: AppRoute.display.name,
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      child: RootLayout(
+                        routeInfo: routes[AppRoute.display]!,
+                        backButton: true,
+                        title: AppRoute.display.title,
+                        child: const DisplayPreferencesView(),
+                      ),
                     ),
                   ),
                   GoRoute(
-                    path: SettingsSubRoutes.security.path,
-                    name: SettingsSubRoutes.security.name,
-                    pageBuilder: (context, state) => const MaterialPage<void>(
-                      child: SecuirtySettingsView(),
+                    path: AppRoute.security.path,
+                    name: AppRoute.security.name,
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      child: RootLayout(
+                        routeInfo: routes[AppRoute.security]!,
+                        backButton: true,
+                        title: AppRoute.security.title,
+                        child: const SecuirtySettingsView(),
+                      ),
                     ),
                   ),
                   GoRoute(
-                    path: SettingsSubRoutes.importExport.path,
-                    name: SettingsSubRoutes.importExport.name,
-                    pageBuilder: (context, state) => const MaterialPage<void>(
-                      child: ImportExportSettingsView(),
+                    path: AppRoute.importExport.path,
+                    name: AppRoute.importExport.name,
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      child: RootLayout(
+                        routeInfo: routes[AppRoute.importExport]!,
+                        backButton: true,
+                        title: AppRoute.importExport.title,
+                        child: const ImportExportSettingsView(),
+                      ),
                     ),
                   ),
                   GoRoute(
-                    path: SettingsSubRoutes.data.path,
-                    name: SettingsSubRoutes.data.name,
-                    pageBuilder: (context, state) => const MaterialPage<void>(
-                      child: DataSettingsView(),
+                    path: AppRoute.data.path,
+                    name: AppRoute.data.name,
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      child: RootLayout(
+                        routeInfo: routes[AppRoute.data]!,
+                        backButton: true,
+                        title: AppRoute.data.title,
+                        child: const DataSettingsView(),
+                      ),
                     ),
                   ),
                 ],
@@ -129,11 +211,11 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
       ],
       redirect: (context, state) {
         String currentRoute = state.subloc;
-        String loginRoute = AppRoutes.login.path;
+        String loginRoute = AppRoute.login.path;
 
         if (currentRoute == loginRoute) {
           if (bloc.state.authenticated || !bloc.state.hasCredentials) {
-            return AppRoutes.home.path;
+            return AppRoute.home.path;
           }
           return null;
         } else {

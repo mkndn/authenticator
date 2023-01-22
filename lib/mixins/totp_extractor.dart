@@ -1,5 +1,5 @@
-import 'package:authenticator/common/enums.dart';
 import 'package:authenticator/classes/totp_data.dart';
+import 'package:authenticator/common/classes/enums.dart';
 
 mixin TotpExtractor {
   Map<TotpField, RegExp> regexMap = <TotpField, RegExp>{

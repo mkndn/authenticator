@@ -1,3 +1,6 @@
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/extensions.dart';
+import 'package:authenticator/common/classes/observables.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';
 import 'package:authenticator/common/theme/theme_settings.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -5,9 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/common/views/settings_section.dart';
 import 'package:authenticator/common/views/settings_tile.dart';
 import 'package:authenticator/common/views/settings_view.dart';
@@ -106,91 +106,81 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
       bloc: settingsBloc,
       builder: (builder, settingsState) {
         final settings = SettingsModel.fromStateJson(settingsState.toJson());
-        return AppTitleBar(
-          backButton: true,
-          backActionPath: AppSubRoutes.settings.path,
-          title: SettingsSubRoutes.display.title,
-          child: SettingsView(
-            children: [
-              SettingsSection(
-                children: [
-                  SettingsTile(
-                    leading: const [
-                      Icon(
-                        Icons.hide_source,
-                      ),
-                    ],
-                    trailing: [
-                      Switch(
-                        value: settings.display.tapToReveal,
-                        onChanged: (value) async {
-                          await _preferenceService.setTapToReveal(value);
-                          settingsBloc
-                              .add(SettingsEvent.updateTapToRevealState(value));
-                        },
-                      ),
-                    ],
-                    title: Text(
-                      DisplaySettings.tapToReveal.title,
+        return SettingsView(
+          children: [
+            SettingsSection(
+              children: [
+                SettingsTile(
+                  leading: const [
+                    Icon(
+                      Icons.hide_source,
                     ),
-                    subTitle: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        settings.display.tapToReveal
-                            ? 'TOTP codes are hidden'
-                            : 'TOTP codes are visible',
-                      ),
+                  ],
+                  trailing: [
+                    Switch(
+                      value: settings.display.tapToReveal,
+                      onChanged: (value) async {
+                        await _preferenceService.setTapToReveal(value);
+                        settingsBloc
+                            .add(SettingsEvent.updateTapToRevealState(value));
+                      },
+                    ),
+                  ],
+                  title: Text(
+                    DisplaySettings.tapToReveal.title,
+                  ),
+                  subTitle: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      settings.display.tapToReveal
+                          ? 'TOTP codes are hidden'
+                          : 'TOTP codes are visible',
                     ),
                   ),
-                  SettingsTile(
-                    title: Text(
-                      DisplaySettings.primaryColor.title,
-                    ),
-                    subTitle: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        '#${ThemeProvider.of(context).settings.value.sourceColor.hex}',
-                      ),
-                    ),
-                    trailing: const [
-                      Icon(
-                        Icons.chevron_right,
-                      )
-                    ],
-                    leading: [
-                      ColorIndicator(
-                        width: 25,
-                        height: 25,
-                        borderRadius: 50,
-                        color: ThemeProvider.of(context)
-                            .settings
-                            .value
-                            .sourceColor,
-                        onSelectFocus: false,
-                        onSelect: () async {
-                          final Color newColor = await colorPickerDialog(
-                            ThemeProvider.of(context)
-                                .settings
-                                .value
-                                .sourceColor,
-                          );
-                          await _preferenceService
-                              .setPrimaryColor(newColor.hexAlpha);
-                          if (!mounted) return;
-                          final newSettings = ThemeSettings(
-                            sourceColor: newColor, // Replace this color
-                            themeMode: ThemeMode.system,
-                          );
-                          ThemeSettingChange(settings: newSettings)
-                              .dispatch(context);
-                        },
-                      ),
-                    ],
+                ),
+                SettingsTile(
+                  title: Text(
+                    DisplaySettings.primaryColor.title,
                   ),
-                ],
-              ),
-            ],
-          ),
+                  subTitle: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      '#${ThemeProvider.of(context).settings.value.sourceColor.hex}',
+                    ),
+                  ),
+                  trailing: const [
+                    Icon(
+                      Icons.chevron_right,
+                    )
+                  ],
+                  leading: [
+                    ColorIndicator(
+                      width: 25,
+                      height: 25,
+                      borderRadius: 50,
+                      color:
+                          ThemeProvider.of(context).settings.value.sourceColor,
+                      onSelectFocus: false,
+                      onSelect: () async {
+                        final Color newColor = await colorPickerDialog(
+                          ThemeProvider.of(context).settings.value.sourceColor,
+                        );
+                        await _preferenceService
+                            .setPrimaryColor(newColor.hexAlpha);
+                        if (!mounted) return;
+                        final newSettings = ThemeSettings(
+                          sourceColor: newColor, // Replace this color
+                          themeMode: ThemeMode.system,
+                        );
+                        ThemeSettingChange(settings: newSettings)
+                            .dispatch(context);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

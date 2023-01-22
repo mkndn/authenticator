@@ -1,11 +1,9 @@
+import 'package:authenticator/common/classes/alert.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/classes/settings.dart';
-import 'package:authenticator/common/alert.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/common/views/settings_section.dart';
 import 'package:authenticator/common/views/settings_tile.dart';
 import 'package:authenticator/common/views/settings_view.dart';
@@ -86,7 +84,7 @@ class _DataSettingsViewState extends State<DataSettingsView> {
   Widget getWarningContent() {
     return Card(
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: context.colors.outline, width: 0.75),
+        side: const BorderSide(width: 0.75),
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
@@ -120,18 +118,13 @@ class _DataSettingsViewState extends State<DataSettingsView> {
       bloc: settingsBloc,
       builder: (builder, settingsState) {
         final settings = SettingsModel.fromStateJson(settingsState.toJson());
-        return AppTitleBar(
-          backButton: true,
-          backActionPath: AppSubRoutes.settings.path,
-          title: SettingsSubRoutes.data.title,
-          child: SettingsView(
-            children: [
-              SettingsSection(
-                sectionSubHeader: getWarningContent(),
-                children: getDataOptions(settings),
-              ),
-            ],
-          ),
+        return SettingsView(
+          children: [
+            SettingsSection(
+              sectionSubHeader: getWarningContent(),
+              children: getDataOptions(settings),
+            ),
+          ],
         );
       },
     );

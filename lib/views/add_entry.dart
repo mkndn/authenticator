@@ -1,9 +1,7 @@
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/views/edit_entry.dart';
-import 'package:authenticator/common/enums.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/mixins/totp_extractor.dart';
@@ -74,10 +72,12 @@ class _AddEntryState extends State<AddEntry> with TotpExtractor {
     );
 
     if (addMode == SecretAddMode.secret || isUrlExtracted) {
-      children.add(EditEntry(
-        data: data,
-        parentFormKey: _formKey,
-      ));
+      children.add(
+        EditEntry.emdedded(
+          data: data,
+          parentFormKey: _formKey,
+        ),
+      );
     } else {
       children.addAll(
         [
@@ -151,22 +151,19 @@ class _AddEntryState extends State<AddEntry> with TotpExtractor {
 
   @override
   Widget build(BuildContext context) {
-    return AppTitleBar(
-      displayMenu: false,
-      title: "Add account",
-      backActionPath: AppRoutes.home.path,
-      backButton: true,
-      child: LayoutBuilder(
-        builder: (context, constraints) => Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: getChildren(constraints),
-              ),
-            )),
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 25.0,
+          vertical: 15.0,
+        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: getChildren(constraints),
+          ),
+        ),
       ),
     );
   }

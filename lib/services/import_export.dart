@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:authenticator/classes/totp_data.dart';
-import 'package:authenticator/common/typedefs.dart';
+import 'package:authenticator/common/classes/typedefs.dart';
 import 'package:authenticator/services/encrypt_decrypt.dart';
 
 class ImportExport {

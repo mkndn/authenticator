@@ -1,40 +1,63 @@
 import 'dart:async';
 
-import 'package:authenticator/mixins/route_mixin.dart';
+import 'package:authenticator/common/classes/alert.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:authenticator/common/alert.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:authenticator/classes/totp_data.dart';
 
 class EditEntry extends StatefulWidget {
-  const EditEntry({
-    this.title = 'Add Account',
-    this.embedded = true,
-    this.parentFormKey,
+  const EditEntry._({
+    required this.title,
+    required this.isEmbedded,
     this.entryId,
+    this.parentFormKey,
     this.data,
     super.key,
   })  : assert((entryId != null || data != null),
             'Either entryId or data parameter required'),
-        assert((embedded && parentFormKey != null) || (!embedded),
+        assert((isEmbedded && parentFormKey != null) || (!isEmbedded),
             'parentFormKey required for embeddeded forms');
 
-  final String title;
+  static EditEntry standalone({
+    required String entryId,
+  }) {
+    return EditEntry._(
+      entryId: entryId,
+      data: null,
+      parentFormKey: null,
+      title: 'Add Account',
+      isEmbedded: false,
+    );
+  }
+
+  static EditEntry emdedded({
+    required TotpData data,
+    required GlobalKey<FormState>? parentFormKey,
+  }) {
+    return EditEntry._(
+      data: data,
+      parentFormKey: parentFormKey,
+      title: null,
+      entryId: null,
+      isEmbedded: true,
+    );
+  }
+
+  final String? title;
   final String? entryId;
   final GlobalKey<FormState>? parentFormKey;
   final TotpData? data;
-  final bool embedded;
+  final bool isEmbedded;
 
   @override
   State<EditEntry> createState() => _EditEntryState();
 }
 
-class _EditEntryState extends State<EditEntry> with RouteMixin {
-  final HiveService service = HiveService.instance();
+class _EditEntryState extends State<EditEntry> {
+  final HiveService _hiveService = HiveService.instance();
   TotpData? entryData;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -170,11 +193,13 @@ class _EditEntryState extends State<EditEntry> with RouteMixin {
                   // the form is invalid.
                   if (_formKey.currentState!.validate()) {
                     // Process data.
-                    service.addItem(entryData!);
+                    _hiveService.addItem(entryData!);
                     Alert.showAlert(context, 'Account added successfully');
                     Timer(const Duration(seconds: 3), () {
-                      GoRouter.of(context)
-                          .go(parent(GoRouterState.of(context)));
+                      context.goNamed(
+                        AppRoute.home.name,
+                        queryParams: {'reload': true},
+                      );
                     });
                   }
                 },
@@ -193,20 +218,19 @@ class _EditEntryState extends State<EditEntry> with RouteMixin {
   void initState() {
     super.initState();
     entryData = widget.data;
-    _formKey = widget.embedded ? widget.parentFormKey! : _formKey;
+    _formKey = widget.isEmbedded ? widget.parentFormKey! : _formKey;
     if (entryData == null && widget.entryId != null) {
-      entryData = service.getItem(widget.entryId!);
+      entryData = _hiveService.getItem(widget.entryId!);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (entryData != null) {
-      if (widget.embedded) {
+      if (widget.isEmbedded) {
         return LayoutBuilder(
           builder: (context, constraints) => Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: buildFormControl(constraints),
@@ -214,21 +238,15 @@ class _EditEntryState extends State<EditEntry> with RouteMixin {
           ),
         );
       } else {
-        return AppTitleBar(
-          displayMenu: false,
-          backButton: true,
-          backActionPath: AppRoutes.home.path,
-          title: widget.title,
-          child: LayoutBuilder(
-            builder: (context, constraints) => Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: buildFormControl(constraints),
-                ),
+        return LayoutBuilder(
+          builder: (context, constraints) => Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: buildFormControl(constraints),
               ),
             ),
           ),

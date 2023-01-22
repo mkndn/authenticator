@@ -1,20 +1,20 @@
-import 'package:authenticator/mixins/route_mixin.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
 import 'package:authenticator/common/views/brightness_toggle.dart';
 import 'package:authenticator/common/views/hover_container.dart';
 import 'package:window_manager/window_manager.dart';
 
-class DesktopNav extends StatefulWidget {
-  const DesktopNav({
+class DesktopLayout extends StatefulWidget {
+  const DesktopLayout({
     required this.title,
     required this.child,
     required this.constraints,
+    required this.parent,
     this.backButton = false,
     this.displayMenu = true,
     this.toolBarHeight = 50.0,
@@ -23,6 +23,7 @@ class DesktopNav extends StatefulWidget {
   });
 
   final String title;
+  final String parent;
   final Widget child;
   final bool backButton;
   final double toolBarHeight;
@@ -31,13 +32,13 @@ class DesktopNav extends StatefulWidget {
   final BoxConstraints constraints;
 
   @override
-  State<DesktopNav> createState() => _DesktopNavState();
+  State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _DesktopNavState extends State<DesktopNav>
-    with RouteMixin, WindowListener {
+class _DesktopLayoutState extends State<DesktopLayout> with WindowListener {
   String resizeText = 'Maximize';
   final Map<int, VoidCallback> navigationMapping = {};
+  final Map<String, int> routeNameToIndex = {};
 
   @override
   Future<void> onWindowEvent(String eventName) async {
@@ -53,8 +54,7 @@ class _DesktopNavState extends State<DesktopNav>
     SettingsBloc bloc,
     SettingsModel settings,
   ) {
-    List<NavigationRailDestination> sideBarItems = [];
-    sideBarItems.addAll([
+    return [
       NavigationRailDestination(
         icon: const Icon(
           Icons.home_outlined,
@@ -89,8 +89,7 @@ class _DesktopNavState extends State<DesktopNav>
         ),
         label: Text(NavRailOptions.exit.title),
       ),
-    ]);
-    return sideBarItems;
+    ];
   }
 
   Widget getAppBarContent(
@@ -127,16 +126,20 @@ class _DesktopNavState extends State<DesktopNav>
     SettingsBloc bloc,
     SettingsModel settings,
   ) {
-    navigationMapping.addAll(
-      <int, VoidCallback>{
-        0: () => GoRouter.of(context).go(AppRoutes.home.path),
-        1: () => GoRouter.of(context)
-            .go("${AppRoutes.home.path}/${AppSubRoutes.addEntry.path}"),
-        2: () => GoRouter.of(context)
-            .go("${AppRoutes.home.path}/${AppSubRoutes.settings.path}"),
-        3: () => windowManager.close()
-      },
-    );
+    routeNameToIndex.addAll({
+      AppRoute.home.name: 0,
+      AppRoute.addEntry.name: 1,
+      AppRoute.settings.name: 2
+    });
+
+    for (var e in routeNameToIndex.entries) {
+      navigationMapping.putIfAbsent(
+        e.value,
+        () => () => context.goNamed(e.key),
+      );
+    }
+
+    navigationMapping.putIfAbsent(3, () => () => windowManager.close());
   }
 
   // Toolbar
@@ -215,10 +218,54 @@ class _DesktopNavState extends State<DesktopNav>
     );
   }
 
+  Widget? floatingAction(SettingsBloc settingsBloc) {
+    if (GoRouterState.of(context).location == AppRoute.home.path) {
+      return FloatingActionButton.small(
+        onPressed: () {
+          settingsBloc.add(
+            SettingsEvent.updateTapToRevealState(
+                !settingsBloc.state.display.tapToReveal),
+          );
+        },
+        child: const Icon(Icons.visibility_off),
+      );
+    } else if (widget.backButton) {
+      return FloatingActionButton.small(
+        shape: const CircleBorder(),
+        onPressed: () => context.goNamed(widget.parent),
+        child: const Icon(Icons.chevron_left_outlined),
+      );
+    } else {
+      return null;
+    }
+  }
+
+  void initListener() {
+    GoRouter.of(context).routeInformationProvider.addListener(() {
+      if (mounted) {
+        RouteInformation info =
+            GoRouter.of(context).routeInformationProvider.value;
+        final appBloc = BlocProvider.of<AppBloc>(context);
+        if (info.location != null) {
+          final name =
+              info.location!.substring(info.location!.lastIndexOf("/") + 1);
+          int? index = routeNameToIndex[name];
+          if (index != null &&
+              appBloc.state.selectedTabIndexNoMobile != index) {
+            appBloc.add(AppEvent.setSelectedTabIndexNoMobile(index));
+          }
+        }
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initListener();
+    });
   }
 
   @override
@@ -251,16 +298,10 @@ class _DesktopNavState extends State<DesktopNav>
                 ],
               ),
               floatingActionButtonLocation:
-                  FloatingActionButtonLocation.startFloat,
-              floatingActionButton: widget.backButton
-                  ? FloatingActionButton.small(
-                      shape: const CircleBorder(),
-                      onPressed: () => GoRouter.of(context).go(
-                        parent(GoRouterState.of(context)),
-                      ),
-                      child: const Icon(Icons.chevron_left_outlined),
-                    )
-                  : null,
+                  GoRouterState.of(context).location == AppRoute.home.path
+                      ? FloatingActionButtonLocation.endFloat
+                      : FloatingActionButtonLocation.startFloat,
+              floatingActionButton: floatingAction(settingsBloc),
               body: SafeArea(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

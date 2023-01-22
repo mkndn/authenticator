@@ -1,3 +1,4 @@
+import 'package:authenticator/common/classes/observables.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';
 import 'package:authenticator/common/theme/theme_settings.dart';
 import 'package:flutter/material.dart';

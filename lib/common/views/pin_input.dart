@@ -1,4 +1,4 @@
-import 'package:authenticator/common/typedefs.dart';
+import 'package:authenticator/common/classes/typedefs.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldConfig {

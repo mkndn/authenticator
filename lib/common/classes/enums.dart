@@ -134,52 +134,21 @@ enum DataSettings {
       DataSettings.values.map((e) => e.title).toList();
 }
 
-enum AppRoutes {
-  login('/login', 'Login'),
-  home('/home', 'Authenticator');
-
-  const AppRoutes(this.path, this.title);
-
-  final String path;
-  final String title;
-}
-
-enum AppSubRoutes {
-  addEntry('add', 'Add Account'),
-  editEntry('edit/:eid', 'Edit Account'),
-  scan('scan', 'Scan QR Code'),
-  settings('settings', 'Settings');
-
-  const AppSubRoutes(this.path, this.title);
-
-  final String path;
-  final String title;
-}
-
-enum SettingsSubRoutes {
+enum AppRoute {
+  login(Icons.person_2, '/login', 'Login'),
+  home(Icons.home, '/home', 'Authenticator'),
+  addEntry(Icons.add, 'add', 'Add Account'),
+  editEntry(Icons.edit, 'edit', 'Edit Account'),
+  scan(Icons.camera_alt_rounded, 'scan', 'Scan QR Code'),
+  settings(Icons.settings, 'settings', 'Settings'),
   display(Icons.display_settings, 'display', 'Display'),
   security(Icons.security_outlined, 'security', 'Security'),
-  importExport(Icons.import_export, 'exportImport', 'Import & Export'),
+  importExport(Icons.import_export, 'importExport', 'Import & Export'),
   data(Icons.dataset_outlined, 'data', 'Data');
 
-  const SettingsSubRoutes(this.icon, this.path, this.title);
+  const AppRoute(this.icon, this.path, this.title);
 
-  final IconData icon;
   final String path;
   final String title;
-
-  List<String> getLeaves() {
-    switch (this) {
-      case SettingsSubRoutes.display:
-        return DisplaySettings.titles;
-      case SettingsSubRoutes.security:
-        return SecuritySettings.titles;
-      case SettingsSubRoutes.importExport:
-        return ImportExportSettings.titles;
-      case SettingsSubRoutes.data:
-        return DataSettings.titles;
-      default:
-        return [];
-    }
-  }
+  final IconData icon;
 }

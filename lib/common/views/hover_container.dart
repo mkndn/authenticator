@@ -1,5 +1,5 @@
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
-import 'package:authenticator/common/enums.dart';
 
 class HoverContainer extends StatelessWidget {
   const HoverContainer({

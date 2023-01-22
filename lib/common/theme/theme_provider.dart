@@ -224,6 +224,16 @@ class ThemeProvider extends InheritedWidget {
     );
   }
 
+  FloatingActionButtonThemeData fabTheme(Brightness brightness) {
+    final fabThemeTemplate = brightness == Brightness.dark
+        ? ThemeData.dark().floatingActionButtonTheme
+        : ThemeData.light().floatingActionButtonTheme;
+    return fabThemeTemplate.copyWith(
+      shape: const CircleBorder(),
+      iconSize: 16.0,
+    );
+  }
+
   ThemeData light([Color? targetColor]) {
     final colorScheme = colors(Brightness.light, targetColor);
     return ThemeData.light().copyWith(
@@ -241,11 +251,13 @@ class ThemeProvider extends InheritedWidget {
       bottomAppBarTheme: bottomAppBarTheme(colorScheme),
       bottomNavigationBarTheme:
           bottomNavigationBarTheme(Brightness.light, colorScheme),
+      floatingActionButtonTheme: fabTheme(Brightness.light),
       navigationRailTheme: navigationRailTheme(Brightness.light, colorScheme),
       tabBarTheme: tabBarTheme(colorScheme),
       drawerTheme: drawerTheme(colorScheme),
       scaffoldBackgroundColor: colorScheme.background,
       dialogTheme: dialogTheme(Brightness.light, colorScheme),
+      dividerColor: colorScheme.outlineVariant,
       useMaterial3: true,
     );
   }
@@ -267,11 +279,13 @@ class ThemeProvider extends InheritedWidget {
       bottomAppBarTheme: bottomAppBarTheme(colorScheme),
       bottomNavigationBarTheme:
           bottomNavigationBarTheme(Brightness.light, colorScheme),
+      floatingActionButtonTheme: fabTheme(Brightness.dark),
       navigationRailTheme: navigationRailTheme(Brightness.dark, colorScheme),
       tabBarTheme: tabBarTheme(colorScheme),
       drawerTheme: drawerTheme(colorScheme),
       scaffoldBackgroundColor: colorScheme.background,
       dialogTheme: dialogTheme(Brightness.dark, colorScheme),
+      dividerColor: colorScheme.outlineVariant,
       useMaterial3: true,
     );
   }

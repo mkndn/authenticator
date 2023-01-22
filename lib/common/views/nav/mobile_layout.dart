@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:authenticator/mixins/route_mixin.dart';
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
 
-class MobileNav extends StatefulWidget {
-  const MobileNav({
+class MobileLayout extends StatefulWidget {
+  const MobileLayout({
     required this.title,
     required this.child,
+    required this.parent,
     required this.constraints,
     this.backButton = false,
     this.bottom,
@@ -20,16 +20,17 @@ class MobileNav extends StatefulWidget {
   });
 
   final String title;
+  final String parent;
   final Widget child;
   final bool backButton;
   final PreferredSizeWidget? bottom;
   final BoxConstraints constraints;
 
   @override
-  State<MobileNav> createState() => _MobileNavState();
+  State<MobileLayout> createState() => _MobileLayoutState();
 }
 
-class _MobileNavState extends State<MobileNav> with RouteMixin {
+class _MobileLayoutState extends State<MobileLayout> with RouteAware {
   final Map<int, VoidCallback> navigationMapping = {};
 
   void loadNavigationMapping(
@@ -38,11 +39,9 @@ class _MobileNavState extends State<MobileNav> with RouteMixin {
   ) {
     navigationMapping.addAll(
       <int, VoidCallback>{
-        0: () => GoRouter.of(context).go(AppRoutes.home.path),
-        1: () => GoRouter.of(context).go(
-            absolute(GoRouterState.of(context), AppSubRoutes.addEntry.path)),
-        2: () => GoRouter.of(context).go(
-            absolute(GoRouterState.of(context), AppSubRoutes.settings.path)),
+        0: () => context.goNamed(AppRoute.home.name),
+        1: () => context.goNamed(AppRoute.addEntry.name),
+        2: () => context.goNamed(AppRoute.settings.name),
       },
     );
   }
@@ -79,8 +78,7 @@ class _MobileNavState extends State<MobileNav> with RouteMixin {
                     leading: const Icon(Icons.qr_code_scanner),
                     title: Text(MenuOptions.scan.optionName),
                     onTap: () {
-                      GoRouter.of(context).go(absolute(
-                          GoRouterState.of(context), AppSubRoutes.scan.path));
+                      context.goNamed(AppRoute.scan.name);
                       Navigator.pop(context);
                     },
                   ),
@@ -144,9 +142,7 @@ class _MobileNavState extends State<MobileNav> with RouteMixin {
                             Icons.arrow_back,
                             size: 16,
                           ),
-                          onPressed: () => GoRouter.of(context).go(
-                            parent(GoRouterState.of(context)),
-                          ),
+                          onPressed: () => context.goNamed(widget.parent),
                         ),
                       )
                     : null,

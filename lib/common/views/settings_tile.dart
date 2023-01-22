@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:authenticator/common/extensions.dart';
 
 class SettingsTile extends StatefulWidget {
   const SettingsTile({

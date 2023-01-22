@@ -1,4 +1,5 @@
 import 'dart:io' show Directory, Platform;
+import 'package:authenticator/common/classes/adapters.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:authenticator/app.dart';
@@ -6,8 +7,6 @@ import 'package:authenticator/classes/totp_data.dart';
 import 'package:window_manager/window_manager.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart';
-
-import 'common/adapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

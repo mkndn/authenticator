@@ -9,8 +9,3 @@ class ThemeSettings {
   final Color sourceColor;
   final ThemeMode themeMode;
 }
-
-class ThemeSettingChange extends Notification {
-  ThemeSettingChange({required this.settings});
-  final ThemeSettings settings;
-}

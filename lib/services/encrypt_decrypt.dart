@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:encrypt/encrypt.dart';
-import 'package:authenticator/common/typedefs.dart';
+import 'package:authenticator/common/classes/typedefs.dart';
 
 class EncryptDecrypt {
   static const EncryptDecrypt _instance = EncryptDecrypt._();

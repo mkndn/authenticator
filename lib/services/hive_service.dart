@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:objectid/objectid.dart';
 
 class HiveService {
   final Box<TotpData> _box = Hive.box<TotpData>('totp_data');
+  final ValueNotifier<TotpData?> notifier = ValueNotifier(null);
 
   HiveService._();
 
@@ -13,7 +15,9 @@ class HiveService {
 
   Box<TotpData> getBox() => _box;
 
-  void addItem(TotpData data) => _box.put(data.id.hexString, data);
+  void addItem(TotpData data) {
+    _box.put(data.id.hexString, data);
+  }
 
   TotpData? getItem(String itemId) => _box.get(itemId);
 

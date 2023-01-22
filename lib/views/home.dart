@@ -2,40 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
 import 'package:authenticator/services/hive_service.dart';
-import 'package:authenticator/services/preference_service.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/views/totp_layout.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({this.reload = false, super.key});
+
+  final bool reload;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final PreferenceService preferenceService = PreferenceService.instance();
-  final HiveService service = HiveService.instance();
+class _HomeViewState extends State<HomeView> {
+  final HiveService _hiveService = HiveService.instance();
   final List<TotpData> data = List.empty(growable: true);
-  TextStyle fontStyle = const TextStyle(
-    letterSpacing: 2.0,
-    fontSize: 16.0,
-  );
-  TextStyle titleFont = const TextStyle(
-    letterSpacing: 2.0,
-    fontSize: 18.0,
-  );
-  Color accentColor = Colors.white;
 
   void loadData() {
-    data.addAll(service.getAllItems());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadData();
+    data.clear();
+    data.addAll(_hiveService.getAllItems());
   }
 
   @override
@@ -44,51 +30,49 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<SettingsBloc, SettingsState>(
       bloc: settingsBloc,
       builder: (builder, settingState) {
-        return LayoutBuilder(
-          builder: (builder, constraints) => SingleChildScrollView(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Container(
-              padding: const EdgeInsets.all(5.0),
-              constraints: BoxConstraints(
-                maxWidth: constraints.maxWidth * 0.9,
-                maxHeight: constraints.maxHeight,
-              ),
-              child: data.isNotEmpty
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            TotpLayout(
-                              data: data[index],
-                              settings: SettingsModel.fromStateJson(
-                                  settingState.toJson()),
+        loadData();
+        return SingleChildScrollView(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: data.isNotEmpty
+              ? Container(
+                  padding: const EdgeInsets.all(5.0),
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.75,
+                    maxHeight: MediaQuery.of(context).size.height * 0.75,
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TotpLayout(
+                            data: data[index],
+                            onDelete: (id) => setState(
+                              () => data
+                                  .removeWhere((element) => element.id == id),
                             ),
-                            if (index < data.length - 1)
-                              const Divider(
-                                thickness: 0.3,
-                              ),
-                          ],
-                        );
-                      },
-                    )
-                  : const Center(
-                      child: Text.rich(
-                        TextSpan(children: [
-                          TextSpan(text: 'Press '),
-                          WidgetSpan(
-                              child: Icon(
-                            Icons.menu,
-                            size: 18,
-                          )),
-                          TextSpan(text: ' to add account')
-                        ]),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-            ),
-          ),
+                            settings: SettingsModel.fromStateJson(
+                                settingState.toJson()),
+                          ),
+                          if (index < data.length - 1)
+                            const Divider(
+                              thickness: 0.3,
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                )
+              : SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: const Align(
+                    alignment: AlignmentDirectional.center,
+                    child: Text('No accounts found'),
+                  ),
+                ),
         );
       },
     );

@@ -1,15 +1,14 @@
+import 'package:authenticator/common/classes/alert.dart';
+import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/common/views/pin_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:authenticator/classes/settings.dart';
-import 'package:authenticator/common/alert.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
-import 'package:authenticator/common/enums.dart';
-import 'package:authenticator/common/extensions.dart';
-import 'package:authenticator/common/views/nav/app_title_bar.dart';
 import 'package:authenticator/common/views/settings_section.dart';
 import 'package:authenticator/common/views/settings_tile.dart';
 import 'package:authenticator/common/views/settings_view.dart';
@@ -517,26 +516,21 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
       builder: (builder, settingsState) {
         final settings = SettingsModel.fromStateJson(settingsState.toJson());
         return LayoutBuilder(
-          builder: (context, constraints) => AppTitleBar(
-            backButton: true,
-            backActionPath: AppSubRoutes.settings.path,
-            title: SettingsSubRoutes.security.title,
-            child: SettingsView(
-              children: [
-                SettingsSection(
-                  sectionSubHeader: !settings.hasCredentials
-                      ? const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Your app is not protected. Consider enabling only of the security options below.',
-                          ),
-                        )
-                      : null,
-                  children:
-                      getSecurityOptions(constraints, settingsBloc, settings),
-                ),
-              ],
-            ),
+          builder: (context, constraints) => SettingsView(
+            children: [
+              SettingsSection(
+                sectionSubHeader: !settings.hasCredentials
+                    ? const Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Your app is not protected. Consider enabling only of the security options below.',
+                        ),
+                      )
+                    : null,
+                children:
+                    getSecurityOptions(constraints, settingsBloc, settings),
+              ),
+            ],
           ),
         );
       },
