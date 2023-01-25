@@ -1,6 +1,7 @@
 import 'package:authenticator/common/classes/alert.dart';
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/common/classes/extensions.dart';
+import 'package:authenticator/common/views/custom_loading_indicator.dart';
 import 'package:authenticator/common/views/pin_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -320,7 +321,7 @@ class _LoginViewState extends State<LoginView> {
             ),
           );
         } else {
-          return const CircularProgressIndicator.adaptive();
+          return const CustomLoadingIndicator();
         }
       },
     );

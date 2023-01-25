@@ -1,7 +1,7 @@
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/common/classes/enums.dart';
 
-mixin TotpExtractor {
+mixin TotpMixin {
   Map<TotpField, RegExp> regexMap = <TotpField, RegExp>{
     TotpField.label: RegExp(r'totp\/([a-zA-Z0-9,@,\-,_,.,:]+)'),
     TotpField.algorithm: RegExp(r'algorithm=([a-zA-Z0-9]+)'),
@@ -37,5 +37,13 @@ mixin TotpExtractor {
     data.digits = results[TotpField.digits] ?? data.digits;
     data.period = results[TotpField.period] ?? data.period;
     return true;
+  }
+
+  String totpUrl(TotpData data) {
+    assert(data.label != null, 'Totp label is required');
+    assert(data.secret != null, 'Totp secret is required');
+    String url =
+        'otpauth://totp/${data.label}?secret=${data.secret}&algorithm=${data.algorithm.crypto}&digits=${data.digits}&period=${data.period}';
+    return data.issuer != null ? '$url&issuer=${data.issuer}' : url;
   }
 }

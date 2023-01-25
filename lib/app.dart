@@ -1,12 +1,12 @@
 import 'package:authenticator/common/classes/observables.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';
 import 'package:authenticator/common/theme/theme_settings.dart';
+import 'package:authenticator/common/views/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
-import 'package:authenticator/common/bloc/progress/progress_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
 import 'package:authenticator/services/auth/auth_service.dart';
 import 'package:authenticator/services/preference_service.dart';
@@ -101,10 +101,7 @@ class _MyAppState extends State<MyApp> {
                     create: (context) => appBloc,
                     child: BlocProvider<SettingsBloc>(
                       create: (context) => SettingsBloc(appSettings),
-                      child: BlocProvider<ProgressBloc>(
-                        create: (context) => ProgressBloc(),
-                        child: child,
-                      ),
+                      child: child,
                     ),
                   ),
                 );
@@ -114,7 +111,7 @@ class _MyAppState extends State<MyApp> {
         ),
       );
     } else {
-      return const CircularProgressIndicator.adaptive();
+      return const CustomLoadingIndicator();
     }
   }
 }

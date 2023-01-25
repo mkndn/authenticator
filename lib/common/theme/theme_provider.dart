@@ -62,12 +62,12 @@ class ThemeProvider extends InheritedWidget {
         borderRadius: BorderRadius.circular(8),
       );
 
-  CardTheme cardTheme() {
+  CardTheme cardTheme(ColorScheme colors) {
     return CardTheme(
-      elevation: 0,
-      shape: shapeMedium,
-      clipBehavior: Clip.antiAlias,
-    );
+        elevation: 0,
+        shape: shapeMedium,
+        clipBehavior: Clip.antiAlias,
+        color: colors.surface);
   }
 
   ListTileThemeData listTileTheme(ColorScheme colors) {
@@ -112,13 +112,15 @@ class ThemeProvider extends InheritedWidget {
       Brightness brightness, ColorScheme colors) {
     return BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: colors.surfaceVariant,
-      selectedItemColor: colors.onSurface,
-      unselectedItemColor: colors.onSurfaceVariant,
+      backgroundColor: colors.primaryContainer,
+      selectedLabelStyle: textTheme(brightness, colors.primary).labelSmall,
+      unselectedLabelStyle: textTheme(brightness, colors.secondary).labelSmall,
       elevation: 0,
       landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-      selectedIconTheme: iconTheme(brightness, colors.primary),
-      unselectedIconTheme: iconTheme(brightness, colors.primary),
+      selectedIconTheme:
+          iconTheme(brightness, colors.primary).copyWith(size: 20),
+      unselectedIconTheme:
+          iconTheme(brightness, colors.secondary).copyWith(size: 20),
     );
   }
 
@@ -201,13 +203,14 @@ class ThemeProvider extends InheritedWidget {
     return iconThemeTemplate.copyWith(size: 16, color: color);
   }
 
-  BottomSheetThemeData bottomSheetTheme(Brightness brightness, Color color) {
+  BottomSheetThemeData bottomSheetTheme(
+      Brightness brightness, ColorScheme colors) {
     final bottomSheetThemeTemplate = brightness == Brightness.dark
         ? ThemeData.dark().bottomSheetTheme
         : ThemeData.light().bottomSheetTheme;
     return bottomSheetThemeTemplate.copyWith(
-      backgroundColor: color,
-      modalBackgroundColor: color,
+      backgroundColor: colors.surfaceTint,
+      modalBackgroundColor: colors.primaryContainer,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
@@ -239,14 +242,14 @@ class ThemeProvider extends InheritedWidget {
     return ThemeData.light().copyWith(
       // Add page transitions
       colorScheme: colorScheme,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       textTheme: textTheme(Brightness.light, colorScheme.onSurface),
       primaryTextTheme: textTheme(Brightness.light, colorScheme.primary),
       iconTheme: iconTheme(Brightness.light, colorScheme.onSurface),
       primaryIconTheme: iconTheme(Brightness.light, colorScheme.primary),
       appBarTheme: appBarTheme(Brightness.light, colorScheme),
-      bottomSheetTheme:
-          bottomSheetTheme(Brightness.light, colorScheme.onSurface),
-      cardTheme: cardTheme(),
+      bottomSheetTheme: bottomSheetTheme(Brightness.light, colorScheme),
+      cardTheme: cardTheme(colorScheme),
       listTileTheme: listTileTheme(colorScheme),
       bottomAppBarTheme: bottomAppBarTheme(colorScheme),
       bottomNavigationBarTheme:
@@ -267,14 +270,14 @@ class ThemeProvider extends InheritedWidget {
     return ThemeData.dark().copyWith(
       // Add page transitions
       colorScheme: colorScheme,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       textTheme: textTheme(Brightness.dark, colorScheme.onSurface),
       primaryTextTheme: textTheme(Brightness.dark, colorScheme.primary),
       iconTheme: iconTheme(Brightness.dark, colorScheme.onSurface),
       primaryIconTheme: iconTheme(Brightness.dark, colorScheme.primary),
       appBarTheme: appBarTheme(Brightness.dark, colorScheme),
-      bottomSheetTheme:
-          bottomSheetTheme(Brightness.light, colorScheme.onSurface),
-      cardTheme: cardTheme(),
+      bottomSheetTheme: bottomSheetTheme(Brightness.dark, colorScheme),
+      cardTheme: cardTheme(colorScheme),
       listTileTheme: listTileTheme(colorScheme),
       bottomAppBarTheme: bottomAppBarTheme(colorScheme),
       bottomNavigationBarTheme:

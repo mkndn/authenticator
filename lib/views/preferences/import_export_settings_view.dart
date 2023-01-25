@@ -74,7 +74,7 @@ class _ImportExportSettingsViewState extends State<ImportExportSettingsView>
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width * 0.7,
+              width: MediaQuery.of(context).size.width,
               child: TabBarView(
                 controller: _tabController,
                 children: [

@@ -57,7 +57,8 @@ dependencies:
   flutter_secure_storage: ^7.0.1
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.3.0
-  bitsdojo_window: ^0.1.5
+  qr_flutter: ^4.0.0
+  graphql_flutter: ^5.1.1
 
 
 dev_dependencies:

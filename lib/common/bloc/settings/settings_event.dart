@@ -13,4 +13,6 @@ class SettingsEvent with _$SettingsEvent {
       UpdateTapToRevealState;
   const factory SettingsEvent.updatePrimaryColor(String color) =
       UpdatePrimaryColor;
+  const factory SettingsEvent.setAutoBrightness(bool status) =
+      SetAutoBrightness;
 }

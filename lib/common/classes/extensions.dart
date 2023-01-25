@@ -54,6 +54,11 @@ extension TypographyUtils on BuildContext {
   TextStyle? get bodySmall => textTheme.bodySmall?.copyWith(
         color: colors.onSurface,
       );
+
+  Size get dimen => MediaQuery.of(this).size;
+  bool get isTablet => dimen.width > 730;
+  bool get isDesktop => dimen.width > 1200;
+  bool get isMobile => !isTablet && !isDesktop;
 }
 
 extension BreakpointUtils on BoxConstraints {

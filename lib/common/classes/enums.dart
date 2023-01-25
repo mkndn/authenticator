@@ -19,21 +19,14 @@ enum Algorithm {
 }
 
 enum PreferenceOptions {
-  tapToReveal('tapReveal'),
-  progressColor('progressColor'),
-  dividerColor('dividerColor'),
-  accentColor('accentColor'),
-  headerColor('headerColor'),
-  primaryColor('primaryColor'),
-  fingerprint('fingerprint'),
-  password('password'),
-  pin('pin'),
-  autoBackup('autoBackup'),
-  autoBackupPath('autoBackupPath');
-
-  const PreferenceOptions(this.settingName);
-
-  final String settingName;
+  tapToReveal,
+  primaryColor,
+  autoBrightness,
+  fingerprint,
+  password,
+  pin,
+  autoBackup,
+  autoBackupPath;
 }
 
 enum MenuOptions {
@@ -49,8 +42,7 @@ enum MenuOptions {
 enum NavRailOptions {
   home('Home'),
   add('Add'),
-  settings('Settings'),
-  exit('Exit');
+  settings('Settings');
 
   const NavRailOptions(this.title);
 
@@ -91,7 +83,8 @@ enum HoverMode { contained, around }
 
 enum DisplaySettings {
   tapToReveal('Tap to reveal'),
-  primaryColor('Primary color');
+  primaryColor('Primary color'),
+  autoBrightness('Automatic Brightness');
 
   const DisplaySettings(this.title);
   final String title;

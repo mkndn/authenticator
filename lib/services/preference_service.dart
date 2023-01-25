@@ -19,6 +19,7 @@ class PreferenceService {
     SettingsModel settings = SettingsModel();
     settings.display.tapToReveal = await getTapToReveal() ?? true;
     settings.display.primaryColor = await getPrimaryColor();
+    settings.display.autoBrightness = await getAutoBrightness() ?? false;
     settings.security.fingerPrint = await getFingerprint() ?? false;
     settings.security.hasPassword = await getPassword() ?? false;
     settings.security.hasPin = await getPin() ?? false;
@@ -29,6 +30,7 @@ class PreferenceService {
     SettingsModel settings = SettingsModel();
     settings.display.tapToReveal = await getTapToReveal() ?? true;
     settings.display.primaryColor = await getPrimaryColor();
+    settings.display.autoBrightness = await getAutoBrightness() ?? false;
     return settings;
   }
 
@@ -46,35 +48,17 @@ class PreferenceService {
   Future<bool?> getTapToReveal() async =>
       (await _prefs).getBool(PreferenceOptions.tapToReveal.name);
 
-  Future<bool> setProgressColor(String value) async =>
-      (await _prefs).setString(PreferenceOptions.progressColor.name, value);
-
-  Future<String?> getProgressColor() async =>
-      (await _prefs).getString(PreferenceOptions.progressColor.name);
-
-  Future<bool> setDividerColor(String value) async =>
-      (await _prefs).setString(PreferenceOptions.dividerColor.name, value);
-
-  Future<String?> getDividerColor() async =>
-      (await _prefs).getString(PreferenceOptions.dividerColor.name);
-
-  Future<bool> setAccentColor(String value) async =>
-      (await _prefs).setString(PreferenceOptions.accentColor.name, value);
-
-  Future<String?> getAccentColor() async =>
-      (await _prefs).getString(PreferenceOptions.accentColor.name);
-
-  Future<bool> setHeaderColor(String value) async =>
-      (await _prefs).setString(PreferenceOptions.headerColor.name, value);
-
-  Future<String?> getHeaderColor() async =>
-      (await _prefs).getString(PreferenceOptions.headerColor.name);
-
   Future<bool> setPrimaryColor(String value) async =>
       (await _prefs).setString(PreferenceOptions.primaryColor.name, value);
 
   Future<String?> getPrimaryColor() async =>
       (await _prefs).getString(PreferenceOptions.primaryColor.name);
+
+  Future<bool> setAutoBrightness(bool value) async =>
+      (await _prefs).setBool(PreferenceOptions.autoBrightness.name, value);
+
+  Future<bool?> getAutoBrightness() async =>
+      (await _prefs).getBool(PreferenceOptions.autoBrightness.name);
 
   Future<bool> setFingerprint(bool status) async =>
       (await _prefs).setBool(PreferenceOptions.fingerprint.name, status);

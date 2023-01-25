@@ -103,9 +103,7 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
                   child: RootLayout(
                     routeInfo: routes[AppRoute.home]!,
                     title: AppRoute.home.title,
-                    child: HomeView(
-                      reload: state.queryParams['reload'] == 'true',
-                    ),
+                    child: const HomeView(),
                   ),
                 ),
             routes: [
@@ -125,7 +123,11 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
                     displayMenu: false,
                     title: "Add account",
                     backButton: true,
-                    child: const AddEntry(),
+                    child: AddEntry(
+                      initialValue: state.queryParams.containsKey('totpUrl')
+                          ? state.queryParams['totpUrl']
+                          : null,
+                    ),
                   ),
                 ),
               ),

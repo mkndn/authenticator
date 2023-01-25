@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/common/views/brightness_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -63,47 +64,6 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
     ];
   }
 
-  void showBottonSheetContent(
-      SettingsBloc settingsBloc, SettingsState settingsState) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: 200,
-          child: Center(
-            child: ListView(
-              children: [
-                if (Platform.isAndroid || Platform.isIOS)
-                  ListTile(
-                    leading: const Icon(Icons.qr_code_scanner),
-                    title: Text(MenuOptions.scan.optionName),
-                    onTap: () {
-                      context.goNamed(AppRoute.scan.name);
-                      Navigator.pop(context);
-                    },
-                  ),
-                ListTile(
-                    leading: const Icon(Icons.security_rounded),
-                    title: Text(
-                      settingsState.display.tapToReveal
-                          ? MenuOptions.revealDisable.optionName
-                          : MenuOptions.revealEnable.optionName,
-                    ),
-                    onTap: () {
-                      settingsBloc.add(
-                        SettingsEvent.updateTapToRevealState(
-                            !settingsState.display.tapToReveal),
-                      );
-                      Navigator.pop(context);
-                    })
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
@@ -118,10 +78,30 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
                 SettingsModel.fromStateJson(settingsState.toJson());
             loadNavigationMapping(settingsBloc, settings);
             return Scaffold(
-              floatingActionButton: FloatingActionButton(
-                child: const Icon(Icons.keyboard_arrow_up),
-                onPressed: () =>
-                    showBottonSheetContent(settingsBloc, settingsState),
+              floatingActionButton: Wrap(
+                direction: Axis.vertical,
+                children: [
+                  FloatingActionButton.small(
+                    child: const Icon(Icons.qr_code_scanner_rounded),
+                    onPressed: () {
+                      context.goNamed(AppRoute.scan.name);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  FloatingActionButton.small(
+                    child: Icon(settingsBloc.state.display.tapToReveal
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      settingsBloc.add(
+                        SettingsEvent.updateTapToRevealState(
+                            !settingsState.display.tapToReveal),
+                      );
+                    },
+                  ),
+                ],
               ),
               bottomNavigationBar: BottomNavigationBar(
                 items: getBottomNavigation(),
@@ -136,19 +116,17 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
                 bottom: widget.bottom,
                 centerTitle: true,
                 leading: widget.backButton
-                    ? CircleAvatar(
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            size: 16,
-                          ),
-                          onPressed: () => context.goNamed(widget.parent),
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
                         ),
+                        onPressed: () => context.goNamed(widget.parent),
                       )
                     : null,
                 title: Text(
                   widget.title,
                 ),
+                actions: const [BrightnessToggle()],
               ),
               body: SizedBox(
                 height: widget.constraints.maxHeight,

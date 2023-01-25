@@ -47,25 +47,30 @@ class SettingsModel {
 class Display {
   bool tapToReveal;
   String? primaryColor;
+  bool autoBrightness;
 
   Display({
     this.tapToReveal = true,
     this.primaryColor,
+    this.autoBrightness = false,
   });
 
   void copy(Display other) {
     tapToReveal = other.tapToReveal;
     primaryColor = other.primaryColor;
+    autoBrightness = other.autoBrightness;
   }
 
   factory Display.fromJson(Map<String, dynamic> json) => Display(
         tapToReveal: json['tapToReveal'],
         primaryColor: json['primaryColor'],
+        autoBrightness: json['autoBrightness'],
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'tapToReveal': tapToReveal,
         'primaryColor': primaryColor,
+        'autoBrightness': autoBrightness,
       };
 }
 

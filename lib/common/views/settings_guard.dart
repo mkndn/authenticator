@@ -1,3 +1,4 @@
+import 'package:authenticator/common/views/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
@@ -21,7 +22,7 @@ class _SettingsGuardState extends State<SettingsGuard> {
           if (state.settingsLoaded) {
             return widget.child;
           }
-          return const CircularProgressIndicator.adaptive();
+          return const CustomLoadingIndicator();
         });
   }
 }

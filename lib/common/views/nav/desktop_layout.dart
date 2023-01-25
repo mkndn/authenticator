@@ -1,13 +1,13 @@
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/common/views/brightness_toggle.dart';
 import 'package:authenticator/common/views/window_buttons.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:authenticator/classes/settings.dart';
 import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
+import 'package:window_manager/window_manager.dart';
 
 class DesktopLayout extends StatefulWidget {
   const DesktopLayout({
@@ -35,7 +35,8 @@ class DesktopLayout extends StatefulWidget {
   State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _DesktopLayoutState extends State<DesktopLayout> {
+class _DesktopLayoutState extends State<DesktopLayout>
+    with AutomaticKeepAliveClientMixin<DesktopLayout> {
   String resizeText = 'Maximize';
   final Map<int, VoidCallback> navigationMapping = {};
   final Map<String, int> routeNameToIndex = {};
@@ -69,15 +70,6 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           Icons.settings_outlined,
         ),
         label: Text(NavRailOptions.settings.title),
-      ),
-      NavigationRailDestination(
-        icon: const Icon(
-          Icons.cancel_outlined,
-        ),
-        selectedIcon: const Icon(
-          Icons.cancel,
-        ),
-        label: Text(NavRailOptions.exit.title),
       ),
     ];
   }
@@ -117,21 +109,24 @@ class _DesktopLayoutState extends State<DesktopLayout> {
 
   void initListener() {
     GoRouter.of(context).routeInformationProvider.addListener(() {
-      if (mounted) {
-        RouteInformation info =
-            GoRouter.of(context).routeInformationProvider.value;
-        final appBloc = BlocProvider.of<AppBloc>(context);
-        if (info.location != null) {
-          final name =
-              info.location!.substring(info.location!.lastIndexOf("/") + 1);
-          int? index = routeNameToIndex[name];
-          if (index != null &&
-              appBloc.state.selectedSidebarItemIndex != index) {
-            appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
-          }
+      selectIndexByRoute();
+    });
+  }
+
+  void selectIndexByRoute() {
+    if (mounted) {
+      RouteInformation info =
+          GoRouter.of(context).routeInformationProvider.value;
+      final appBloc = BlocProvider.of<AppBloc>(context);
+      if (info.location != null) {
+        final name =
+            info.location!.substring(info.location!.lastIndexOf("/") + 1);
+        int? index = routeNameToIndex[name];
+        if (index != null && appBloc.state.selectedSidebarItemIndex != index) {
+          appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
         }
       }
-    });
+    }
   }
 
   @override
@@ -139,6 +134,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initListener();
+      selectIndexByRoute();
     });
   }
 
@@ -159,7 +155,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
               appBar: AppBar(
                 bottom: widget.bottom,
                 leading: null,
-                flexibleSpace: WindowTitleBarBox(child: MoveWindow()),
+                flexibleSpace: DragToMoveArea(child: Container()),
                 centerTitle: true,
                 title: Text(
                   widget.title,
@@ -220,4 +216,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

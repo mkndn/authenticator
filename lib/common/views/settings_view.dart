@@ -1,3 +1,5 @@
+import 'package:authenticator/common/classes/extensions.dart';
+import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:flutter/material.dart';
 
 class SettingsView extends StatefulWidget {
@@ -14,7 +16,7 @@ class SettingsView extends StatefulWidget {
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> {
+class _SettingsViewState extends State<SettingsView> with SizeMixin {
   List<Widget> listViewItems = [];
 
   @override
@@ -42,8 +44,9 @@ class _SettingsViewState extends State<SettingsView> {
         child: Container(
           padding: const EdgeInsets.all(5.0),
           constraints: BoxConstraints(
-            maxWidth: constraints.maxWidth * 0.9,
-            maxHeight: constraints.maxHeight,
+            maxWidth: maxWidth(constraints,
+                offsetPercent: 0.7, offsetPercentMobile: 0.9),
+            maxHeight: maxHeight(constraints, offsetPercent: 0.7),
           ),
           alignment: Alignment.topCenter,
           child: ListView.builder(

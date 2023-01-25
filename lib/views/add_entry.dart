@@ -4,19 +4,24 @@ import 'package:flutter/services.dart';
 import 'package:authenticator/views/edit_entry.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:authenticator/classes/totp_data.dart';
-import 'package:authenticator/mixins/totp_extractor.dart';
+import 'package:authenticator/mixins/totp_mixin.dart';
 import 'package:objectid/objectid.dart';
 
 String extractTotpValue(String keyValue) => keyValue.split('=')[1];
 
 class AddEntry extends StatefulWidget {
-  const AddEntry({super.key});
+  const AddEntry({
+    this.initialValue,
+    super.key,
+  });
+
+  final String? initialValue;
 
   @override
   State<AddEntry> createState() => _AddEntryState();
 }
 
-class _AddEntryState extends State<AddEntry> with TotpExtractor {
+class _AddEntryState extends State<AddEntry> with TotpMixin {
   SecretAddMode addMode = SecretAddMode.url;
   final HiveService service = HiveService.instance();
   TotpData data = TotpData(id: ObjectId());
@@ -93,6 +98,7 @@ class _AddEntryState extends State<AddEntry> with TotpExtractor {
                       BoxConstraints(maxWidth: constraints.maxWidth * 0.9),
                   child: TextFormField(
                     maxLines: 2,
+                    initialValue: widget.initialValue,
                     keyboardType: TextInputType.url,
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.allow(RegExp(

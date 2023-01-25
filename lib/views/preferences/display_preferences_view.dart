@@ -180,6 +180,34 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
                     ),
                   ],
                 ),
+                SettingsTile(
+                  leading: const [
+                    Icon(
+                      Icons.brightness_auto_rounded,
+                    ),
+                  ],
+                  trailing: [
+                    Switch(
+                      value: settings.display.autoBrightness,
+                      onChanged: (value) async {
+                        await _preferenceService.setAutoBrightness(value);
+                        settingsBloc
+                            .add(SettingsEvent.setAutoBrightness(value));
+                      },
+                    ),
+                  ],
+                  title: Text(
+                    DisplaySettings.autoBrightness.title,
+                  ),
+                  subTitle: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      settings.display.autoBrightness
+                          ? 'App will change theme automatically based on your location'
+                          : 'App theme is controlled by user',
+                    ),
+                  ),
+                ),
               ],
             ),
           ],

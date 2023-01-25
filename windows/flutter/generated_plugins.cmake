@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  bitsdojo_window_windows
+  connectivity_plus
   dynamic_color
   flutter_secure_storage_windows
   local_auth_windows

@@ -19,6 +19,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         updatePinState: (event) => _updatePinState(event, emit),
         updateTapToRevealState: (event) => _updateTapToRevealState(event, emit),
         updatePrimaryColor: (event) => _updatePrimaryColor(event, emit),
+        setAutoBrightness: (event) => _setAutoBrightness(event, emit),
       ),
     );
   }
@@ -59,6 +60,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(
       state.copyWith(
         display: state.display.copyWith(primaryColor: event.color),
+      ),
+    );
+  }
+
+  void _setAutoBrightness(
+      SetAutoBrightness event, Emitter<SettingsState> emit) {
+    emit(
+      state.copyWith(
+        display: state.display.copyWith(autoBrightness: event.status),
       ),
     );
   }

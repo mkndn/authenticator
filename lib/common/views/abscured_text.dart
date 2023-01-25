@@ -1,11 +1,10 @@
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:flutter/material.dart';
 
 class AbscuredText extends StatelessWidget {
-  const AbscuredText(
-      {this.digits = 6, this.decorColor = Colors.blue, super.key});
+  const AbscuredText({this.digits = 6, super.key});
 
   final int digits;
-  final Color decorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +13,16 @@ class AbscuredText extends StatelessWidget {
       spacing: 5.0,
       children: range
           .map((e) => Container(
-                width: 25,
-                height: 25,
+                constraints: BoxConstraints(
+                  maxWidth: context.isMobile
+                      ? context.dimen.width * 0.05
+                      : context.dimen.width * 0.04,
+                  maxHeight: context.isMobile
+                      ? context.dimen.height * 0.05
+                      : context.dimen.height * 0.04,
+                ),
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: decorColor.withAlpha(175)),
+                    shape: BoxShape.circle, color: context.colors.primary),
               ))
           .toList(),
     );

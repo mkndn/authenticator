@@ -23,6 +23,7 @@ mixin _$SettingsEvent {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$SettingsEvent {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$SettingsEvent {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +56,7 @@ mixin _$SettingsEvent {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$SettingsEvent {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +76,7 @@ mixin _$SettingsEvent {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,6 +170,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) {
     return updateFingerPrintState(status);
   }
@@ -176,6 +183,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updateFingerPrintState?.call(status);
   }
@@ -188,6 +196,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updateFingerPrintState != null) {
@@ -206,6 +215,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updateFingerPrintState(this);
   }
@@ -218,6 +228,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updateFingerPrintState?.call(this);
   }
@@ -230,6 +241,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updateFingerPrintState != null) {
@@ -319,6 +331,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) {
     return updatePasswordState(status);
   }
@@ -331,6 +344,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updatePasswordState?.call(status);
   }
@@ -343,6 +357,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePasswordState != null) {
@@ -361,6 +376,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updatePasswordState(this);
   }
@@ -373,6 +389,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updatePasswordState?.call(this);
   }
@@ -385,6 +402,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePasswordState != null) {
@@ -472,6 +490,7 @@ class _$UpdatePinState implements UpdatePinState {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) {
     return updatePinState(status);
   }
@@ -484,6 +503,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updatePinState?.call(status);
   }
@@ -496,6 +516,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePinState != null) {
@@ -514,6 +535,7 @@ class _$UpdatePinState implements UpdatePinState {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updatePinState(this);
   }
@@ -526,6 +548,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updatePinState?.call(this);
   }
@@ -538,6 +561,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePinState != null) {
@@ -626,6 +650,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) {
     return updateTapToRevealState(status);
   }
@@ -638,6 +663,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updateTapToRevealState?.call(status);
   }
@@ -650,6 +676,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updateTapToRevealState != null) {
@@ -668,6 +695,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updateTapToRevealState(this);
   }
@@ -680,6 +708,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updateTapToRevealState?.call(this);
   }
@@ -692,6 +721,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updateTapToRevealState != null) {
@@ -781,6 +811,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
     required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
   }) {
     return updatePrimaryColor(color);
   }
@@ -793,6 +824,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
     TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updatePrimaryColor?.call(color);
   }
@@ -805,6 +837,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
     TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePrimaryColor != null) {
@@ -823,6 +856,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
     required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updatePrimaryColor(this);
   }
@@ -835,6 +869,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updatePrimaryColor?.call(this);
   }
@@ -847,6 +882,7 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
     TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
     if (updatePrimaryColor != null) {
@@ -862,6 +898,165 @@ abstract class UpdatePrimaryColor implements SettingsEvent {
   String get color;
   @JsonKey(ignore: true)
   _$$UpdatePrimaryColorCopyWith<_$UpdatePrimaryColor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetAutoBrightnessCopyWith<$Res> {
+  factory _$$SetAutoBrightnessCopyWith(
+          _$SetAutoBrightness value, $Res Function(_$SetAutoBrightness) then) =
+      __$$SetAutoBrightnessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool status});
+}
+
+/// @nodoc
+class __$$SetAutoBrightnessCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SetAutoBrightness>
+    implements _$$SetAutoBrightnessCopyWith<$Res> {
+  __$$SetAutoBrightnessCopyWithImpl(
+      _$SetAutoBrightness _value, $Res Function(_$SetAutoBrightness) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+  }) {
+    return _then(_$SetAutoBrightness(
+      null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetAutoBrightness implements SetAutoBrightness {
+  const _$SetAutoBrightness(this.status);
+
+  @override
+  final bool status;
+
+  @override
+  String toString() {
+    return 'SettingsEvent.setAutoBrightness(status: $status)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetAutoBrightness &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetAutoBrightnessCopyWith<_$SetAutoBrightness> get copyWith =>
+      __$$SetAutoBrightnessCopyWithImpl<_$SetAutoBrightness>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool status) updateFingerPrintState,
+    required TResult Function(bool status) updatePasswordState,
+    required TResult Function(bool status) updatePinState,
+    required TResult Function(bool status) updateTapToRevealState,
+    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(bool status) setAutoBrightness,
+  }) {
+    return setAutoBrightness(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool status)? updateFingerPrintState,
+    TResult? Function(bool status)? updatePasswordState,
+    TResult? Function(bool status)? updatePinState,
+    TResult? Function(bool status)? updateTapToRevealState,
+    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(bool status)? setAutoBrightness,
+  }) {
+    return setAutoBrightness?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool status)? updateFingerPrintState,
+    TResult Function(bool status)? updatePasswordState,
+    TResult Function(bool status)? updatePinState,
+    TResult Function(bool status)? updateTapToRevealState,
+    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(bool status)? setAutoBrightness,
+    required TResult orElse(),
+  }) {
+    if (setAutoBrightness != null) {
+      return setAutoBrightness(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UpdateFingerPrintState value)
+        updateFingerPrintState,
+    required TResult Function(UpdatePasswordState value) updatePasswordState,
+    required TResult Function(UpdatePinState value) updatePinState,
+    required TResult Function(UpdateTapToRevealState value)
+        updateTapToRevealState,
+    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(SetAutoBrightness value) setAutoBrightness,
+  }) {
+    return setAutoBrightness(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UpdateFingerPrintState value)? updateFingerPrintState,
+    TResult? Function(UpdatePasswordState value)? updatePasswordState,
+    TResult? Function(UpdatePinState value)? updatePinState,
+    TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
+    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(SetAutoBrightness value)? setAutoBrightness,
+  }) {
+    return setAutoBrightness?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UpdateFingerPrintState value)? updateFingerPrintState,
+    TResult Function(UpdatePasswordState value)? updatePasswordState,
+    TResult Function(UpdatePinState value)? updatePinState,
+    TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
+    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(SetAutoBrightness value)? setAutoBrightness,
+    required TResult orElse(),
+  }) {
+    if (setAutoBrightness != null) {
+      return setAutoBrightness(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetAutoBrightness implements SettingsEvent {
+  const factory SetAutoBrightness(final bool status) = _$SetAutoBrightness;
+
+  bool get status;
+  @JsonKey(ignore: true)
+  _$$SetAutoBrightnessCopyWith<_$SetAutoBrightness> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1052,6 +1247,7 @@ DisplayState _$DisplayStateFromJson(Map<String, dynamic> json) {
 mixin _$DisplayState {
   bool get tapToReveal => throw _privateConstructorUsedError;
   String? get primaryColor => throw _privateConstructorUsedError;
+  bool get autoBrightness => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1065,7 +1261,7 @@ abstract class $DisplayStateCopyWith<$Res> {
           DisplayState value, $Res Function(DisplayState) then) =
       _$DisplayStateCopyWithImpl<$Res, DisplayState>;
   @useResult
-  $Res call({bool tapToReveal, String? primaryColor});
+  $Res call({bool tapToReveal, String? primaryColor, bool autoBrightness});
 }
 
 /// @nodoc
@@ -1083,6 +1279,7 @@ class _$DisplayStateCopyWithImpl<$Res, $Val extends DisplayState>
   $Res call({
     Object? tapToReveal = null,
     Object? primaryColor = freezed,
+    Object? autoBrightness = null,
   }) {
     return _then(_value.copyWith(
       tapToReveal: null == tapToReveal
@@ -1093,6 +1290,10 @@ class _$DisplayStateCopyWithImpl<$Res, $Val extends DisplayState>
           ? _value.primaryColor
           : primaryColor // ignore: cast_nullable_to_non_nullable
               as String?,
+      autoBrightness: null == autoBrightness
+          ? _value.autoBrightness
+          : autoBrightness // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -1105,7 +1306,7 @@ abstract class _$$_DisplayStateCopyWith<$Res>
       __$$_DisplayStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool tapToReveal, String? primaryColor});
+  $Res call({bool tapToReveal, String? primaryColor, bool autoBrightness});
 }
 
 /// @nodoc
@@ -1121,6 +1322,7 @@ class __$$_DisplayStateCopyWithImpl<$Res>
   $Res call({
     Object? tapToReveal = null,
     Object? primaryColor = freezed,
+    Object? autoBrightness = null,
   }) {
     return _then(_$_DisplayState(
       tapToReveal: null == tapToReveal
@@ -1131,6 +1333,10 @@ class __$$_DisplayStateCopyWithImpl<$Res>
           ? _value.primaryColor
           : primaryColor // ignore: cast_nullable_to_non_nullable
               as String?,
+      autoBrightness: null == autoBrightness
+          ? _value.autoBrightness
+          : autoBrightness // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1138,7 +1344,10 @@ class __$$_DisplayStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DisplayState implements _DisplayState {
-  const _$_DisplayState({this.tapToReveal = true, this.primaryColor});
+  const _$_DisplayState(
+      {this.tapToReveal = true,
+      this.primaryColor,
+      this.autoBrightness = false});
 
   factory _$_DisplayState.fromJson(Map<String, dynamic> json) =>
       _$$_DisplayStateFromJson(json);
@@ -1148,10 +1357,13 @@ class _$_DisplayState implements _DisplayState {
   final bool tapToReveal;
   @override
   final String? primaryColor;
+  @override
+  @JsonKey()
+  final bool autoBrightness;
 
   @override
   String toString() {
-    return 'DisplayState(tapToReveal: $tapToReveal, primaryColor: $primaryColor)';
+    return 'DisplayState(tapToReveal: $tapToReveal, primaryColor: $primaryColor, autoBrightness: $autoBrightness)';
   }
 
   @override
@@ -1162,12 +1374,15 @@ class _$_DisplayState implements _DisplayState {
             (identical(other.tapToReveal, tapToReveal) ||
                 other.tapToReveal == tapToReveal) &&
             (identical(other.primaryColor, primaryColor) ||
-                other.primaryColor == primaryColor));
+                other.primaryColor == primaryColor) &&
+            (identical(other.autoBrightness, autoBrightness) ||
+                other.autoBrightness == autoBrightness));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, tapToReveal, primaryColor);
+  int get hashCode =>
+      Object.hash(runtimeType, tapToReveal, primaryColor, autoBrightness);
 
   @JsonKey(ignore: true)
   @override
@@ -1185,7 +1400,9 @@ class _$_DisplayState implements _DisplayState {
 
 abstract class _DisplayState implements DisplayState {
   const factory _DisplayState(
-      {final bool tapToReveal, final String? primaryColor}) = _$_DisplayState;
+      {final bool tapToReveal,
+      final String? primaryColor,
+      final bool autoBrightness}) = _$_DisplayState;
 
   factory _DisplayState.fromJson(Map<String, dynamic> json) =
       _$_DisplayState.fromJson;
@@ -1194,6 +1411,8 @@ abstract class _DisplayState implements DisplayState {
   bool get tapToReveal;
   @override
   String? get primaryColor;
+  @override
+  bool get autoBrightness;
   @override
   @JsonKey(ignore: true)
   _$$_DisplayStateCopyWith<_$_DisplayState> get copyWith =>

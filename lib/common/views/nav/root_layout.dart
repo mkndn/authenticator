@@ -49,33 +49,39 @@ class _RootLayoutState extends State<RootLayout> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.isDesktop) {
-        return DesktopLayout(
-          title: widget.title,
-          parent: parentRouteName,
-          constraints: constraints,
-          bottom: widget.bottom,
-          backButton: widget.backButton,
-          toolBarHeight: widget.toolBarHeight,
-          child: widget.child,
+        return SafeArea(
+          child: DesktopLayout(
+            title: widget.title,
+            parent: parentRouteName,
+            constraints: constraints,
+            bottom: widget.bottom,
+            backButton: widget.backButton,
+            toolBarHeight: widget.toolBarHeight,
+            child: widget.child,
+          ),
         );
       } else if (constraints.isTablet) {
-        return TabletLayout(
-          title: widget.title,
-          parent: parentRouteName,
-          constraints: constraints,
-          bottom: widget.bottom,
-          backButton: widget.backButton,
-          toolBarHeight: widget.toolBarHeight,
-          child: widget.child,
+        return SafeArea(
+          child: TabletLayout(
+            title: widget.title,
+            parent: parentRouteName,
+            constraints: constraints,
+            bottom: widget.bottom,
+            backButton: widget.backButton,
+            toolBarHeight: widget.toolBarHeight,
+            child: widget.child,
+          ),
         );
       } else if (constraints.isMobile) {
-        return MobileLayout(
-          title: widget.title,
-          parent: parentRouteName,
-          bottom: widget.bottom,
-          backButton: widget.backButton,
-          constraints: constraints,
-          child: widget.child,
+        return SafeArea(
+          child: MobileLayout(
+            title: widget.title,
+            parent: parentRouteName,
+            bottom: widget.bottom,
+            backButton: widget.backButton,
+            constraints: constraints,
+            child: widget.child,
+          ),
         );
       } else {
         return const Text('Device not supported');
