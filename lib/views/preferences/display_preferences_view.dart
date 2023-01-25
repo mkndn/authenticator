@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/common/classes/observables.dart';
+import 'package:authenticator/common/dialogs/accent_picker.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';
 import 'package:authenticator/common/theme/theme_settings.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authenticator/classes/settings.dart';
@@ -24,82 +22,6 @@ class DisplayPreferencesView extends StatefulWidget {
 
 class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
   final PreferenceService _preferenceService = PreferenceService.instance();
-
-  Future<Color> colorPickerDialog(Color currentColor) async {
-    return showColorPickerDialog(
-      context,
-      currentColor,
-      width: 25,
-      height: 25,
-      borderRadius: 50,
-      spacing: 5,
-      runSpacing: 5,
-      wheelDiameter: 155,
-      enableOpacity: true,
-      colorCodeHasColor: true,
-      heading: Text(
-        'Select color',
-        style: context.titleMedium,
-      ),
-      subheading: Text(
-        'Select color shade',
-        style: context.titleMedium,
-      ),
-      wheelSubheading: Text(
-        'Selected color and its shades',
-        style: context.titleMedium,
-      ),
-      showMaterialName: true,
-      showColorName: true,
-      showColorCode: true,
-      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-        copyButton: true,
-        pasteButton: true,
-        longPressMenu: true,
-      ),
-      actionButtons: const ColorPickerActionButtons(
-        okButton: true,
-        closeButton: true,
-        dialogActionButtons: false,
-      ),
-      transitionBuilder: (
-        BuildContext context,
-        Animation<double> animation1,
-        Animation<double> animation2,
-        Widget widget,
-      ) {
-        final double curvedValue =
-            Curves.easeInOutBack.transform(animation1.value) - 1.0;
-        return Transform(
-          transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
-          child: Opacity(
-            opacity: animation1.value,
-            child: widget,
-          ),
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 400),
-      constraints: const BoxConstraints(
-        minHeight: 480,
-        minWidth: 320,
-        maxWidth: 320,
-      ),
-      materialNameTextStyle: context.bodySmall,
-      colorNameTextStyle: context.bodySmall,
-      colorCodeTextStyle: context.bodyMedium,
-      colorCodePrefixStyle: context.bodySmall,
-      selectedPickerTypeColor: context.colors.primary,
-      pickersEnabled: const <ColorPickerType, bool>{
-        ColorPickerType.both: false,
-        ColorPickerType.primary: true,
-        ColorPickerType.accent: true,
-        ColorPickerType.bw: false,
-        ColorPickerType.custom: true,
-        ColorPickerType.wheel: true,
-      },
-      customColorSwatchesAndNames: const {},
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +64,7 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
                 ),
                 SettingsTile(
                   title: Text(
-                    DisplaySettings.primaryColor.title,
+                    DisplaySettings.accentColor.title,
                   ),
                   subTitle: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -155,30 +77,20 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
                       Icons.chevron_right,
                     )
                   ],
-                  leading: [
-                    ColorIndicator(
-                      width: 25,
-                      height: 25,
-                      borderRadius: 50,
-                      color:
-                          ThemeProvider.of(context).settings.value.sourceColor,
-                      onSelectFocus: false,
-                      onSelect: () async {
-                        final Color newColor = await colorPickerDialog(
-                          ThemeProvider.of(context).settings.value.sourceColor,
-                        );
-                        await _preferenceService
-                            .setPrimaryColor(newColor.hexAlpha);
-                        if (!mounted) return;
-                        final newSettings = ThemeSettings(
-                          sourceColor: newColor, // Replace this color
-                          themeMode: ThemeMode.system,
-                        );
-                        ThemeSettingChange(settings: newSettings)
-                            .dispatch(context);
-                      },
-                    ),
-                  ],
+                  onTap: () async {
+                    final AccentColor? selectedColor =
+                        await AccentPicker.showCustomDialog(context);
+                    if (mounted && selectedColor != null) {
+                      final themeProvider = ThemeProvider.of(context);
+                      final settings = themeProvider.settings.value;
+                      final newSettings = ThemeSettings(
+                        sourceColor: selectedColor,
+                        themeMode: settings.themeMode,
+                      );
+                      ThemeSettingChange(settings: newSettings)
+                          .dispatch(context);
+                    }
+                  },
                 ),
                 SettingsTile(
                   leading: const [

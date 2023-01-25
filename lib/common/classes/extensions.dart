@@ -146,6 +146,12 @@ extension ColorBrightness on Color {
 
     return hslLight.toColor();
   }
+
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }
 
 extension OffsetSerializer on Offset {
@@ -158,5 +164,9 @@ extension StringDeserializer on String {
     return parts.isNotEmpty
         ? Offset(parts[0] as double, parts[1] as double)
         : const Offset(0.0, 0.0);
+  }
+
+  Color toColor({String alphaChannel = 'FF'}) {
+    return Color(int.parse(replaceFirst('#', '0x$alphaChannel')));
   }
 }

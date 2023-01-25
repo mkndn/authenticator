@@ -25,7 +25,7 @@ class SettingsState with _$SettingsState {
 class DisplayState with _$DisplayState {
   const factory DisplayState({
     @Default(true) bool tapToReveal,
-    String? primaryColor,
+    @Default(1) accentColorIndex,
     @Default(false) bool autoBrightness,
   }) = _DisplayState;
 
@@ -37,7 +37,7 @@ class DisplayState with _$DisplayState {
   factory DisplayState.load(Display initialData) {
     return DisplayState.initial().copyWith(
       tapToReveal: initialData.tapToReveal,
-      primaryColor: initialData.primaryColor,
+      accentColorIndex: initialData.accentColorIndex,
       autoBrightness: initialData.autoBrightness,
     );
   }

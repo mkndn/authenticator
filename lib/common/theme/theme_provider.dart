@@ -37,11 +37,11 @@ class ThemeProvider extends InheritedWidget {
 
   Color blend(Color targetColor) {
     return Color(
-        Blend.harmonize(targetColor.value, settings.value.sourceColor.value));
+        Blend.harmonize(targetColor.value, settings.value.sourceColor.cv));
   }
 
   Color source(Color? target) {
-    Color source = settings.value.sourceColor;
+    Color source = settings.value.sourceColor.color;
     if (target != null) {
       source = blend(target);
     }

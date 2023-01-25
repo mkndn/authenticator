@@ -22,7 +22,7 @@ mixin _$SettingsEvent {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$SettingsEvent {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$SettingsEvent {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) =>
@@ -55,7 +55,7 @@ mixin _$SettingsEvent {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ mixin _$SettingsEvent {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +75,7 @@ mixin _$SettingsEvent {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) =>
@@ -169,7 +169,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
     return updateFingerPrintState(status);
@@ -182,7 +182,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updateFingerPrintState?.call(status);
@@ -195,7 +195,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -214,7 +214,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updateFingerPrintState(this);
@@ -227,7 +227,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updateFingerPrintState?.call(this);
@@ -240,7 +240,7 @@ class _$UpdateFingerPrintState implements UpdateFingerPrintState {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -330,7 +330,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
     return updatePasswordState(status);
@@ -343,7 +343,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updatePasswordState?.call(status);
@@ -356,7 +356,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -375,7 +375,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updatePasswordState(this);
@@ -388,7 +388,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updatePasswordState?.call(this);
@@ -401,7 +401,7 @@ class _$UpdatePasswordState implements UpdatePasswordState {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -489,7 +489,7 @@ class _$UpdatePinState implements UpdatePinState {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
     return updatePinState(status);
@@ -502,7 +502,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updatePinState?.call(status);
@@ -515,7 +515,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -534,7 +534,7 @@ class _$UpdatePinState implements UpdatePinState {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updatePinState(this);
@@ -547,7 +547,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updatePinState?.call(this);
@@ -560,7 +560,7 @@ class _$UpdatePinState implements UpdatePinState {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -649,7 +649,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
     return updateTapToRevealState(status);
@@ -662,7 +662,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
     return updateTapToRevealState?.call(status);
@@ -675,7 +675,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -694,7 +694,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return updateTapToRevealState(this);
@@ -707,7 +707,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return updateTapToRevealState?.call(this);
@@ -720,7 +720,7 @@ class _$UpdateTapToRevealState implements UpdateTapToRevealState {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -742,66 +742,66 @@ abstract class UpdateTapToRevealState implements SettingsEvent {
 }
 
 /// @nodoc
-abstract class _$$UpdatePrimaryColorCopyWith<$Res> {
-  factory _$$UpdatePrimaryColorCopyWith(_$UpdatePrimaryColor value,
-          $Res Function(_$UpdatePrimaryColor) then) =
-      __$$UpdatePrimaryColorCopyWithImpl<$Res>;
+abstract class _$$UpdateAccentColorCopyWith<$Res> {
+  factory _$$UpdateAccentColorCopyWith(
+          _$UpdateAccentColor value, $Res Function(_$UpdateAccentColor) then) =
+      __$$UpdateAccentColorCopyWithImpl<$Res>;
   @useResult
-  $Res call({String color});
+  $Res call({int colorIndex});
 }
 
 /// @nodoc
-class __$$UpdatePrimaryColorCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdatePrimaryColor>
-    implements _$$UpdatePrimaryColorCopyWith<$Res> {
-  __$$UpdatePrimaryColorCopyWithImpl(
-      _$UpdatePrimaryColor _value, $Res Function(_$UpdatePrimaryColor) _then)
+class __$$UpdateAccentColorCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateAccentColor>
+    implements _$$UpdateAccentColorCopyWith<$Res> {
+  __$$UpdateAccentColorCopyWithImpl(
+      _$UpdateAccentColor _value, $Res Function(_$UpdateAccentColor) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? color = null,
+    Object? colorIndex = null,
   }) {
-    return _then(_$UpdatePrimaryColor(
-      null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$UpdateAccentColor(
+      null == colorIndex
+          ? _value.colorIndex
+          : colorIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$UpdatePrimaryColor implements UpdatePrimaryColor {
-  const _$UpdatePrimaryColor(this.color);
+class _$UpdateAccentColor implements UpdateAccentColor {
+  const _$UpdateAccentColor(this.colorIndex);
 
   @override
-  final String color;
+  final int colorIndex;
 
   @override
   String toString() {
-    return 'SettingsEvent.updatePrimaryColor(color: $color)';
+    return 'SettingsEvent.updateAccentColor(colorIndex: $colorIndex)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatePrimaryColor &&
-            (identical(other.color, color) || other.color == color));
+            other is _$UpdateAccentColor &&
+            (identical(other.colorIndex, colorIndex) ||
+                other.colorIndex == colorIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, color);
+  int get hashCode => Object.hash(runtimeType, colorIndex);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdatePrimaryColorCopyWith<_$UpdatePrimaryColor> get copyWith =>
-      __$$UpdatePrimaryColorCopyWithImpl<_$UpdatePrimaryColor>(
-          this, _$identity);
+  _$$UpdateAccentColorCopyWith<_$UpdateAccentColor> get copyWith =>
+      __$$UpdateAccentColorCopyWithImpl<_$UpdateAccentColor>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -810,10 +810,10 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
-    return updatePrimaryColor(color);
+    return updateAccentColor(colorIndex);
   }
 
   @override
@@ -823,10 +823,10 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
-    return updatePrimaryColor?.call(color);
+    return updateAccentColor?.call(colorIndex);
   }
 
   @override
@@ -836,12 +836,12 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
-    if (updatePrimaryColor != null) {
-      return updatePrimaryColor(color);
+    if (updateAccentColor != null) {
+      return updateAccentColor(colorIndex);
     }
     return orElse();
   }
@@ -855,10 +855,10 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
-    return updatePrimaryColor(this);
+    return updateAccentColor(this);
   }
 
   @override
@@ -868,10 +868,10 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
-    return updatePrimaryColor?.call(this);
+    return updateAccentColor?.call(this);
   }
 
   @override
@@ -881,23 +881,23 @@ class _$UpdatePrimaryColor implements UpdatePrimaryColor {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
-    if (updatePrimaryColor != null) {
-      return updatePrimaryColor(this);
+    if (updateAccentColor != null) {
+      return updateAccentColor(this);
     }
     return orElse();
   }
 }
 
-abstract class UpdatePrimaryColor implements SettingsEvent {
-  const factory UpdatePrimaryColor(final String color) = _$UpdatePrimaryColor;
+abstract class UpdateAccentColor implements SettingsEvent {
+  const factory UpdateAccentColor(final int colorIndex) = _$UpdateAccentColor;
 
-  String get color;
+  int get colorIndex;
   @JsonKey(ignore: true)
-  _$$UpdatePrimaryColorCopyWith<_$UpdatePrimaryColor> get copyWith =>
+  _$$UpdateAccentColorCopyWith<_$UpdateAccentColor> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -969,7 +969,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     required TResult Function(bool status) updatePasswordState,
     required TResult Function(bool status) updatePinState,
     required TResult Function(bool status) updateTapToRevealState,
-    required TResult Function(String color) updatePrimaryColor,
+    required TResult Function(int colorIndex) updateAccentColor,
     required TResult Function(bool status) setAutoBrightness,
   }) {
     return setAutoBrightness(status);
@@ -982,7 +982,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     TResult? Function(bool status)? updatePasswordState,
     TResult? Function(bool status)? updatePinState,
     TResult? Function(bool status)? updateTapToRevealState,
-    TResult? Function(String color)? updatePrimaryColor,
+    TResult? Function(int colorIndex)? updateAccentColor,
     TResult? Function(bool status)? setAutoBrightness,
   }) {
     return setAutoBrightness?.call(status);
@@ -995,7 +995,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     TResult Function(bool status)? updatePasswordState,
     TResult Function(bool status)? updatePinState,
     TResult Function(bool status)? updateTapToRevealState,
-    TResult Function(String color)? updatePrimaryColor,
+    TResult Function(int colorIndex)? updateAccentColor,
     TResult Function(bool status)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -1014,7 +1014,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     required TResult Function(UpdatePinState value) updatePinState,
     required TResult Function(UpdateTapToRevealState value)
         updateTapToRevealState,
-    required TResult Function(UpdatePrimaryColor value) updatePrimaryColor,
+    required TResult Function(UpdateAccentColor value) updateAccentColor,
     required TResult Function(SetAutoBrightness value) setAutoBrightness,
   }) {
     return setAutoBrightness(this);
@@ -1027,7 +1027,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     TResult? Function(UpdatePasswordState value)? updatePasswordState,
     TResult? Function(UpdatePinState value)? updatePinState,
     TResult? Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult? Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult? Function(UpdateAccentColor value)? updateAccentColor,
     TResult? Function(SetAutoBrightness value)? setAutoBrightness,
   }) {
     return setAutoBrightness?.call(this);
@@ -1040,7 +1040,7 @@ class _$SetAutoBrightness implements SetAutoBrightness {
     TResult Function(UpdatePasswordState value)? updatePasswordState,
     TResult Function(UpdatePinState value)? updatePinState,
     TResult Function(UpdateTapToRevealState value)? updateTapToRevealState,
-    TResult Function(UpdatePrimaryColor value)? updatePrimaryColor,
+    TResult Function(UpdateAccentColor value)? updateAccentColor,
     TResult Function(SetAutoBrightness value)? setAutoBrightness,
     required TResult orElse(),
   }) {
@@ -1246,7 +1246,7 @@ DisplayState _$DisplayStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DisplayState {
   bool get tapToReveal => throw _privateConstructorUsedError;
-  String? get primaryColor => throw _privateConstructorUsedError;
+  dynamic get accentColorIndex => throw _privateConstructorUsedError;
   bool get autoBrightness => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1261,7 +1261,7 @@ abstract class $DisplayStateCopyWith<$Res> {
           DisplayState value, $Res Function(DisplayState) then) =
       _$DisplayStateCopyWithImpl<$Res, DisplayState>;
   @useResult
-  $Res call({bool tapToReveal, String? primaryColor, bool autoBrightness});
+  $Res call({bool tapToReveal, dynamic accentColorIndex, bool autoBrightness});
 }
 
 /// @nodoc
@@ -1278,7 +1278,7 @@ class _$DisplayStateCopyWithImpl<$Res, $Val extends DisplayState>
   @override
   $Res call({
     Object? tapToReveal = null,
-    Object? primaryColor = freezed,
+    Object? accentColorIndex = freezed,
     Object? autoBrightness = null,
   }) {
     return _then(_value.copyWith(
@@ -1286,10 +1286,10 @@ class _$DisplayStateCopyWithImpl<$Res, $Val extends DisplayState>
           ? _value.tapToReveal
           : tapToReveal // ignore: cast_nullable_to_non_nullable
               as bool,
-      primaryColor: freezed == primaryColor
-          ? _value.primaryColor
-          : primaryColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+      accentColorIndex: freezed == accentColorIndex
+          ? _value.accentColorIndex
+          : accentColorIndex // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       autoBrightness: null == autoBrightness
           ? _value.autoBrightness
           : autoBrightness // ignore: cast_nullable_to_non_nullable
@@ -1306,7 +1306,7 @@ abstract class _$$_DisplayStateCopyWith<$Res>
       __$$_DisplayStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool tapToReveal, String? primaryColor, bool autoBrightness});
+  $Res call({bool tapToReveal, dynamic accentColorIndex, bool autoBrightness});
 }
 
 /// @nodoc
@@ -1321,7 +1321,7 @@ class __$$_DisplayStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tapToReveal = null,
-    Object? primaryColor = freezed,
+    Object? accentColorIndex = freezed,
     Object? autoBrightness = null,
   }) {
     return _then(_$_DisplayState(
@@ -1329,10 +1329,9 @@ class __$$_DisplayStateCopyWithImpl<$Res>
           ? _value.tapToReveal
           : tapToReveal // ignore: cast_nullable_to_non_nullable
               as bool,
-      primaryColor: freezed == primaryColor
-          ? _value.primaryColor
-          : primaryColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+      accentColorIndex: freezed == accentColorIndex
+          ? _value.accentColorIndex!
+          : accentColorIndex,
       autoBrightness: null == autoBrightness
           ? _value.autoBrightness
           : autoBrightness // ignore: cast_nullable_to_non_nullable
@@ -1346,7 +1345,7 @@ class __$$_DisplayStateCopyWithImpl<$Res>
 class _$_DisplayState implements _DisplayState {
   const _$_DisplayState(
       {this.tapToReveal = true,
-      this.primaryColor,
+      this.accentColorIndex = 1,
       this.autoBrightness = false});
 
   factory _$_DisplayState.fromJson(Map<String, dynamic> json) =>
@@ -1356,14 +1355,15 @@ class _$_DisplayState implements _DisplayState {
   @JsonKey()
   final bool tapToReveal;
   @override
-  final String? primaryColor;
+  @JsonKey()
+  final dynamic accentColorIndex;
   @override
   @JsonKey()
   final bool autoBrightness;
 
   @override
   String toString() {
-    return 'DisplayState(tapToReveal: $tapToReveal, primaryColor: $primaryColor, autoBrightness: $autoBrightness)';
+    return 'DisplayState(tapToReveal: $tapToReveal, accentColorIndex: $accentColorIndex, autoBrightness: $autoBrightness)';
   }
 
   @override
@@ -1373,16 +1373,16 @@ class _$_DisplayState implements _DisplayState {
             other is _$_DisplayState &&
             (identical(other.tapToReveal, tapToReveal) ||
                 other.tapToReveal == tapToReveal) &&
-            (identical(other.primaryColor, primaryColor) ||
-                other.primaryColor == primaryColor) &&
+            const DeepCollectionEquality()
+                .equals(other.accentColorIndex, accentColorIndex) &&
             (identical(other.autoBrightness, autoBrightness) ||
                 other.autoBrightness == autoBrightness));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, tapToReveal, primaryColor, autoBrightness);
+  int get hashCode => Object.hash(runtimeType, tapToReveal,
+      const DeepCollectionEquality().hash(accentColorIndex), autoBrightness);
 
   @JsonKey(ignore: true)
   @override
@@ -1401,7 +1401,7 @@ class _$_DisplayState implements _DisplayState {
 abstract class _DisplayState implements DisplayState {
   const factory _DisplayState(
       {final bool tapToReveal,
-      final String? primaryColor,
+      final dynamic accentColorIndex,
       final bool autoBrightness}) = _$_DisplayState;
 
   factory _DisplayState.fromJson(Map<String, dynamic> json) =
@@ -1410,7 +1410,7 @@ abstract class _DisplayState implements DisplayState {
   @override
   bool get tapToReveal;
   @override
-  String? get primaryColor;
+  dynamic get accentColorIndex;
   @override
   bool get autoBrightness;
   @override

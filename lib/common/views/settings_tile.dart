@@ -9,13 +9,13 @@ class SettingsTile extends StatefulWidget {
     this.spacing = 8.0,
     this.alignment,
     this.overflowBarAlignment = OverflowBarAlignment.center,
-    this.onClick,
+    this.onTap,
     super.key,
   });
 
   final List<Widget> leading;
   final List<Widget> trailing;
-  final VoidCallback? onClick;
+  final VoidCallback? onTap;
   final Widget title;
   final Widget? subTitle;
   final MainAxisAlignment? alignment;
@@ -30,7 +30,7 @@ class _SettingsTileState extends State<SettingsTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: widget.onClick,
+      onTap: widget.onTap,
       leading: Wrap(
         spacing: 5.0,
         runSpacing: 5.0,

@@ -35,7 +35,7 @@ class _DataSettingsViewState extends State<DataSettingsView> {
               Icons.chevron_right_rounded,
             ),
           ],
-          onClick: () async => await _preferenceService.reset().whenComplete(
+          onTap: () async => await _preferenceService.reset().whenComplete(
                 () => Alert.showAlert(context, 'Cache cleared successfully'),
               ),
           title: Text(
@@ -59,7 +59,7 @@ class _DataSettingsViewState extends State<DataSettingsView> {
               Icons.chevron_right_rounded,
             ),
           ],
-          onClick: () {
+          onTap: () {
             setState(() {
               HiveService.instance().reset();
             });

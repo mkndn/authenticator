@@ -192,7 +192,7 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
                   Icons.chevron_right_rounded,
                 ),
         ],
-        onClick: () => settings.hasPassword()
+        onTap: () => settings.hasPassword()
             ? _passwordDialog(bloc, settings, isCreate: false)
             : _passwordDialog(bloc, settings),
       ),
@@ -243,7 +243,7 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
                   Icons.chevron_right_rounded,
                 ),
         ],
-        onClick: () => settings.hasPin()
+        onTap: () => settings.hasPin()
             ? _pinDialog(bloc, settings, isCreate: false)
             : _pinDialog(bloc, settings),
       ),

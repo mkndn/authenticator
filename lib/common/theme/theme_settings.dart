@@ -1,3 +1,4 @@
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:flutter/material.dart';
 
 class ThemeSettings {
@@ -6,6 +7,6 @@ class ThemeSettings {
     required this.themeMode,
   });
 
-  final Color sourceColor;
+  final AccentColor sourceColor;
   final ThemeMode themeMode;
 }

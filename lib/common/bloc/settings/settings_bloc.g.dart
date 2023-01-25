@@ -22,14 +22,14 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
 _$_DisplayState _$$_DisplayStateFromJson(Map<String, dynamic> json) =>
     _$_DisplayState(
       tapToReveal: json['tapToReveal'] as bool? ?? true,
-      primaryColor: json['primaryColor'] as String?,
+      accentColorIndex: json['accentColorIndex'] ?? 1,
       autoBrightness: json['autoBrightness'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_DisplayStateToJson(_$_DisplayState instance) =>
     <String, dynamic>{
       'tapToReveal': instance.tapToReveal,
-      'primaryColor': instance.primaryColor,
+      'accentColorIndex': instance.accentColorIndex,
       'autoBrightness': instance.autoBrightness,
     };
 

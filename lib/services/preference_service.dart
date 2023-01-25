@@ -18,7 +18,7 @@ class PreferenceService {
   Future<SettingsModel> loadAllPreferences() async {
     SettingsModel settings = SettingsModel();
     settings.display.tapToReveal = await getTapToReveal() ?? true;
-    settings.display.primaryColor = await getPrimaryColor();
+    settings.display.accentColorIndex = await getAccentColor() ?? 1;
     settings.display.autoBrightness = await getAutoBrightness() ?? false;
     settings.security.fingerPrint = await getFingerprint() ?? false;
     settings.security.hasPassword = await getPassword() ?? false;
@@ -29,7 +29,7 @@ class PreferenceService {
   Future<SettingsModel> loadDisplayPreferences() async {
     SettingsModel settings = SettingsModel();
     settings.display.tapToReveal = await getTapToReveal() ?? true;
-    settings.display.primaryColor = await getPrimaryColor();
+    settings.display.accentColorIndex = await getAccentColor() ?? 1;
     settings.display.autoBrightness = await getAutoBrightness() ?? false;
     return settings;
   }
@@ -48,11 +48,11 @@ class PreferenceService {
   Future<bool?> getTapToReveal() async =>
       (await _prefs).getBool(PreferenceOptions.tapToReveal.name);
 
-  Future<bool> setPrimaryColor(String value) async =>
-      (await _prefs).setString(PreferenceOptions.primaryColor.name, value);
+  Future<bool> setAccentColor(int value) async =>
+      (await _prefs).setInt(PreferenceOptions.accentColor.name, value);
 
-  Future<String?> getPrimaryColor() async =>
-      (await _prefs).getString(PreferenceOptions.primaryColor.name);
+  Future<int?> getAccentColor() async =>
+      (await _prefs).getInt(PreferenceOptions.accentColor.name);
 
   Future<bool> setAutoBrightness(bool value) async =>
       (await _prefs).setBool(PreferenceOptions.autoBrightness.name, value);

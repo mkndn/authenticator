@@ -1,3 +1,4 @@
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ enum Algorithm {
 
 enum PreferenceOptions {
   tapToReveal,
-  primaryColor,
+  accentColor,
   autoBrightness,
   fingerprint,
   password,
@@ -83,7 +84,7 @@ enum HoverMode { contained, around }
 
 enum DisplaySettings {
   tapToReveal('Tap to reveal'),
-  primaryColor('Primary color'),
+  accentColor('Accent color'),
   autoBrightness('Automatic Brightness');
 
   const DisplaySettings(this.title);
@@ -144,4 +145,30 @@ enum AppRoute {
   final String path;
   final String title;
   final IconData icon;
+}
+
+enum AccentColor {
+  materialYou(1, 'Material You', '#2196F3'),
+  purple(2, 'Deep Purple', '#6750A4'),
+  purple2(3, 'Just Purple', '#b84fff'),
+  stawberry(4, 'Stawberry Smoothie', '#ff342b'),
+  orange(5, 'Orange Squash', '#ff7a19'),
+  green(6, 'Green Grass', '#689300'),
+  green2(7, 'Simply Green', '#00978d'),
+  blue(8, 'Blue Mania', '#3e7dff'),
+  pink(9, 'Pinky Pink', '#fe008a');
+
+  const AccentColor(this.id, this.title, this.hex);
+  final int id;
+  final String title;
+  final String hex;
+
+  Color get color => hex.toColor();
+
+  int get cv => color.value;
+
+  static AccentColor fromId(int id) =>
+      values.firstWhere((element) => element.id == id);
+
+  static Color colorFromId(int id) => AccentColor.fromId(id).color;
 }

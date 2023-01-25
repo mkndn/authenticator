@@ -43,7 +43,7 @@ class _PreferencesViewState extends State<PreferencesView> {
                         e.leaves.join(" . "),
                       ),
                     ),
-                    onClick: () => context.goNamed(e.route.name),
+                    onTap: () => context.goNamed(e.route.name),
                   ))
               .toList(),
         ),

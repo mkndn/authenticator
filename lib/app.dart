@@ -1,3 +1,4 @@
+import 'package:authenticator/common/classes/enums.dart';
 import 'package:authenticator/common/classes/observables.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';
 import 'package:authenticator/common/theme/theme_settings.dart';
@@ -12,7 +13,6 @@ import 'package:authenticator/services/auth/auth_service.dart';
 import 'package:authenticator/services/preference_service.dart';
 import 'router.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -49,8 +49,8 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         settings = ValueNotifier(
           ThemeSettings(
-            sourceColor: appSettings.display.primaryColor?.toColor ??
-                const Color.fromARGB(255, 35, 72, 238), // Replace this color
+            sourceColor: AccentColor.fromId(
+                appSettings.display.accentColorIndex), // Replace this color
             themeMode: ThemeMode.system,
           ),
         );
@@ -67,16 +67,18 @@ class _MyAppState extends State<MyApp> {
         hasCredentials: appSettings.hasCredentials,
         availableBiometricsList: biometricsOptions,
       );
-      return DynamicColorBuilder(
-        builder: (lightDynamic, darkDynamic) => ThemeProvider(
-          lightDynamic: lightDynamic,
-          darkDynamic: darkDynamic,
-          settings: settings,
-          child: NotificationListener<ThemeSettingChange>(
-            onNotification: (notification) {
-              settings.value = notification.settings;
-              return true;
-            },
+      return NotificationListener<ThemeSettingChange>(
+        onNotification: (notification) {
+          settings.value = notification.settings;
+          return true;
+        },
+        child: DynamicColorBuilder(
+          builder: (lightDynamic, darkDynamic) => ThemeProvider(
+            lightDynamic:
+                appSettings.display.accentColorIndex == 1 ? lightDynamic : null,
+            darkDynamic:
+                appSettings.display.accentColorIndex == 1 ? darkDynamic : null,
+            settings: settings,
             child: ValueListenableBuilder<ThemeSettings>(
               valueListenable: settings,
               builder: (context, value, _) {
@@ -89,9 +91,9 @@ class _MyAppState extends State<MyApp> {
                   debugShowCheckedModeBanner: false,
                   title: 'Authenticator',
                   // Add theme
-                  theme: theme.light(settings.value.sourceColor),
+                  theme: theme.light(settings.value.sourceColor.color),
                   // Add dark theme
-                  darkTheme: theme.dark(settings.value.sourceColor),
+                  darkTheme: theme.dark(settings.value.sourceColor.color),
                   // Add theme mode
                   themeMode: theme.themeMode(),
                   routeInformationParser: routerInfo.routeInformationParser,
