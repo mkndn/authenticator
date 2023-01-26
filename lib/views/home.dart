@@ -1,3 +1,4 @@
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
       bloc: settingsBloc,
       builder: (builder, settingState) {
         loadData();
+        final settings = SettingsModel.fromStateJson(settingState.toJson());
         return LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -41,32 +43,7 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
                           offsetPercent: 0.7, offsetPercentMobile: 0.9),
                       maxHeight: maxHeight(constraints, offsetPercent: 0.7),
                     ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TotpLayout(
-                              data: data[index],
-                              onDelete: (id) => setState(
-                                () => data
-                                    .removeWhere((element) => element.id == id),
-                              ),
-                              settings: SettingsModel.fromStateJson(
-                                  settingState.toJson()),
-                            ),
-                            if (index < data.length - 1)
-                              const Divider(
-                                thickness: 0.3,
-                              ),
-                          ],
-                        );
-                      },
-                    ),
+                    child: getGridContent(constraints, settings),
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
@@ -79,6 +56,27 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
           ),
         );
       },
+    );
+  }
+
+  Widget getGridContent(BoxConstraints constraints, SettingsModel settings) {
+    return GridView.builder(
+      primary: false,
+      padding: const EdgeInsets.all(20),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 600.0,
+        mainAxisExtent: 125.0,
+        mainAxisSpacing: 25.0,
+      ),
+      itemCount: data.length,
+      itemBuilder: (context, index) => TotpLayout(
+        data: data[index],
+        onDelete: (id) => setState(
+          () => data.removeWhere((element) => element.id == id),
+        ),
+        settings: settings,
+      ),
     );
   }
 }

@@ -35,8 +35,7 @@ class DesktopLayout extends StatefulWidget {
   State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _DesktopLayoutState extends State<DesktopLayout>
-    with AutomaticKeepAliveClientMixin<DesktopLayout> {
+class _DesktopLayoutState extends State<DesktopLayout> {
   String resizeText = 'Maximize';
   final Map<int, VoidCallback> navigationMapping = {};
   final Map<String, int> routeNameToIndex = {};
@@ -216,7 +215,4 @@ class _DesktopLayoutState extends State<DesktopLayout>
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

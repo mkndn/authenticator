@@ -70,6 +70,7 @@ class _MyAppState extends State<MyApp> {
       return NotificationListener<ThemeSettingChange>(
         onNotification: (notification) {
           settings.value = notification.settings;
+          appSettings.display.accentColorIndex = settings.value.sourceColor.id;
           return true;
         },
         child: DynamicColorBuilder(

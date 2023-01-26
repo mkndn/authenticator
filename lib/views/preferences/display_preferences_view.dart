@@ -69,7 +69,11 @@ class _DisplayPreferencesViewState extends State<DisplayPreferencesView> {
                   subTitle: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      '#${ThemeProvider.of(context).settings.value.sourceColor.hex}',
+                      ThemeProvider.of(context)
+                          .settings
+                          .value
+                          .sourceColor
+                          .title,
                     ),
                   ),
                   trailing: const [

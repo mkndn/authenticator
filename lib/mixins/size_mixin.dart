@@ -4,37 +4,59 @@ import 'package:flutter/material.dart';
 mixin SizeMixin<T extends StatefulWidget> on State<T> {
   double maxHeight(
     BoxConstraints constraints, {
+    bool offsetAppliesToAll = false,
     double? offsetPercent,
     double? offsetPercentDesktop,
     double? offsetPercentMobile,
     double? offsetPercentTablet,
-  }) =>
-      constraints.maxHeight != double.infinity
-          ? constraints.maxHeight
-          : _applyOffset(
-              context.dimen.height,
+  }) {
+    if (constraints.maxHeight != double.infinity) {
+      return offsetAppliesToAll
+          ? _applyOffset(
+              constraints.maxHeight,
               offsetPercent,
               offsetPercentDesktop,
               offsetPercentMobile,
               offsetPercentTablet,
-            );
+            )
+          : constraints.maxHeight;
+    }
+    return _applyOffset(
+      context.dimen.height,
+      offsetPercent,
+      offsetPercentDesktop,
+      offsetPercentMobile,
+      offsetPercentTablet,
+    );
+  }
 
   double maxWidth(
     BoxConstraints constraints, {
+    bool offsetAppliesToAll = false,
     double? offsetPercent,
     double? offsetPercentDesktop,
     double? offsetPercentMobile,
     double? offsetPercentTablet,
-  }) =>
-      constraints.maxWidth != double.infinity
-          ? constraints.maxWidth
-          : _applyOffset(
-              context.dimen.width,
+  }) {
+    if (constraints.maxWidth != double.infinity) {
+      return offsetAppliesToAll
+          ? _applyOffset(
+              constraints.maxWidth,
               offsetPercent,
               offsetPercentDesktop,
               offsetPercentMobile,
               offsetPercentTablet,
-            );
+            )
+          : constraints.maxWidth;
+    }
+    return _applyOffset(
+      context.dimen.width,
+      offsetPercent,
+      offsetPercentDesktop,
+      offsetPercentMobile,
+      offsetPercentTablet,
+    );
+  }
 
   double _applyOffset(
     double value,

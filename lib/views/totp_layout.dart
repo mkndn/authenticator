@@ -98,78 +98,91 @@ class _TotpLayoutState extends State<TotpLayout>
             widget.data.label ?? '',
           ),
         ),
-        subtitle: Row(
+        subtitle: Wrap(
+          spacing: 10.0,
+          runSpacing: 10.0,
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            TotpLayoutCard(
-              animationTimeoutCallback: refreshTotpCode,
-              progressColor: context.colors.primary,
-              strokeWidth: 3.0,
-              totpWidget: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: codeRevealed
-                      ? AbscuredText(
-                          digits: totpCode?.length ?? 6,
-                        )
-                      : Text(
-                          totpCode ?? '',
-                          style:
-                              context.titleLarge!.copyWith(letterSpacing: 25.0),
-                        ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10.0,
-            ),
-            Wrap(
-              spacing: 5.0,
+            Column(
               children: [
-                CircleAvatar(
-                  child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () async {
-                      final image = await QrPainter(
-                        data: totpUrl(widget.data),
-                        version: QrVersions.auto,
-                        gapless: false,
-                        color: context.colors.onSurface,
-                      ).toImage(300);
-                      final qrImageData =
-                          await image.toByteData(format: ImageByteFormat.png);
-                      if (qrImageData != null) {
-                        showQrCodeDialog(qrImageData.buffer.asUint8List());
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.qr_code,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: TotpLayoutCard(
+                    animationTimeoutCallback: refreshTotpCode,
+                    progressColor: context.colors.primary,
+                    strokeWidth: 3.0,
+                    totpWidget: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: codeRevealed
+                            ? AbscuredText(
+                                digits: totpCode?.length ?? 6,
+                              )
+                            : Text(
+                                totpCode ?? '',
+                                style: context.titleLarge!
+                                    .copyWith(letterSpacing: 25.0),
+                              ),
+                      ),
                     ),
                   ),
                 ),
-                CircleAvatar(
-                  child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () => context.goNamed(
-                      AppRoute.editEntry.name,
-                      params: {'eid': widget.data.id.hexString},
+              ],
+            ),
+            Column(
+              children: [
+                Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  children: [
+                    CircleAvatar(
+                      child: IconButton(
+                        alignment: Alignment.center,
+                        onPressed: () async {
+                          final image = await QrPainter(
+                            data: totpUrl(widget.data),
+                            version: QrVersions.auto,
+                            gapless: false,
+                            color: context.colors.onSurface,
+                          ).toImage(300);
+                          final qrImageData = await image.toByteData(
+                              format: ImageByteFormat.png);
+                          if (qrImageData != null) {
+                            showQrCodeDialog(qrImageData.buffer.asUint8List());
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.qr_code,
+                        ),
+                      ),
                     ),
-                    icon: const Icon(
-                      Icons.edit,
+                    CircleAvatar(
+                      child: IconButton(
+                        alignment: Alignment.center,
+                        onPressed: () => context.goNamed(
+                          AppRoute.editEntry.name,
+                          params: {'eid': widget.data.id.hexString},
+                        ),
+                        icon: const Icon(
+                          Icons.edit,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                CircleAvatar(
-                  child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () {
-                      hiveService.removeItem(widget.data.id);
-                      widget.onDelete(widget.data.id);
-                    },
-                    icon: const Icon(
-                      Icons.delete,
+                    CircleAvatar(
+                      child: IconButton(
+                        alignment: Alignment.center,
+                        onPressed: () {
+                          hiveService.removeItem(widget.data.id);
+                          widget.onDelete(widget.data.id);
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
