@@ -196,7 +196,8 @@ class _EditEntryState extends State<EditEntry> {
                     _hiveService.addItem(entryData!);
                     Alert.showAlert(context, 'Account added successfully');
                     Timer(const Duration(seconds: 3), () {
-                      context.goNamed(AppRoute.home.name);
+                      context.goNamed(AppRoute.home.name,
+                          queryParams: {'reload': 'true'});
                     });
                   }
                 },

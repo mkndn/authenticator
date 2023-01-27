@@ -131,8 +131,8 @@ enum DataSettings {
 enum AppRoute {
   login(Icons.person_2, '/login', 'Login'),
   home(Icons.home, '/home', 'Authenticator'),
-  addEntry(Icons.add, 'add', 'Add Account'),
-  editEntry(Icons.edit, 'edit', 'Edit Account'),
+  add(Icons.add, 'add', 'Add Account'),
+  edit(Icons.edit, 'edit', 'Edit Account'),
   scan(Icons.camera_alt_rounded, 'scan', 'Scan QR Code'),
   settings(Icons.settings, 'settings', 'Settings'),
   display(Icons.display_settings, 'display', 'Display'),

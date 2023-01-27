@@ -19,7 +19,7 @@ class ImportExport {
     final importFile = File(path);
     if (await importFile.exists() && await importFile.length() > 0) {
       final bytes = await importFile.readAsBytes();
-      List<JsonMap> content = passkey != null
+      List<JsonMap> content = passkey != null && passkey.isNotEmpty
           ? await _encryptDecrypt.decryptContent(
               passkey, String.fromCharCodes(bytes))
           : jsonDecode(String.fromCharCodes(bytes));
@@ -32,7 +32,7 @@ class ImportExport {
       String exportFilePath, String? passkey, List<TotpData> data) async {
     final File exportFile = File('$exportFilePath/mk_totp_export.enkrypt');
     List<JsonMap> content = data.map((e) => e.toJson()).toList();
-    String encryptedContent = passkey != null
+    String encryptedContent = passkey != null && passkey.isNotEmpty
         ? _encryptDecrypt.encryptContent(passkey, content)
         : jsonEncode(content);
     exportFile.writeAsString(encryptedContent);

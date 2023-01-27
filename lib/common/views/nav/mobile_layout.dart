@@ -41,7 +41,7 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
     navigationMapping.addAll(
       <int, VoidCallback>{
         0: () => context.goNamed(AppRoute.home.name),
-        1: () => context.goNamed(AppRoute.addEntry.name),
+        1: () => context.goNamed(AppRoute.add.name),
         2: () => context.goNamed(AppRoute.settings.name),
       },
     );
@@ -78,19 +78,23 @@ class _MobileLayoutState extends State<MobileLayout> with RouteAware {
                 SettingsModel.fromStateJson(settingsState.toJson());
             loadNavigationMapping(settingsBloc, settings);
             return Scaffold(
+              resizeToAvoidBottomInset: false,
               floatingActionButton: Wrap(
                 direction: Axis.vertical,
                 children: [
-                  FloatingActionButton.small(
-                    child: const Icon(Icons.qr_code_scanner_rounded),
-                    onPressed: () {
-                      context.goNamed(AppRoute.scan.name);
-                    },
-                  ),
+                  if (Platform.isAndroid || Platform.isIOS)
+                    FloatingActionButton.small(
+                      heroTag: 'totp_scan',
+                      child: const Icon(Icons.qr_code_scanner_rounded),
+                      onPressed: () {
+                        context.goNamed(AppRoute.scan.name);
+                      },
+                    ),
                   const SizedBox(
                     height: 10.0,
                   ),
                   FloatingActionButton.small(
+                    heroTag: 'totp_ttr',
                     child: Icon(settingsBloc.state.display.tapToReveal
                         ? Icons.visibility
                         : Icons.visibility_off),

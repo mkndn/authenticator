@@ -70,12 +70,12 @@ class _TotpLayoutCardState extends State<TotpLayoutCard>
         pathType: PathType.rRect,
         strokeWidth: widget.strokeWidth,
         animationDirection: AnimationDirection.clockwise,
-        radius: const Radius.circular(30.0),
+        radius: const Radius.circular(35.0),
       ),
       child: Card(
         elevation: 3.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
         child: widget.totpWidget,
       ),

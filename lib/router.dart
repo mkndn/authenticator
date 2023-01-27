@@ -46,12 +46,12 @@ final Map<AppRoute, RouteInfo> routes = {
     route: AppRoute.scan,
     parent: AppRoute.home,
   ),
-  AppRoute.editEntry: RouteInfo(
-    route: AppRoute.editEntry,
+  AppRoute.edit: RouteInfo(
+    route: AppRoute.edit,
     parent: AppRoute.home,
   ),
-  AppRoute.addEntry: RouteInfo(
-    route: AppRoute.addEntry,
+  AppRoute.add: RouteInfo(
+    route: AppRoute.add,
     parent: AppRoute.home,
   ),
   AppRoute.settings: RouteInfo(
@@ -103,7 +103,11 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
                   child: RootLayout(
                     routeInfo: routes[AppRoute.home]!,
                     title: AppRoute.home.title,
-                    child: const HomeView(),
+                    child: HomeView(
+                      reload: state.queryParams.containsKey('reload')
+                          ? state.queryParams['reload']!
+                          : 'false',
+                    ),
                   ),
                 ),
             routes: [
@@ -115,11 +119,11 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
                 ),
               ),
               GoRoute(
-                path: AppRoute.addEntry.path,
-                name: AppRoute.addEntry.name,
+                path: AppRoute.add.path,
+                name: AppRoute.add.name,
                 pageBuilder: (context, state) => MaterialPage<void>(
                   child: RootLayout(
-                    routeInfo: routes[AppRoute.addEntry]!,
+                    routeInfo: routes[AppRoute.add]!,
                     displayMenu: false,
                     title: "Add account",
                     backButton: true,
@@ -132,14 +136,14 @@ GoRouter appRouter(AppBloc bloc) => GoRouter(
                 ),
               ),
               GoRoute(
-                path: '${AppRoute.editEntry.path}/:eid',
-                name: AppRoute.editEntry.name,
+                path: '${AppRoute.edit.path}/:eid',
+                name: AppRoute.edit.name,
                 pageBuilder: (context, state) => MaterialPage<void>(
                   child: RootLayout(
-                    routeInfo: routes[AppRoute.editEntry]!,
+                    routeInfo: routes[AppRoute.edit]!,
                     displayMenu: false,
                     backButton: true,
-                    title: AppRoute.editEntry.title,
+                    title: AppRoute.edit.title,
                     child: EditEntry.standalone(
                       entryId: state.params['eid']!,
                     ),

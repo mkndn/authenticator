@@ -55,7 +55,7 @@ class QRScanner extends StatelessWidget {
             final String url = barcode.rawValue!;
             debugPrint('Barcode found! $url');
             context.goNamed(
-              AppRoute.addEntry.name,
+              AppRoute.add.name,
               queryParams: {'totpUrl': url},
             );
           }

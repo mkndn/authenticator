@@ -18,10 +18,9 @@ void main() async {
     ..registerAdapter(TotpDataAdapter())
     ..registerAdapter(OffsetAdapter());
 
-  final appDir = await getApplicationDocumentsDirectory();
-  await Hive.openBox<TotpData>('totp_data', path: appDir.path);
-
   if (Platform.isWindows || Platform.isMacOS) {
+    await Hive.openBox<TotpData>('totp_data',
+        path: Directory.current.absolute.path);
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(
@@ -37,6 +36,9 @@ void main() async {
       await windowManager.show();
       await windowManager.focus();
     });
+  } else {
+    final appSupport = await getApplicationSupportDirectory();
+    await Hive.openBox<TotpData>('totp_data', path: appSupport.path);
   }
 
   runApp(const MyApp());

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:crypto/crypto.dart';
@@ -17,7 +18,18 @@ class TOTP {
       String secret, int time, int length, Algorithm algorithm) {
     length = (length <= 8 && length > 0) ? length : 6;
 
-    var secretList = base32.decode(secret);
+    late Uint8List secretList;
+
+    try {
+      secretList = base32.decode(secret.replaceAll(" ", ""));
+    } on Exception catch (_) {
+      try {
+        secretList = base64.decode(secret.replaceAll(" ", ""));
+      } on Exception catch (_) {
+        rethrow;
+      }
+    }
+
     var timebytes = _int2bytes(time);
 
     var hmac = Hmac(algorithm.hash, secretList);

@@ -79,7 +79,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
   ) {
     routeNameToIndex.addAll({
       AppRoute.home.name: 0,
-      AppRoute.addEntry.name: 1,
+      AppRoute.add.name: 1,
       AppRoute.settings.name: 2
     });
 
@@ -118,8 +118,11 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           GoRouter.of(context).routeInformationProvider.value;
       final appBloc = BlocProvider.of<AppBloc>(context);
       if (info.location != null) {
-        final name =
+        final fullPath =
             info.location!.substring(info.location!.lastIndexOf("/") + 1);
+        final name = fullPath.indexOf("?") > 0
+            ? fullPath.substring(0, fullPath.indexOf("?"))
+            : fullPath;
         int? index = routeNameToIndex[name];
         if (index != null && appBloc.state.selectedSidebarItemIndex != index) {
           appBloc.add(AppEvent.setselectedSidebarItemIndex(index));

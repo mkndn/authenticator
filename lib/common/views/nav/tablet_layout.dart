@@ -107,7 +107,7 @@ class _TabletLayoutState extends State<TabletLayout> {
   ) {
     routeNameToIndex.addAll({
       AppRoute.home.name: 0,
-      AppRoute.addEntry.name: 1,
+      AppRoute.add.name: 1,
       AppRoute.settings.name: 2
     });
 

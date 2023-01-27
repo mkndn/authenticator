@@ -1,4 +1,3 @@
-import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,9 @@ import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/views/totp_layout.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({this.reload = 'false', super.key});
+
+  final String reload;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -33,27 +34,24 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
         loadData();
         final settings = SettingsModel.fromStateJson(settingState.toJson());
         return LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: data.isNotEmpty
-                ? Container(
-                    padding: const EdgeInsets.all(5.0),
-                    constraints: BoxConstraints(
-                      maxWidth: maxWidth(constraints,
-                          offsetPercent: 0.7, offsetPercentMobile: 0.9),
-                      maxHeight: maxHeight(constraints, offsetPercent: 0.7),
-                    ),
-                    child: getGridContent(constraints, settings),
-                  )
-                : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: const Align(
-                      alignment: AlignmentDirectional.center,
-                      child: Text('No accounts found'),
-                    ),
+          builder: (context, constraints) => data.isNotEmpty
+              ? Container(
+                  padding: const EdgeInsets.all(5.0),
+                  constraints: BoxConstraints(
+                    maxWidth: maxWidth(constraints,
+                        offsetPercent: 0.7, offsetPercentMobile: 0.9),
+                    maxHeight: maxHeight(constraints, offsetPercent: 0.7),
                   ),
-          ),
+                  child: getGridContent(constraints, settings),
+                )
+              : SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: const Align(
+                    alignment: AlignmentDirectional.center,
+                    child: Text('No accounts found'),
+                  ),
+                ),
         );
       },
     );
@@ -65,18 +63,49 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
       padding: const EdgeInsets.all(20),
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 600.0,
-        mainAxisExtent: 125.0,
-        mainAxisSpacing: 25.0,
+        maxCrossAxisExtent: 800.0,
+        mainAxisExtent: 150.0,
+        mainAxisSpacing: 5.0,
+        crossAxisSpacing: 10.0,
       ),
       itemCount: data.length,
-      itemBuilder: (context, index) => TotpLayout(
-        data: data[index],
-        onDelete: (id) => setState(
-          () => data.removeWhere((element) => element.id == id),
+      itemBuilder: (context, index) => FittedBox(
+        fit: BoxFit.scaleDown,
+        child: TotpLayout(
+          data: data[index],
+          onDelete: (id) => setState(
+            () => data.removeWhere((element) => element.id == id),
+          ),
+          settings: settings,
         ),
-        settings: settings,
       ),
+    );
+  }
+
+  Widget getListViewContent(SettingsModel settings) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TotpLayout(
+              data: data[index],
+              onDelete: (id) => setState(
+                () => data.removeWhere((element) => element.id == id),
+              ),
+              settings: settings,
+            ),
+            if (index < data.length - 1)
+              const Divider(
+                thickness: 0.3,
+              ),
+          ],
+        );
+      },
     );
   }
 }

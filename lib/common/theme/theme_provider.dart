@@ -53,7 +53,9 @@ class ThemeProvider extends InheritedWidget {
         ? lightDynamic?.primary
         : darkDynamic?.primary;
     return ColorScheme.fromSeed(
-      seedColor: dynamicPrimary ?? source(targetColor),
+      seedColor: settings.value.sourceColor.id == 1 && dynamicPrimary != null
+          ? dynamicPrimary
+          : source(targetColor),
       brightness: brightness,
     );
   }
@@ -222,7 +224,7 @@ class ThemeProvider extends InheritedWidget {
         ? ThemeData.dark().dialogTheme
         : ThemeData.light().dialogTheme;
     return dialogThemeTemplate.copyWith(
-      backgroundColor: colors.onSecondary,
+      backgroundColor: colors.surfaceVariant,
       iconColor: colors.primary,
     );
   }
@@ -237,12 +239,26 @@ class ThemeProvider extends InheritedWidget {
     );
   }
 
+  SnackBarThemeData snackBarTheme(Brightness brightness, ColorScheme colors) {
+    final snackBarThemeTemplate = brightness == Brightness.dark
+        ? ThemeData.dark().snackBarTheme
+        : ThemeData.light().snackBarTheme;
+    return snackBarThemeTemplate.copyWith(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      ),
+      backgroundColor: colors.onPrimary,
+      contentTextStyle: textTheme(brightness, colors.primary).titleMedium,
+    );
+  }
+
   ThemeData light([Color? targetColor]) {
     final colorScheme = colors(Brightness.light, targetColor);
     return ThemeData.light().copyWith(
       // Add page transitions
       colorScheme: colorScheme,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      snackBarTheme: snackBarTheme(Brightness.light, colorScheme),
       textTheme: textTheme(Brightness.light, colorScheme.onSurface),
       primaryTextTheme: textTheme(Brightness.light, colorScheme.primary),
       iconTheme: iconTheme(Brightness.light, colorScheme.onSurface),
@@ -272,6 +288,7 @@ class ThemeProvider extends InheritedWidget {
       colorScheme: colorScheme,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       textTheme: textTheme(Brightness.dark, colorScheme.onSurface),
+      snackBarTheme: snackBarTheme(Brightness.dark, colorScheme),
       primaryTextTheme: textTheme(Brightness.dark, colorScheme.primary),
       iconTheme: iconTheme(Brightness.dark, colorScheme.onSurface),
       primaryIconTheme: iconTheme(Brightness.dark, colorScheme.primary),

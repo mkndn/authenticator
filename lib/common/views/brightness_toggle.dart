@@ -47,7 +47,7 @@ class _BrightnessToggleState extends State<BrightnessToggle> {
   void dispatchThemeChange(ThemeMode newMode) {
     final themeProvider = ThemeProvider.of(context);
     final settings = themeProvider.settings.value;
-    if (newMode != ThemeMode.system && settings.themeMode == ThemeMode.system) {
+    if (newMode != ThemeMode.system && settings.themeMode != newMode) {
       final newSettings = ThemeSettings(
         sourceColor: settings.sourceColor,
         themeMode: newMode,
@@ -74,9 +74,9 @@ class _BrightnessToggleState extends State<BrightnessToggle> {
           if (!_state.display.autoBrightness) {
             _state = settingsState;
           }
-          if (settings.themeMode == ThemeMode.system) {
-            Future.delayed(const Duration(milliseconds: 500), _selectTheme);
-          }
+
+          Future.delayed(const Duration(milliseconds: 500), _selectTheme);
+
           return const Padding(
             padding: EdgeInsets.only(right: 10.0),
             child: Icon(

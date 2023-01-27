@@ -1,4 +1,5 @@
 import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:authenticator/views/edit_entry.dart';
@@ -21,7 +22,7 @@ class AddEntry extends StatefulWidget {
   State<AddEntry> createState() => _AddEntryState();
 }
 
-class _AddEntryState extends State<AddEntry> with TotpMixin {
+class _AddEntryState extends State<AddEntry> with TotpMixin, SizeMixin {
   SecretAddMode addMode = SecretAddMode.url;
   final HiveService service = HiveService.instance();
   TotpData data = TotpData(id: ObjectId());
@@ -166,6 +167,7 @@ class _AddEntryState extends State<AddEntry> with TotpMixin {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             children: getChildren(constraints),
           ),

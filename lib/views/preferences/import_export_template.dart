@@ -79,11 +79,13 @@ class _ImportExportTemplateState extends State<ImportExportTemplate>
   }
 
   void exportData(String path, String key) {
+    final backupCurrent = Directory.current;
     ImportExport.instance()
         .exportData(path, key, _hiveService.getAllItems())
-        .whenComplete(
-          () => Alert.showAlert(context, 'Totp data imported successfully'),
-        );
+        .whenComplete(() {
+      Directory.current = backupCurrent;
+      Alert.showAlert(context, 'Totp data exported successfully');
+    });
   }
 
   @override
@@ -121,10 +123,12 @@ class _ImportExportTemplateState extends State<ImportExportTemplate>
                       },
                     ),
                     onTap: () async {
+                      final backupCurrent = Directory.current;
                       final selectedPath = (isImport
                               ? await selectfile()
                               : await FilePicker.platform.getDirectoryPath()) ??
                           '';
+                      Directory.current = backupCurrent;
                       setState(() => path = selectedPath);
                     }),
               ),
