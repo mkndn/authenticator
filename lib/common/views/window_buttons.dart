@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:authenticator/common/classes/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';

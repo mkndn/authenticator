@@ -25,12 +25,12 @@ class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _passwordForm = GlobalKey<FormState>();
   final GlobalKey<FormState> _pinForm = GlobalKey<FormState>();
   late AppBloc appBloc;
+  late SettingsModel settings;
+  Map<LoginOptions, Widget> options = <LoginOptions, Widget>{};
 
-  Map<LoginOptions, Widget> getLoginOptions(SettingsModel settings) {
-    Map<LoginOptions, Widget> children = <LoginOptions, Widget>{};
-
+  void getLoginOptions(SettingsModel settings) {
     if (settings.hasFingerPrint()) {
-      children.putIfAbsent(
+      options.putIfAbsent(
           LoginOptions.fingerprint,
           () => ListTile(
                 mouseCursor: MaterialStateMouseCursor.clickable,
@@ -60,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
     }
 
     if (settings.hasPassword()) {
-      children.putIfAbsent(
+      options.putIfAbsent(
         LoginOptions.password,
         () => ListTile(
           mouseCursor: MaterialStateMouseCursor.clickable,
@@ -85,7 +85,7 @@ class _LoginViewState extends State<LoginView> {
     }
 
     if (settings.hasPin()) {
-      children.putIfAbsent(
+      options.putIfAbsent(
         LoginOptions.pin,
         () => ListTile(
           mouseCursor: MaterialStateMouseCursor.clickable,
@@ -109,7 +109,6 @@ class _LoginViewState extends State<LoginView> {
         ),
       );
     }
-    return children;
   }
 
   Future<bool?> _pinDialog() async {
@@ -249,9 +248,8 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Future<void> triggerAvailable(
-      SettingsModel settings, Map<LoginOptions, Widget> option) async {
-    final entry = option.entries.first;
+  Future<void> triggerAvailable() async {
+    final entry = options.entries.first;
     if (mounted) {
       switch (entry.key) {
         case LoginOptions.fingerprint:
@@ -279,6 +277,16 @@ class _LoginViewState extends State<LoginView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && options.isNotEmpty) {
+        triggerAvailable();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     appBloc = BlocProvider.of<AppBloc>(context);
 
@@ -293,9 +301,9 @@ class _LoginViewState extends State<LoginView> {
                 return BlocBuilder<SettingsBloc, SettingsState>(
                   bloc: settingsBloc,
                   builder: (context, settingsState) {
-                    final settings =
+                    settings =
                         SettingsModel.fromStateJson(settingsState.toJson());
-                    final options = getLoginOptions(settings);
+                    getLoginOptions(settings);
                     return Container(
                       height: constraints.maxHeight,
                       alignment: AlignmentDirectional.center,

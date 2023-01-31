@@ -15,7 +15,6 @@ class EditEntry extends StatefulWidget {
     this.entryId,
     this.parentFormKey,
     this.data,
-    super.key,
   })  : assert((entryId != null || data != null),
             'Either entryId or data parameter required'),
         assert((isEmbedded && parentFormKey != null) || (!isEmbedded),

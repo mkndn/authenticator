@@ -1,4 +1,3 @@
-import 'package:authenticator/common/classes/extensions.dart';
 import 'package:flutter/material.dart';
 
 class Alert {

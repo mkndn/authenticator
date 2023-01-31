@@ -1,5 +1,4 @@
 import 'package:authenticator/common/classes/enums.dart';
-import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/common/classes/observables.dart';
 import 'package:authenticator/common/dialogs/accent_picker.dart';
 import 'package:authenticator/common/theme/theme_provider.dart';

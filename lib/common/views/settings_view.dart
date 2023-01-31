@@ -1,4 +1,3 @@
-import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:flutter/material.dart';
 

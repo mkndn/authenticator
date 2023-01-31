@@ -117,26 +117,35 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
           title: Text(
             SecuritySettings.fingerprint.title,
           ),
-          subTitle: Wrap(
-            direction: Axis.vertical,
+          subTitle: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Text(
-                  'Strong security',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      'Strong security',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Text(
-                  settings.security.fingerPrint
-                      ? 'You will be prompted to login with your Fingerprint upon restart'
-                      : 'Fingerprint is disabled',
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        settings.security.fingerPrint
+                            ? 'You will be prompted to login with your Fingerprint upon restart'
+                            : 'Fingerprint is disabled',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -151,26 +160,35 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
               ? 'Reset ${SecuritySettings.password.title}'
               : 'Setup ${SecuritySettings.password.title}',
         ),
-        subTitle: Wrap(
-          direction: Axis.vertical,
+        subTitle: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: Text(
-                'Medium security',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amber,
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    'Medium security',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Text(
-                settings.security.hasPassword
-                    ? 'You will be prompted to login with your password upon restart'
-                    : 'Password is not set',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      settings.security.hasPassword
+                          ? 'You will be prompted to login with your password upon restart'
+                          : 'Password is not set',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -202,26 +220,35 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
               ? 'Reset ${SecuritySettings.pin.title}'
               : 'Setup ${SecuritySettings.pin.title}',
         ),
-        subTitle: Wrap(
-          direction: Axis.vertical,
+        subTitle: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: Text(
-                'Weak security',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    'Weak security',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Text(
-                settings.security.hasPin
-                    ? 'You will be prompted to login with your PIN upon restart'
-                    : 'PIN is not set',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      settings.security.hasPin
+                          ? 'You will be prompted to login with your PIN upon restart'
+                          : 'PIN is not set',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

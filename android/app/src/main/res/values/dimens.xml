@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_title_sz" >24sp</dimen>
+    <dimen name="widget_content_sz">18sp</dimen>
+    <dimen name="widget_padding">15dp</dimen>
+</resources>

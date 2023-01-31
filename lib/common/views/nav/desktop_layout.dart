@@ -140,6 +140,70 @@ class _DesktopLayoutState extends State<DesktopLayout> {
     });
   }
 
+  List<Widget> getChildren(
+    AppBloc appBloc,
+    SettingsBloc settingsBloc,
+    SettingsModel settings,
+  ) {
+    if (widget.displayMenu) {
+      return [
+        NavigationRail(
+          extended: widget.constraints.maxWidth >= 800,
+          minExtendedWidth: 150,
+          selectedIndex: appBloc.state.selectedSidebarItemIndex,
+          onDestinationSelected: (int index) {
+            appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
+            final navFunc = navigationMapping[index];
+            if (navFunc != null) navFunc();
+          },
+          destinations: getNavigationRailItems(settingsBloc, settings),
+        ),
+        const VerticalDivider(thickness: 1, width: 1),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              OverflowBar(
+                spacing: 10.0,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: widget.child,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
+
+    return [
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          OverflowBar(
+            spacing: 10.0,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: widget.child,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
@@ -152,7 +216,9 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           builder: (builder, settingsState) {
             final settings =
                 SettingsModel.fromStateJson(settingsState.toJson());
-            loadNavigationMapping(settingsBloc, settings);
+            if (widget.displayMenu) {
+              loadNavigationMapping(settingsBloc, settings);
+            }
             return Scaffold(
               appBar: AppBar(
                 bottom: widget.bottom,
@@ -168,48 +234,14 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                   GoRouterState.of(context).location == AppRoute.home.path
                       ? FloatingActionButtonLocation.endFloat
                       : null,
-              floatingActionButton: floatingAction(settingsBloc),
+              floatingActionButton:
+                  widget.displayMenu ? floatingAction(settingsBloc) : null,
               body: SafeArea(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    NavigationRail(
-                      extended: widget.constraints.maxWidth >= 800,
-                      minExtendedWidth: 150,
-                      selectedIndex: appBloc.state.selectedSidebarItemIndex,
-                      onDestinationSelected: (int index) {
-                        appBloc
-                            .add(AppEvent.setselectedSidebarItemIndex(index));
-                        final navFunc = navigationMapping[index];
-                        if (navFunc != null) navFunc();
-                      },
-                      destinations:
-                          getNavigationRailItems(settingsBloc, settings),
-                    ),
-                    const VerticalDivider(thickness: 1, width: 1),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          OverflowBar(
-                            spacing: 10.0,
-                            children: [
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 15.0),
-                                  child: widget.child,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  children: getChildren(appBloc, settingsBloc, settings),
                 ),
               ),
             );

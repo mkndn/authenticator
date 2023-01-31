@@ -71,36 +71,6 @@ class _TabletLayoutState extends State<TabletLayout> {
     ];
   }
 
-  Widget getAppBarContent(
-          SettingsBloc bloc, SettingsModel settings, bool isTemplate) =>
-      FittedBox(
-        alignment: Alignment.centerRight,
-        clipBehavior: Clip.hardEdge,
-        child: getContentByAlignment(bloc, settings),
-      );
-
-  Widget getContentByAlignment(SettingsBloc bloc, SettingsModel settings) {
-    List<Widget> children = [];
-
-    children.add(const BrightnessToggle());
-
-    return Container(
-      alignment: Alignment.centerRight,
-      constraints: BoxConstraints(
-        maxHeight: widget.toolBarHeight,
-        maxWidth: double.infinity,
-      ),
-      height: widget.toolBarHeight,
-      padding: const EdgeInsets.all(10.0),
-      child: Wrap(
-        spacing: 5.0,
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: children,
-      ),
-    );
-  }
-
   void loadNavigationMapping(
     SettingsBloc bloc,
     SettingsModel settings,
@@ -143,21 +113,27 @@ class _TabletLayoutState extends State<TabletLayout> {
 
   void initListener() {
     GoRouter.of(context).routeInformationProvider.addListener(() {
-      if (mounted) {
-        RouteInformation info =
-            GoRouter.of(context).routeInformationProvider.value;
-        final appBloc = BlocProvider.of<AppBloc>(context);
-        if (info.location != null) {
-          final name =
-              info.location!.substring(info.location!.lastIndexOf("/") + 1);
-          int? index = routeNameToIndex[name];
-          if (index != null &&
-              appBloc.state.selectedSidebarItemIndex != index) {
-            appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
-          }
+      selectIndexByRoute();
+    });
+  }
+
+  void selectIndexByRoute() {
+    if (mounted) {
+      RouteInformation info =
+          GoRouter.of(context).routeInformationProvider.value;
+      final appBloc = BlocProvider.of<AppBloc>(context);
+      if (info.location != null) {
+        final fullPath =
+            info.location!.substring(info.location!.lastIndexOf("/") + 1);
+        final name = fullPath.indexOf("?") > 0
+            ? fullPath.substring(0, fullPath.indexOf("?"))
+            : fullPath;
+        int? index = routeNameToIndex[name];
+        if (index != null && appBloc.state.selectedSidebarItemIndex != index) {
+          appBloc.add(AppEvent.setselectedSidebarItemIndex(index));
         }
       }
-    });
+    }
   }
 
   @override
@@ -165,6 +141,7 @@ class _TabletLayoutState extends State<TabletLayout> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initListener();
+      selectIndexByRoute();
     });
   }
 
@@ -180,7 +157,9 @@ class _TabletLayoutState extends State<TabletLayout> {
           builder: (builder, settingsState) {
             final settings =
                 SettingsModel.fromStateJson(settingsState.toJson());
-            loadNavigationMapping(settingsBloc, settings);
+            if (widget.displayMenu) {
+              loadNavigationMapping(settingsBloc, settings);
+            }
             return Scaffold(
               appBar: AppBar(
                 bottom: widget.bottom,
@@ -188,15 +167,14 @@ class _TabletLayoutState extends State<TabletLayout> {
                 title: Text(
                   widget.title,
                 ),
-                actions: [
-                  getAppBarContent(settingsBloc, settings, true),
-                ],
+                actions: const [BrightnessToggle()],
               ),
               floatingActionButtonLocation:
                   GoRouterState.of(context).location == AppRoute.home.path
                       ? FloatingActionButtonLocation.endFloat
                       : FloatingActionButtonLocation.startFloat,
-              floatingActionButton: floatingAction(settingsBloc),
+              floatingActionButton:
+                  widget.displayMenu ? floatingAction(settingsBloc) : null,
               body: SafeArea(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

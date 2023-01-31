@@ -1,7 +1,7 @@
 {
-    "editor.fontFamily": "Operator Mono Lig",
+    "editor.fontFamily": "JetBrains Mono",
     "editor.letterSpacing": 0,
     "editor.fontSize": 16,
-    "editor.lineHeight": 30,
+    "editor.lineHeight": 35,
     "terminal.integrated.fontFamily": "Cascadia Code"
 }

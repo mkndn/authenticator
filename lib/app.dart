@@ -11,6 +11,8 @@ import 'package:authenticator/common/bloc/app/app_bloc.dart';
 import 'package:authenticator/common/bloc/settings/settings_bloc.dart';
 import 'package:authenticator/services/auth/auth_service.dart';
 import 'package:authenticator/services/preference_service.dart';
+import 'package:home_widget/home_widget.dart';
+import 'package:workmanager/workmanager.dart';
 import 'router.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
@@ -40,10 +42,84 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  _updateWidget() async {
+    try {
+      return HomeWidget.updateWidget(
+          name: 'AuthenticatorWidgetProvider',
+          androidName: 'AuthenticatorWidgetProvider',
+          qualifiedAndroidName:
+              'com.mkndn.authenticator.widget.AuthenticatorWidgetProvider');
+    } on PlatformException catch (e) {
+      debugPrint('Error Updating Widget. $e');
+    }
+  }
+
+  _sendData() async {
+    try {
+      final List<String> totpData = [
+        '123456',
+        '789101',
+        '987654',
+      ];
+      return HomeWidget.saveWidgetData<String>('totpData', totpData.join(','));
+    } on PlatformException catch (e) {
+      debugPrint('Error Sending Data. $e');
+    }
+  }
+
+  Future<void> _sendAndUpdate() async {
+    await _sendData();
+    await _updateWidget();
+  }
+
+  void _checkForWidgetLaunch() {
+    HomeWidget.initiallyLaunchedFromHomeWidget().then(_launchedFromWidget);
+  }
+
+  void _startBackgroundUpdate() {
+    Workmanager().registerPeriodicTask('1', 'widgetBackgroundUpdate',
+        frequency: const Duration(minutes: 15));
+  }
+
+  void _stopBackgroundUpdate() {
+    Workmanager().cancelByUniqueName('1');
+  }
+
+  void _launchedFromWidget(Uri? uri) {
+    if (uri != null) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text('App started from widget'),
+                content: Text('The url from Widget: $uri'),
+              ));
+    }
+  }
+
+  /// Called when Doing Background Work initiated from Widget
+  @pragma("vm:entry-point")
+  static void backgroundCallback(Uri? data) async {
+    debugPrint(data?.toString());
+    final List<String> totpData = [
+      '123456',
+      '789101',
+      '987654',
+    ];
+    await HomeWidget.saveWidgetData<String>('totpData', totpData.join(','));
+    await HomeWidget.updateWidget(
+        name: 'AuthenticatorWidgetProvider',
+        androidName: 'AuthenticatorWidgetProvider',
+        qualifiedAndroidName:
+            'com.mkndn.authenticator.widget.AuthenticatorWidgetProvider');
+  }
+
   @override
   void initState() {
     super.initState();
+    _sendAndUpdate();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //await HomeWidget.setAppGroupId('group.com.mkndn.authenticator');
+      //await HomeWidget.registerBackgroundCallback(backgroundCallback);
       await loadBiometricsOptions();
       appSettings = await _preferenceService.loadAllPreferences();
       setState(() {
@@ -57,6 +133,18 @@ class _MyAppState extends State<MyApp> {
         settingsLoaded = true;
       });
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _checkForWidgetLaunch();
+    HomeWidget.widgetClicked.listen(_launchedFromWidget);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

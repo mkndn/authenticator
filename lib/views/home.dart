@@ -26,12 +26,27 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      loadData();
+    });
+  }
+
+  @override
+  void didUpdateWidget(HomeView old) {
+    super.didUpdateWidget(old);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      loadData();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     return BlocBuilder<SettingsBloc, SettingsState>(
       bloc: settingsBloc,
       builder: (builder, settingState) {
-        loadData();
         final settings = SettingsModel.fromStateJson(settingState.toJson());
         return LayoutBuilder(
           builder: (context, constraints) => data.isNotEmpty
