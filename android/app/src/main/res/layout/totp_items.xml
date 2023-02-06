@@ -1,23 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/totp_items"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="@dimen/widget_padding">
-    <TextView
-        android:id="@+id/totp_code_text"
+
+    <LinearLayout
+        android:id="@+id/totp_label_container"
         android:layout_width="0dp"
-        android:gravity="center_vertical"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:textSize="@dimen/widget_content_sz" />
-
-    <!--<ProgressBar
-        android:id="@+id/totp_period"
-        style="?android:attr/progressBarStyle"
         android:gravity="center_vertical"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content" />-->
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/totp_label_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/widget_content_sz" />
+
+        <TextView
+            android:id="@+id/totp_code_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/widget_content_sz" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <ProgressBar
+            android:id="@+id/totp_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/progress_shape"
+            android:gravity="center_vertical"
+            android:indeterminate="false"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_circular"
+            android:secondaryProgress="0" />
+
+        <TextView
+            android:id="@+id/totp_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_alignBottom="@+id/totp_progress"
+            android:layout_alignTop="@+id/totp_progress"
+            android:layout_centerInParent="true"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
 
 </LinearLayout>

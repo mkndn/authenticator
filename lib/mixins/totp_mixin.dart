@@ -34,7 +34,9 @@ mixin TotpMixin {
         ? Algorithm.from(results[TotpField.algorithm]!)
         : data.algorithm;
     data.issuer = results[TotpField.issuer];
-    data.digits = results[TotpField.digits] ?? data.digits;
+    data.digits = results[TotpField.digits] != null
+        ? int.parse(results[TotpField.digits]!)
+        : data.digits;
     data.period = results[TotpField.period] ?? data.period;
     return true;
   }

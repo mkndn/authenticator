@@ -11,7 +11,7 @@ class TotpData {
   @HiveField(1)
   Algorithm algorithm;
   @HiveField(2)
-  String digits;
+  int digits;
   @HiveField(3)
   String period;
   @HiveField(4)
@@ -26,7 +26,7 @@ class TotpData {
     this.label,
     this.secret,
     this.algorithm = Algorithm.sha1Hash,
-    this.digits = '6',
+    this.digits = 6,
     this.period = '30',
     this.issuer,
   });
@@ -68,7 +68,7 @@ class TotpData {
         'id': id.hexString,
         'label': label,
         'secret': secret,
-        'algorithm': algorithm.crypto,
+        'algorithm': algorithm.name,
         'digits': digits,
         'period': period,
         'issuer': issuer,

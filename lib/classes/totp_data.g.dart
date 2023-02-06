@@ -21,7 +21,7 @@ class TotpDataAdapter extends TypeAdapter<TotpData> {
       label: fields[5] as String?,
       secret: fields[6] as String?,
       algorithm: fields[1] as Algorithm,
-      digits: fields[2] as String,
+      digits: fields[2] as int,
       period: fields[3] as String,
       issuer: fields[4] as String?,
     );

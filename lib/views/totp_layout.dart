@@ -7,6 +7,7 @@ import 'package:authenticator/common/classes/typedefs.dart';
 import 'package:authenticator/common/dialogs/qrcode_share.dart';
 import 'package:authenticator/mixins/size_mixin.dart';
 import 'package:authenticator/mixins/totp_mixin.dart';
+import 'package:authenticator/services/authenticator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -40,12 +41,25 @@ class _TotpLayoutState extends State<TotpLayout>
   String? totpCode;
   bool codeConcealed = true;
   final HiveService hiveService = HiveService.instance();
+  final AuthenticatorWidget _authenticatorWidget =
+      AuthenticatorWidget.instance();
 
   void refreshTotpCode() {
     setState(() {
       totpCode = TOTP.generateTOTPCode(
-          widget.data.secret!, DateTime.now().millisecondsSinceEpoch);
+        widget.data.secret!,
+        DateTime.now().millisecondsSinceEpoch,
+        algorithm: widget.data.algorithm,
+        length: widget.data.digits,
+      );
+      //sendNextCode();
     });
+  }
+
+  void sendNextCode() async {
+    if (totpCode != null && totpCode!.isNotEmpty) {
+      _authenticatorWidget.sendNext(widget.data.id.hexString, totpCode!);
+    }
   }
 
   @override
@@ -60,7 +74,11 @@ class _TotpLayoutState extends State<TotpLayout>
     setState(() {
       codeConcealed = widget.settings.display.tapToReveal;
       totpCode = TOTP.generateTOTPCode(
-          widget.data.secret!, DateTime.now().millisecondsSinceEpoch);
+        widget.data.secret!,
+        DateTime.now().millisecondsSinceEpoch,
+        algorithm: widget.data.algorithm,
+        length: widget.data.digits,
+      );
     });
   }
 

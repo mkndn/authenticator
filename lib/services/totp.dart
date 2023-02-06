@@ -9,9 +9,9 @@ class TOTP {
   TOTP._();
   static String generateTOTPCode(String key, int time,
       {int length = 6, Algorithm algorithm = Algorithm.sha1Hash}) {
-    time = (((time ~/ 1000).round()) ~/ 30).floor();
+    final refactoredTime = (((time ~/ 1000).round()) ~/ 30).floor();
     //time = (time ~/30).floor();
-    return _generateCode(key, time, length, algorithm);
+    return _generateCode(key, refactoredTime, length, algorithm);
   }
 
   static String _generateCode(

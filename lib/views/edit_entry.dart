@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:authenticator/common/classes/alert.dart';
 import 'package:authenticator/common/classes/enums.dart';
+import 'package:authenticator/services/authenticator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -134,13 +135,13 @@ class _EditEntryState extends State<EditEntry> {
               padding: const EdgeInsets.only(left: 15.0),
               constraints: const BoxConstraints(maxWidth: 100.0),
               child: TextFormField(
-                onChanged: (value) => entryData!.digits = value,
+                onChanged: (value) => entryData!.digits = int.parse(value),
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   FilteringTextInputFormatter.digitsOnly,
                 ],
-                initialValue: entryData!.digits,
+                initialValue: entryData!.digits.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Digits',
                 ),
@@ -195,6 +196,7 @@ class _EditEntryState extends State<EditEntry> {
                     _hiveService.addItem(entryData!);
                     Alert.showAlert(context, 'Account added successfully');
                     Timer(const Duration(seconds: 3), () {
+                      AuthenticatorWidget.instance().sendAndUpdate();
                       context.goNamed(AppRoute.home.name,
                           queryParams: {'reload': 'true'});
                     });

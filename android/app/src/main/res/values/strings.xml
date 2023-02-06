@@ -3,7 +3,7 @@
     <string name="widget_title">Authenticator</string>
     <string name="totp_data">totpData</string>
     <string name="app_widget_launch_action">es.antonborri.home_widget.action.LAUNCH</string>
-    <string name="app_widget_card_clicked_uri">com.mkndn.authenticator://cardClicked</string>
+    <string name="app_widget_item_clicked_uri">com.mkndn.authenticator://itemClicked</string>
     <string name="item_cta_key">com.mkndn.authenticator.android.appwidget.CTA</string>
     <string name="action_click">com.mkndn.authenticator.android.appwidget.ACTION_CLICK</string>
 </resources>

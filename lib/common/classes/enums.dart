@@ -15,8 +15,8 @@ enum Algorithm {
   static bool isValid(String algo) =>
       Algorithm.values.any((element) => element.crypto == algo.toUpperCase());
 
-  static Algorithm from(String cryptoValue) => Algorithm.values
-      .firstWhere((element) => element.crypto == cryptoValue.toUpperCase());
+  static Algorithm from(String crypto) => Algorithm.values
+      .firstWhere((element) => element.crypto == crypto.toUpperCase());
 }
 
 enum PreferenceOptions {
