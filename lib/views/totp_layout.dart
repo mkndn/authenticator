@@ -17,7 +17,6 @@ import 'package:authenticator/services/totp.dart';
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/views/totp_layout_card.dart';
 import 'package:authenticator/common/views/totp_container.dart';
-import 'package:objectid/objectid.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class TotpLayout extends StatefulWidget {
@@ -30,7 +29,7 @@ class TotpLayout extends StatefulWidget {
 
   final TotpData data;
   final SettingsModel settings;
-  final Consumer<ObjectId> onDelete;
+  final Consumer<String> onDelete;
 
   @override
   State<TotpLayout> createState() => _TotpLayoutState();
@@ -52,14 +51,7 @@ class _TotpLayoutState extends State<TotpLayout>
         algorithm: widget.data.algorithm,
         length: widget.data.digits,
       );
-      //sendNextCode();
     });
-  }
-
-  void sendNextCode() async {
-    if (totpCode != null && totpCode!.isNotEmpty) {
-      _authenticatorWidget.sendNext(widget.data.id.hexString, totpCode!);
-    }
   }
 
   @override
@@ -185,7 +177,7 @@ class _TotpLayoutState extends State<TotpLayout>
                         alignment: Alignment.center,
                         onPressed: () => context.goNamed(
                           AppRoute.edit.name,
-                          params: {'eid': widget.data.id.hexString},
+                          params: {'eid': widget.data.id},
                         ),
                         icon: const Icon(
                           Icons.edit,
@@ -197,6 +189,7 @@ class _TotpLayoutState extends State<TotpLayout>
                         alignment: Alignment.center,
                         onPressed: () {
                           hiveService.removeItem(widget.data.id);
+                          _authenticatorWidget.updateData(context);
                           widget.onDelete(widget.data.id);
                         },
                         icon: const Icon(

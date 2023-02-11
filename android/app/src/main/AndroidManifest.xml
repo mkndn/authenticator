@@ -17,6 +17,12 @@
            <intent-filter>
                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
            </intent-filter>
+           <intent-filter>
+               <action android:name="com.mkndn.authenticator.android.appwidget.ACTION_CLICK" />
+           </intent-filter>
+           <intent-filter>
+               <action android:name="com.mkndn.authenticator.android.appwidget.OPEN_APP" />
+           </intent-filter>
            <meta-data android:name="android.appwidget.provider"
                android:resource="@xml/widget_provider" />
        </receiver>

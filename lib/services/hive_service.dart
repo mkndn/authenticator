@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:authenticator/classes/totp_data.dart';
-import 'package:objectid/objectid.dart';
 
 class HiveService {
   final Box<TotpData> _box = Hive.box<TotpData>('totp_data');
@@ -16,17 +15,16 @@ class HiveService {
   Box<TotpData> getBox() => _box;
 
   void addItem(TotpData data) {
-    _box.put(data.id.hexString, data);
+    _box.put(data.id, data);
   }
 
   TotpData? getItem(String itemId) => _box.get(itemId);
 
-  void removeItem(ObjectId key) => _box.delete(key.hexString);
+  void removeItem(String key) => _box.delete(key);
 
   void removeItemByKey(String key) => _box.delete(key);
 
-  void removeItems(List<ObjectId> keys) =>
-      _box.deleteAll(keys.map((k) => k.hexString));
+  void removeItems(List<String> keys) => _box.deleteAll(keys);
 
   List<TotpData> getAllItems() => _box.values.toList();
 

@@ -6,7 +6,6 @@ import 'package:authenticator/views/edit_entry.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:authenticator/classes/totp_data.dart';
 import 'package:authenticator/mixins/totp_mixin.dart';
-import 'package:objectid/objectid.dart';
 
 String extractTotpValue(String keyValue) => keyValue.split('=')[1];
 
@@ -25,7 +24,7 @@ class AddEntry extends StatefulWidget {
 class _AddEntryState extends State<AddEntry> with TotpMixin, SizeMixin {
   SecretAddMode addMode = SecretAddMode.url;
   final HiveService service = HiveService.instance();
-  TotpData data = TotpData(id: ObjectId());
+  late TotpData data;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isUrlExtracted = false;
 
@@ -154,6 +153,12 @@ class _AddEntryState extends State<AddEntry> with TotpMixin, SizeMixin {
       );
     }
     return children;
+  }
+
+  @override
+  void initState() {
+    data = TotpData(id: getId());
+    super.initState();
   }
 
   @override

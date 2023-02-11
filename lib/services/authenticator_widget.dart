@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:authenticator/classes/totp_data.dart';
+import 'package:authenticator/classes/totp_widget_data.dart';
+import 'package:authenticator/common/classes/extensions.dart';
 import 'package:authenticator/services/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,26 +39,33 @@ class AuthenticatorWidget {
     }
   }
 
-  _sendData() async {
-    try {
-      return HomeWidget.saveWidgetData<String>(
-          'totpData', jsonEncode(HiveService.instance().getAllItems()));
-    } on PlatformException catch (e) {
-      debugPrint('Error Sending Data. $e');
-    }
-  }
-
-  Future<void> sendAndUpdate() async {
-    await _sendData();
+  Future<void> updateData(BuildContext context, {TotpData? data}) async {
+    await _sendData(
+      context,
+      data != null ? [data] : HiveService.instance().getAllItems(),
+      true,
+    );
     await _updateWidget();
   }
 
-  Future<void> sendNext(String id, String code) async {
+  Future<void> initData(BuildContext context) async {
+    await _sendData(context, HiveService.instance().getAllItems(), false);
+    await _updateWidget();
+  }
+
+  Future<void> _sendData(
+      BuildContext context, List<TotpData> data, bool isUpdate) async {
     try {
-      HomeWidget.saveWidgetData<String>(id, code);
+      TotpWidgetData widgetData = TotpWidgetData(
+        data: data,
+        totalAccounts: data.length,
+        bgColor: context.colors.primary.toHex(),
+        textColor: context.textTheme.labelSmall!.color!.toHex(),
+        isUpdateFlow: isUpdate,
+      );
+      HomeWidget.saveWidgetData("widgetData", jsonEncode(widgetData));
     } on PlatformException catch (e) {
       debugPrint('Error Sending Data. $e');
     }
-    _updateWidget();
   }
 }

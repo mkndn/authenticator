@@ -11,6 +11,8 @@ mixin TotpMixin {
     TotpField.period: RegExp(r'period=([a-zA-Z0-9]+)'),
   };
 
+  String getId() => DateTime.now().microsecondsSinceEpoch.toString();
+
   bool extract(String content, TotpData data) {
     final Map<TotpField, String> results = {};
 

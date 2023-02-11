@@ -17,7 +17,7 @@ class TotpDataAdapter extends TypeAdapter<TotpData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TotpData(
-      id: fields[0] as ObjectId,
+      id: fields[0] as String,
       label: fields[5] as String?,
       secret: fields[6] as String?,
       algorithm: fields[1] as Algorithm,

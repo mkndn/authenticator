@@ -13,11 +13,11 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> {
   Widget build(BuildContext context) {
     return Container(
       color: context.colors.background,
-      child: Center(
+      child: const Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             SizedBox(
               height: 50.0,
               width: 50.0,

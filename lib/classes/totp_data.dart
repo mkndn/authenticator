@@ -1,13 +1,12 @@
 import 'package:authenticator/common/classes/enums.dart';
 import 'package:hive/hive.dart';
-import 'package:objectid/objectid.dart';
 
 part 'totp_data.g.dart';
 
 @HiveType(typeId: 0)
 class TotpData {
   @HiveField(0)
-  final ObjectId id;
+  final String id;
   @HiveField(1)
   Algorithm algorithm;
   @HiveField(2)
@@ -54,7 +53,7 @@ class TotpData {
 
   factory TotpData.fromJson(Map<String, dynamic> json) {
     return TotpData(
-      id: ObjectId.fromHexString(json['id']),
+      id: json['id'],
       label: json['label'],
       secret: json['secret'],
       algorithm: Algorithm.from(json['algorithm']),
@@ -65,7 +64,7 @@ class TotpData {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'id': id.hexString,
+        'id': id,
         'label': label,
         'secret': secret,
         'algorithm': algorithm.name,

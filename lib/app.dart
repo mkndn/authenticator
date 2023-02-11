@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _authenticatorWidget.sendAndUpdate();
+    _authenticatorWidget.initData(context);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await loadBiometricsOptions();
       _appSettings = await _preferenceService.loadAllPreferences();

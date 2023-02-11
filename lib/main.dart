@@ -13,7 +13,6 @@ void main() async {
   Hive
     ..init(Directory.current.path)
     ..registerAdapter(AlgorithmAdapter())
-    ..registerAdapter(ObjectIdAdapter())
     ..registerAdapter(TotpDataAdapter())
     ..registerAdapter(OffsetAdapter());
 

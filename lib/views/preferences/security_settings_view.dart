@@ -119,8 +119,8 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
           ),
           subTitle: Column(
             children: [
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Padding(
                     padding: EdgeInsets.only(top: 10.0),
                     child: Text(
@@ -162,8 +162,8 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
         ),
         subTitle: Column(
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
@@ -222,8 +222,8 @@ class _SecuirtySettingsViewState extends State<SecuirtySettingsView>
         ),
         subTitle: Column(
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(

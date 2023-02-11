@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="title_open_app">Open App</string>
     <string name="widget_title">Authenticator</string>
-    <string name="totp_data">totpData</string>
+    <string name="empty_view_content">No content</string>
+    <string name="widget_data">widgetData</string>
+    <string name="total_accounts">totalAccounts</string>
+    <string name="bg_color">bgColor</string>
+    <string name="update_flow">isUpdateFlow</string>
+    <string name="text_color">textColor</string>
     <string name="app_widget_launch_action">es.antonborri.home_widget.action.LAUNCH</string>
     <string name="app_widget_item_clicked_uri">com.mkndn.authenticator://itemClicked</string>
     <string name="item_cta_key">com.mkndn.authenticator.android.appwidget.CTA</string>
     <string name="action_click">com.mkndn.authenticator.android.appwidget.ACTION_CLICK</string>
+    <string name="open_app">com.mkndn.authenticator.android.appwidget.OPEN_APP</string>
 </resources>

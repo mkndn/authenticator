@@ -21,8 +21,10 @@ class _HomeViewState extends State<HomeView> with SizeMixin {
   final List<TotpData> data = List.empty(growable: true);
 
   void loadData() {
-    data.clear();
-    data.addAll(_hiveService.getAllItems());
+    setState(() {
+      data.clear();
+      data.addAll(_hiveService.getAllItems());
+    });
   }
 
   @override

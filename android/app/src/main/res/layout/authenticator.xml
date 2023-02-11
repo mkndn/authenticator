@@ -18,9 +18,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
-    <TextView android:id="@+id/no_content_text"
+    <RelativeLayout android:id="@+id/empty_view"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView android:id="@+id/empty_view_text"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/empty_view_content"
         android:textSize="@dimen/widget_content_sz"/>
+        <Button android:id="@+id/btn_open_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_open_app"/>
+    </RelativeLayout>
 </LinearLayout>
