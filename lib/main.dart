@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:authenticator/app.dart';
 import 'package:authenticator/classes/totp_data.dart';
+
 // ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
@@ -17,8 +18,7 @@ void main() async {
     ..registerAdapter(OffsetAdapter());
 
   if (Platform.isWindows || Platform.isMacOS) {
-    await Hive.openBox<TotpData>('totp_data',
-        path: Directory.current.absolute.path);
+    await Hive.openBox<TotpData>('totp_data', path: Directory.current.absolute.path);
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(
